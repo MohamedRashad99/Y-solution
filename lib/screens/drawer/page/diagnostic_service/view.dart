@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:queen/core/helpers/prefs.dart';
 import 'package:tal3thoom/screens/drawer/page/diagnostic_service/page/views/diagnostic_payment/models/diagnostic_payment_model.dart';
 
 import '../../../widgets/constants.dart';
 import '../../../../../../config/keys.dart';
 
 // ignore: must_be_immutable
-class DiagnosticServices extends StatelessWidget {
+class DiagnosticServices extends StatefulWidget {
   final VoidCallback onTapInductions;
   final VoidCallback onTapPayment;
   final VoidCallback onTapHistory;
@@ -15,7 +16,15 @@ class DiagnosticServices extends StatelessWidget {
   final VoidCallback onTapSSi;
   final VoidCallback onTapAppointentReservation;
 
+  final Widget isPayment;
+  final Widget isCaseHistory;
+  final Widget isOases;
+  final Widget isSsrs;
+  final Widget isSsi4;
+  final Widget isDiagnosticReserved;
+
   const DiagnosticServices({
+    super.key,
     required this.onTapInductions,
     required this.onTapPayment,
     required this.onTapHistory,
@@ -23,16 +32,28 @@ class DiagnosticServices extends StatelessWidget {
     required this.onTapSSRS,
     required this.onTapSSi,
     required this.onTapAppointentReservation,
+    required this.isPayment,
+    required this.isCaseHistory,
+    required this.isOases,
+    required this.isSsrs,
+    required this.isSsi4,
+    required this.isDiagnosticReserved,
   });
 
   @override
+  State<DiagnosticServices> createState() => _DiagnosticServicesState();
+}
+
+class _DiagnosticServicesState extends State<DiagnosticServices> {
+
+
+  @override
   Widget build(BuildContext context) {
-     DiagnosticPaymentModel? diagnosticPaymentModel;
+    DiagnosticPaymentModel? diagnosticPaymentModel;
+   bool _isAvailable = Prefs.getBool("isAvailable");
 
     double height = MediaQuery.of(context).size.height;
-    // double width = MediaQuery.of(context).size.width;
 
-     print( "${diagnosticPaymentModel?.data![0] } eeeeeeeeeeeeeeeeeeeeeeeeeeeeee "  );
     return ExpansionTile(
         backgroundColor: kPrimaryColor,
         leading: Image.asset("assets/images/stethoscope.png"),
@@ -46,7 +67,7 @@ class DiagnosticServices extends StatelessWidget {
             height: context.height * 0.08,
             color: kRoundBorderColor,
             child: ListTile(
-              onTap: onTapInductions,
+              onTap: widget.onTapInductions,
               title: Row(
                 children: [
                   Image.asset("assets/images/book.png"),
@@ -61,27 +82,22 @@ class DiagnosticServices extends StatelessWidget {
             height: context.height * 0.08,
             color: kRoundBorderColor,
             child: ListTile(
-              onTap: onTapPayment,
+              onTap: widget.onTapPayment,
               title: Row(
                 children: [
                   Image.asset("assets/images/wallet.png"),
                   buildSizedBox(),
-                  customText4(title: KeysConfig.payment, color: kBlackText),
+                  _isAvailable == false ? customText4(title: KeysConfig.payment, color: kBlackText): customText4(title :  "متابعة", color: kBlackText),
                 ],
               ),
-             // trailing:
-
-
-              // diagnosticPaymentModel?.data![0] == 1 ?
-              // const Icon(Icons.check_box , color: kTextColor,)
-              //     :const Text("eeeee") ,
+              trailing: widget.isPayment,
             ),
           ),
           Container(
             height: context.height * 0.08,
             color: kRoundBorderColor,
             child: ListTile(
-              onTap: onTapHistory,
+              onTap: widget.onTapHistory,
               title: Row(
                 children: [
                   Image.asset("assets/images/Today's calendar.png"),
@@ -90,13 +106,14 @@ class DiagnosticServices extends StatelessWidget {
                       title: KeysConfig.medicalHistory, color: kBlackText),
                 ],
               ),
+              trailing: widget.isCaseHistory,
             ),
           ),
           Container(
             height: context.height * 0.08,
             color: kRoundBorderColor,
             child: ListTile(
-              onTap: onTapTestOases,
+              onTap: widget.onTapTestOases,
               title: Row(
                 children: [
                   Image.asset("assets/images/square question.png"),
@@ -104,13 +121,14 @@ class DiagnosticServices extends StatelessWidget {
                   customText4(title: KeysConfig.testOases, color: kBlackText),
                 ],
               ),
+              trailing: widget.isOases,
             ),
           ),
           Container(
             height: context.height * 0.08,
             color: kRoundBorderColor,
             child: ListTile(
-              onTap: onTapSSRS,
+              onTap: widget.onTapSSRS,
               title: Row(
                 children: [
                   Image.asset("assets/images/circular question.png"),
@@ -118,21 +136,22 @@ class DiagnosticServices extends StatelessWidget {
                   customText4(title: KeysConfig.testSSRS, color: kBlackText),
                 ],
               ),
+              trailing: widget.isSsrs,
             ),
           ),
           Container(
             height: context.height * 0.08,
             color: kRoundBorderColor,
             child: ListTile(
-              onTap: onTapSSi,
-              title: Row(
-                children: [
-                  Image.asset("assets/images/paper.png"),
-                  buildSizedBox(),
-                  customText4(title: KeysConfig.test4, color: kBlackText),
-                ],
-              ),
-            ),
+                onTap: widget.onTapSSi,
+                title: Row(
+                  children: [
+                    Image.asset("assets/images/paper.png"),
+                    buildSizedBox(),
+                    customText4(title: KeysConfig.test4, color: kBlackText),
+                  ],
+                ),
+                trailing: widget.isSsi4),
           ),
           Container(
             height: context.height * 0.08,
@@ -142,7 +161,7 @@ class DiagnosticServices extends StatelessWidget {
                     bottomLeft: Radius.circular(10),
                     bottomRight: Radius.circular(10))),
             child: ListTile(
-              onTap: onTapAppointentReservation,
+              onTap: widget.onTapAppointentReservation,
               title: Row(
                 children: [
                   Image.asset("assets/images/addition.png"),
@@ -151,6 +170,7 @@ class DiagnosticServices extends StatelessWidget {
                       title: KeysConfig.BookSpecialist, color: kBlackText),
                 ],
               ),
+              trailing: widget.isDiagnosticReserved,
             ),
           ),
         ]);

@@ -2,9 +2,10 @@ import 'dart:developer';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:get/get.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:permission_handler/permission_handler.dart';
+import 'package:queen/validation.dart';
 import 'package:tal3thoom/screens/drawer/page/diagnostic_service/page/views/diagnostic_history/cubit/diagnostic_history_question_cubit.dart';
 import 'package:tal3thoom/screens/drawer/page/diagnostic_service/page/views/question.dart';
-import 'package:tal3thoom/screens/drawer/page/diagnostic_service/page/views/success_page.dart';
 import 'package:tal3thoom/screens/widgets/mediaButton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
@@ -13,9 +14,9 @@ import '../../../../../../../config/keys.dart';
 import '../../../../../../widgets/alerts.dart';
 import '../../../../../../widgets/appBar.dart';
 import '../../../../../../widgets/constants.dart';
+import '../../../../../../widgets/custom_text_filed_history_numbers.dart';
 import '../../../../../../widgets/loading.dart';
 import '../../../../../view.dart';
-import '../diagnostci_oases_test/view.dart';
 import 'models/diagnostic_history_question_model.dart';
 
 // ignore: must_be_immutable
@@ -48,12 +49,6 @@ class _DiagnosticHistoryState extends State<DiagnosticHistory> {
           children: [
             customBoldText(
                 title: KeysConfig.qNames[number], color: kPrimaryColor),
-            // customText9(
-            //   //// TODO::: todo 5 varaibles to store length for every qlist
-            //   color: kPrimaryColor,
-            //   title:  " (${cubit.index} من ${qList.length})",
-            //
-            // ),
           ],
         ),
         children: [
@@ -76,34 +71,62 @@ class _DiagnosticHistoryState extends State<DiagnosticHistory> {
                       maxLines: 2,
                     ),
                     FormBuilder(
-                      onChanged: () {},
+
                       autoFocusOnValidationFailure: true,
                       autovalidateMode: AutovalidateMode.always,
                       child: FormBuilderRadioGroup<Answers>(
+
                         decoration: InputDecoration(
                           suffixIcon: InkWell(
-                              onTap: () => speech.speak(currentQuestion
-                                      .description
-                                      .toString() +
-                                  "الاجابات المتاحة هي "
-                                      '${currentQuestion.answers.map((lang) => lang.answerOption)}'),
+                              onTap: () async {
+                                if (await Permission.microphone
+                                    .request()
+                                    .isGranted) {
+                                  speech.speak(currentQuestion.description
+                                          .toString() +
+                                      "الاجابات المتاحة هي "
+                                          '${currentQuestion.answers.map((lang) => lang.answerOption)}');
+                                } else {
+                                  Alert.error(
+                                      "يجب الحصول علي تصريح الوصول الي الميكروفون");
+                                }
+                              },
                               child: Image.asset("assets/images/Earphone.png")),
                           suffix: cubit.shouldShowTextField(currentQuestion)
-                              ? SizedBox(
-                                  height: 60,
-                                  width: 150,
-                                  child: TextFormField(
-                                    // onSaved:(String? str) =>
-                                    // cubit.answersTxt[currentQuestion] = str! ,
-                                    controller: TextEditingController(
-                                        text:
-                                            cubit.answersTxt[currentQuestion]),
+                              ? CustomTextFieldHistory(
 
-                                    onChanged: (str) =>
-                                        cubit.answersTxt[currentQuestion] = str,
-                                  ))
+
+                                  controller: TextEditingController(
+                                      text: cubit
+                                          .answersTxt[currentQuestion]),
+                                // textInputFormatter: [
+                                //   FilteringTextInputFormatter.deny(
+                                //       RegExp(r'[^A-Za-z0-9]+')),
+                                // ],
+
+                                  onsave: (str) {
+                                    cubit
+                                      .answersTxt[currentQuestion] = str;
+                                    print(str);
+                                  },
+
+                                  // type: currentQuestion.description.toString()
+                                  //         .contains("-")
+                                  //     ? TextInputType.number
+                                  //     : TextInputType.text ,
+
+                                   validator: qValidator([
+                                     IsRequired(KeysConfig.thisFieldRequired),
+                                     MinLength(1),
+                                     MaxLength(40),
+                                   ]),
+
+
+
+                          )
                               : null,
                         ),
+
                         initialValue: cubit.answer[currentQuestion],
                         name: 'best_language',
                         onChanged: (value) {
@@ -122,12 +145,14 @@ class _DiagnosticHistoryState extends State<DiagnosticHistory> {
                             });
                           }
                         },
-                        validator: (value) {
-                          if (value == null) {
-                            return 'من فضلك أجب علي المدون أعلاة ';
-                          }
-                          return '';
-                        },
+
+                        //TODO:: The Client Want To Disable the Validation In All Fields
+                        // validator: (value) {
+                        //   if (value == null) {
+                        //     return 'من فضلك أجب علي المدون أعلاة ';
+                        //   }
+                        //   return '';
+                        // },
                         options: currentQuestion.answers
                             .map((lang) => FormBuilderFieldOption(
                                   value: lang,
@@ -149,6 +174,8 @@ class _DiagnosticHistoryState extends State<DiagnosticHistory> {
 
   @override
   Widget build(BuildContext context) {
+    // BlocProvider.of<DiagnosticHistoryQuestionCubit>(context)
+    //     .getDiagnosticHistoryQuestion();
     return Scaffold(
         backgroundColor: kHomeColor,
         drawer: const MenuItems(),
@@ -156,6 +183,8 @@ class _DiagnosticHistoryState extends State<DiagnosticHistory> {
             context: context,
             press: (context) => Scaffold.of(context).openDrawer()),
         body: SingleChildScrollView(
+          padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+
           child: Container(
             height: context.height,
             width: context.width,
@@ -163,9 +192,7 @@ class _DiagnosticHistoryState extends State<DiagnosticHistory> {
             child: BlocConsumer<DiagnosticHistoryQuestionCubit,
                 DiagnosticHistoryQuestionState>(
               listener: (context, state) {
-                if(  state is DiagnosticHistoryQuestionError){
-                  Alert.error("الرجاء التحقق من الإجابات الممكنة والمدونة بالأسفل",desc: " حقل إجابات المريض مطلوب ، ولا يمكن أن يكون خاليًا أو فارغًا ");
-                }
+
               },
               builder: (context, state) {
                 final cubit =
@@ -176,9 +203,11 @@ class _DiagnosticHistoryState extends State<DiagnosticHistory> {
                   );
                 }
                 if (state is DiagnosticHistoryQuestionSuccess) {
-                  return Form(
-                    key: cubit.formKey,
-                    child: SingleChildScrollView(
+                  return SingleChildScrollView(
+                    padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+
+                    child: Form(
+                      key: cubit.formKey,
                       child: Padding(
                         padding: const EdgeInsets.symmetric(
                             horizontal: 12.0, vertical: 4),
@@ -201,7 +230,7 @@ class _DiagnosticHistoryState extends State<DiagnosticHistory> {
                                       color: kBlackText)),
                             ),
                             Image.asset(
-                              "assets/images/255.png",
+                              "assets/images/test 10.png",
                             ),
                             buildSizedBoxed(context.height),
                             ...List.generate(6, buildCategoryItem).toList(),
@@ -213,9 +242,9 @@ class _DiagnosticHistoryState extends State<DiagnosticHistory> {
                                           .validate()) {
                                         cubit.postDiagnosticHistoryAnswers();
                                       }
-                                    }
-
-                                    ,
+                                      // Alert.error("الرجاء التحقق من الإجابات الممكنة والمدونة بالأسفل",desc: " حقل إجابات المريض مطلوب ، ولا يمكن أن يكون خاليًا أو فارغًا ");
+                                      // Get.to(()=>const DiagnosticHistory());
+                                    },
                                     title: KeysConfig.next,
                                   )
                                 : const LoadingFadingCircle(),
@@ -229,7 +258,10 @@ class _DiagnosticHistoryState extends State<DiagnosticHistory> {
                   );
                 }
                 if (state is DiagnosticHistoryQuestionError) {
-                  return Text(state.msg);
+                  BlocProvider.of<DiagnosticHistoryQuestionCubit>(context)
+                      .getDiagnosticHistoryQuestion();
+
+
                 }
                 return const SizedBox();
               },

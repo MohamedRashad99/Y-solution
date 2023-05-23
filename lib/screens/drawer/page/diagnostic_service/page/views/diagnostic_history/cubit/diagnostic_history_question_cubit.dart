@@ -3,9 +3,9 @@ import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
+import 'package:tal3thoom/serives/diagnostics_injects/diagnostic_history_service/answers_service.dart';
+import 'package:tal3thoom/serives/diagnostics_injects/diagnostic_history_service/question_serives.dart';
 
-import 'package:tal3thoom/serives/diagnostic_history_service/question_serives.dart';
-import '../../../../../../../../serives/diagnostic_history_service/answers_service.dart';
 import '../../../../../../../widgets/alerts.dart';
 import '../../diagnostci_oases_test/view.dart';
 import '../../success_page.dart';
@@ -57,31 +57,41 @@ class DiagnosticHistoryQuestionCubit
 
   Future<void> postDiagnosticHistoryAnswers() async {
     emit(DiagnosticHistoryQuestionLoading());
-
     try {
       final res = await AnswersService.postAnswers(
           answers: answer, answersTxt: answersTxt);
-
       emit(DiagnosticHistoryQuestionSuccess(
           diagnosticHistoryQuestionModel: questionList));
+
       if (res!.type == 2) {
         Alert.error(res.body);
       } else if (res.type == 1) {
         Alert.success(res.body);
-        Get.off(() => SuccessView(
-              title1: "لقد تم إنتهاء إختبار SSRS المرضي بنجاح",
+        Get.offAll(() => SuccessView(
+              title1: "لقد تم إنتهاء إختبار التاريخ المرضي بنجاح",
               title2: "إنتقال إلي إختبار Oases",
-              onTap: () => Get.off(() => const DiagnosticOasesTest()),
+              onTap: () => Get.offAll(() => const DiagnosticOasesTest()),
             ));
       } else if (res.type == 3) {
         Alert.success(res.body);
+      } else if (res.type == 0) {
+        Alert.success(res.body);
+        emit(DiagnosticHistoryQuestionError(msg: res.body));
       } else {
         return Alert.success("ssssssssss");
       }
+    } on DioError catch (_) {
+      emit(DiagnosticHistoryQuestionError(msg: "لا يوجد اتصال بالانترنت "));
     } catch (e, st) {
-      log(e.toString());
+      Alert.error(e.toString(),
+          desc:
+              "الرجاء المحاولة مرة أخري وتاكيد اجابات الممكنة المطلوبة وفقا لمعاير التشخيص");
+      log("[]][][][error from cubit is" + e.toString());
+
       log(st.toString());
-      emit(DiagnosticHistoryQuestionError(msg: e.toString()));
+
+
+      emit(DiagnosticHistoryQuestionError(msg: e.toString(), ));
     }
   }
 }

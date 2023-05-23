@@ -2,8 +2,6 @@ import 'dart:io';
 
 import 'package:country_picker/country_picker.dart';
 import 'package:flutter/services.dart';
-import 'package:queen/core/helpers/prefs.dart';
-import 'package:tal3thoom/screens/update_profie/view.dart';
 import 'package:tal3thoom/screens/widgets/mediaButton.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -12,10 +10,10 @@ import 'package:image_picker/image_picker.dart';
 import 'package:queen/validation.dart';
 import 'package:tal3thoom/config/keys.dart';
 
-
 import '../auth/register/page/drop_down_is_readble.dart';
 import '../auth/register/page/drop_down_six.dart';
 import '../drawer/view.dart';
+import '../home/cubit/home_tabebar_cubit.dart';
 import '../home/pages/views/profile/cubit/profile_cubit.dart';
 import '../home/view.dart';
 import '../widgets/alerts.dart';
@@ -25,26 +23,21 @@ import '../widgets/customTextFeild.dart';
 import '../widgets/custom_textFornField_range.dart';
 import '../widgets/custom_text_field_phone.dart';
 import '../widgets/custom_text_filed_country_code.dart';
-import '../widgets/date_convertors.dart';
 import '../widgets/loading.dart';
 import '../widgets/pick_image.dart';
 import '../widgets/profile_pick_image.dart';
 import 'cubit/update_profile_cubit.dart';
-import 'models/profile_model.dart';
-import 'page/drop_down_gender.dart';
-import 'page/drop_down_read.dart';
 
 class UpdateProfile extends StatefulWidget {
-
   final int id;
-   const UpdateProfile({Key? key, required this.id}) : super(key: key);
+  const UpdateProfile({Key? key, required this.id}) : super(key: key);
 
   @override
   State<UpdateProfile> createState() => _UpdateProfileState();
 }
+
 class _UpdateProfileState extends State<UpdateProfile> {
   final formKey = GlobalKey<FormState>();
-
 
   bool value = false;
   dynamic image =
@@ -54,9 +47,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
 
-
     return Scaffold(
-
       backgroundColor: kHomeColor,
       drawer: const MenuItems(),
       appBar: DynamicAppbar(
@@ -72,13 +63,10 @@ class _UpdateProfileState extends State<UpdateProfile> {
               create: (context) => UpdateProfileCubit(),
               child: BlocConsumer<UpdateProfileCubit, UpdateProfileState>(
                 listener: (context, state) {
-                 if (state is UpdateProfileSuccess) {
-                  // TODO : Cached Token needed
-                   // Prefs.setString('token', state.registerModel.);
-                     //Get.offAll(() =>  LoginScreen());
-                    Navigator.of(context).pushAndRemoveUntil(
-                        MaterialPageRoute(builder: (context) =>  const HomeTabScreen()),
-                        (Route<dynamic> route) => false);
+                  if (state is UpdateProfileSuccess) {
+                    BlocProvider.of<ProfileCubit>(context).getProfile();
+                    BlocProvider.of<HomeTabeBarCubit>(context).changeIndex(1);
+                    Get.offAll(() => const HomeTabScreen());
                     Alert.success('تم التعديل بنجاح');
                   } else if (state is UpdateProfileError) {
                     Alert.error(state.msg);
@@ -95,9 +83,18 @@ class _UpdateProfileState extends State<UpdateProfile> {
                       SizedBox(
                         height: context.height * 0.02,
                       ),
-                      _profilePic(userName: Prefs.getString('fullName')),
-
+                      //_profilePic(userName: Prefs.getString('fullName')),
+                      const CircleAvatar(
+                        radius: 40.0,
+                        backgroundImage: NetworkImage(
+                            'https://www.vitaalbank.nl/wp-content/uploads/2021/09/man-1.png'),
+                        backgroundColor: Colors.transparent,
+                      ),
+                      SizedBox(
+                        height: context.height * 0.02,
+                      ),
                       CustomTextField(
+                        isEdit: true,
                         dIcon: Icons.person,
                         label: KeysConfig.firstName,
                         hint: KeysConfig.firstName,
@@ -114,6 +111,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
                       ),
 
                       CustomTextField(
+                        isEdit: true,
                         dIcon: Icons.person,
                         label: KeysConfig.dadName,
                         hint: KeysConfig.dadName,
@@ -133,6 +131,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
                       ),
 
                       CustomTextField(
+                        isEdit: true,
                         dIcon: Icons.person,
                         label: KeysConfig.familyName,
                         hint: KeysConfig.familyName,
@@ -154,12 +153,12 @@ class _UpdateProfileState extends State<UpdateProfile> {
                       CustomTextFieldRange(
                         dIcon: Icons.date_range_outlined,
                         hint: "تاريخ الميلاد",
-                        controller: cubit.dateController
-                        ,                            validator: qValidator([
-                        IsRequired(KeysConfig.thisFieldRequired),
-                        //  IsOptional(),
-                        MaxLength(30),
-                      ]),
+                        controller: cubit.dateController,
+                        validator: qValidator([
+                          IsRequired(KeysConfig.thisFieldRequired),
+                          //  IsOptional(),
+                          MaxLength(30),
+                        ]),
                         onTap: () async {
                           await showDatePicker(
                             context: context,
@@ -182,7 +181,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
                         label: KeysConfig.email,
                         controller: cubit.emailController,
                         validator: qValidator([
-                          IsRequired("thisFieldRequired"),
+                          IsRequired(KeysConfig.thisFieldRequired),
                           //  IsOptional(),
                           MaxLength(30),
                         ]),
@@ -192,7 +191,6 @@ class _UpdateProfileState extends State<UpdateProfile> {
                       DropDownRead(onChanged: cubit.onReadTypeChanged),
                       CustomTextField(
                         isEdit: true,
-
                         read: true,
                         dIcon: Icons.real_estate_agent,
                         label: "الدولة",
@@ -215,7 +213,8 @@ class _UpdateProfileState extends State<UpdateProfile> {
 
                             onSelect: (Country country) {
                               setState(() {
-                                cubit.countryController.text = country.nameLocalized!;
+                                cubit.countryController.text =
+                                    country.nameLocalized!;
 
                                 //.replaceAll(RegExp('[^A-Za-z]'), ' ')
                               });
@@ -233,8 +232,8 @@ class _UpdateProfileState extends State<UpdateProfile> {
                                 prefixIcon: const Icon(Icons.search),
                                 border: OutlineInputBorder(
                                   borderSide: BorderSide(
-                                    color:
-                                    const Color(0xFF8C98A8).withOpacity(0.2),
+                                    color: const Color(0xFF8C98A8)
+                                        .withOpacity(0.2),
                                   ),
                                 ),
                               ),
@@ -244,12 +243,11 @@ class _UpdateProfileState extends State<UpdateProfile> {
                       ),
                       CustomTextField(
                         isEdit: true,
-
                         read: true,
                         dIcon: Icons.location_city_rounded,
                         label: "الجنسية",
                         hint: "الجنسية",
-                        controller: cubit.nationality ,
+                        controller: cubit.nationality,
                         validator: qValidator(
                           [
                             IsRequired(KeysConfig.thisFieldRequired),
@@ -285,7 +283,8 @@ class _UpdateProfileState extends State<UpdateProfile> {
                                 prefixIcon: const Icon(Icons.search),
                                 border: OutlineInputBorder(
                                   borderSide: BorderSide(
-                                    color: const Color(0xFF8C98A8).withOpacity(0.2),
+                                    color: const Color(0xFF8C98A8)
+                                        .withOpacity(0.2),
                                   ),
                                 ),
                               ),
@@ -294,6 +293,7 @@ class _UpdateProfileState extends State<UpdateProfile> {
                         },
                       ),
                       CustomTextField(
+                        isEdit: true,
                         dIcon: Icons.location_on_rounded,
                         label: "المدينة",
                         hint: "المدينة",
@@ -307,15 +307,12 @@ class _UpdateProfileState extends State<UpdateProfile> {
                         type: TextInputType.streetAddress,
                       ),
 
-
-
                       CustomTextField(
                         isEdit: true,
                         dIcon: Icons.work_history_outlined,
                         label: KeysConfig.entityWork,
                         hint: KeysConfig.entityWork,
-                        controller: cubit.entityWorkController
-                        ,
+                        controller: cubit.entityWorkController,
                         validator: qValidator(
                           [
                             IsRequired(KeysConfig.entityWork),
@@ -325,13 +322,11 @@ class _UpdateProfileState extends State<UpdateProfile> {
                         type: TextInputType.text,
                       ),
                       CustomTextField(
-
                         isEdit: true,
                         dIcon: Icons.privacy_tip_outlined,
                         label: KeysConfig.entityNumber,
                         hint: KeysConfig.entityNumber,
-                        controller: cubit.idCardNumber
-                        ,
+                        controller: cubit.idCardNumber,
                         validator: qValidator(
                           [
                             IsRequired(KeysConfig.entityNumber),
@@ -363,11 +358,13 @@ class _UpdateProfileState extends State<UpdateProfile> {
                                 showPhoneCode: true,
                                 onSelect: (Country country) {
                                   setState(() {
-                                    cubit.countryPhoneCode.text = country.displayName
+                                    cubit.countryPhoneCode.text = country
+                                        .displayName
                                         .replaceAll(RegExp('[^0-9]'), '');
                                   });
 
-                                  print('Select country: ${country.displayName}');
+                                  print(
+                                      'Select country: ${country.displayName}');
                                 },
                                 countryListTheme: CountryListThemeData(
                                   borderRadius: const BorderRadius.only(
@@ -396,45 +393,49 @@ class _UpdateProfileState extends State<UpdateProfile> {
                             controller: cubit.phoneController,
                             validator: qValidator([
                               IsRequired(KeysConfig.thisFieldRequired),
-                              MinLength(10, "يجب ان يكون الحد الأدني 10 أرقام "),
+                              MinLength(
+                                  10, "يجب ان يكون الحد الأدني 10 أرقام "),
                               MaxLength(30),
                             ]),
                             type: TextInputType.phone,
                             textInputFormatter: [
-                              FilteringTextInputFormatter.allow(RegExp('[0-9]')),
+                              FilteringTextInputFormatter.allow(
+                                  RegExp('[0-9]')),
                             ],
                           ),
                         ],
                       ),
                       state is! UpdateProfileLoading
                           ? MediaButton(
-                          color: kPrimaryColor,
-                          title: "تعديل",
-                          onPressed: () {
-                            if (formKey.currentState!.validate()) {
-                              cubit.updateProfile(
-                                id: widget.id,
-                                firstName: cubit.firstNameController.text,
-                                middleName: cubit.dadNameController.text,
-                                lastName: cubit.familyNameControlller.text,
-                                email: cubit.emailController.text,
-                                phoneNumber: cubit.phoneController.text,
-                                countryPhoneCode: cubit.countryPhoneCode.text,
-                                birthDate: cubit.dateController.text,
-                                nationality: cubit.nationality.text,
-                                idCardNumber:cubit.idCardNumber.text ,
-                                country: cubit.countryController.text,
-                                city: cubit.city.text,
-                                workPlace: cubit.entityWorkController.text,
-
-
-                              );
-                            }
-                          })
+                              color: kPrimaryColor,
+                              title: "تعديل",
+                              onPressed: () {
+                                if (formKey.currentState!.validate()) {
+                                  cubit.updateProfile(
+                                    id: widget.id,
+                                    firstName: cubit.firstNameController.text,
+                                    middleName: cubit.dadNameController.text,
+                                    lastName: cubit.familyNameControlller.text,
+                                    email: cubit.emailController.text,
+                                    phoneNumber: cubit.phoneController.text,
+                                    countryPhoneCode:
+                                        cubit.countryPhoneCode.text,
+                                    birthDate: cubit.dateController.text,
+                                    nationality: cubit.nationality.text,
+                                    idCardNumber: cubit.idCardNumber.text,
+                                    country: cubit.countryController.text,
+                                    city: cubit.city.text,
+                                    workPlace: cubit.entityWorkController.text,
+                                  );
+                                }
+                              })
                           : const LoadingFadingCircle(),
+
+                      SizedBox(
+                        height: context.height * 0.06,
+                      ),
                     ],
                   );
-
                 },
               ),
             ),

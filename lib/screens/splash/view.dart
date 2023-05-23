@@ -26,41 +26,44 @@ class SplashScreen extends StatefulWidget {
 
 class _SplashScreenState extends State<SplashScreen> {
   bool loggedIn = true;
-  var userId = Prefs.getString("userId");
+
+  String userId = "";
 
   @override
   void initState() {
+    userId = Prefs.getString("userId");
+    setState(() {});
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
-    return
-
-      Scaffold(
-        body: SingleChildScrollView(
+    return Scaffold(
+      body: SingleChildScrollView(
         child: Container(
           height: context.height,
           width: context.width,
           color: kHomeColor,
           child: Column(
             children: [
-              SizedBox(height: context.height*0.05,),
-
-              // Padding(
-              //   padding:  EdgeInsetsDirectional.only(end: context.width*0.7),
-              //   child: SizedBox(width: context.width*0.3,height: context.height*0.1,child: Image.asset("assets/images/sideLogo.jpg",)),
-              // ),
-              // SizedBox(height: context.height*0.03,),
-
-              SizedBox(height: context.height*0.35,width: context.width,child: Image.asset("assets/images/all.png",fit: BoxFit.cover,)),
-
-              SizedBox(height: context.height*0.07,),
-
+              SizedBox(
+                height: context.height * 0.05,
+              ),
+              SizedBox(
+                  height: context.height * 0.35,
+                  width: context.width,
+                  child: Image.asset(
+                    "assets/images/all.png",
+                    fit: BoxFit.cover,
+                  )),
+              SizedBox(
+                height: context.height * 0.07,
+              ),
               customText16(title: " \"كلامي\"", color: kDarklyColor),
               customText18(title: " \"Mytalk\"", color: kDarklyColor),
-              SizedBox(height: context.height*0.02,),
-
+              SizedBox(
+                height: context.height * 0.02,
+              ),
               Padding(
                 padding: EdgeInsets.symmetric(horizontal: context.width * 0.09),
                 child: InkWell(
@@ -76,7 +79,7 @@ class _SplashScreenState extends State<SplashScreen> {
                     textAlign: TextAlign.center,
                     text: const TextSpan(
                       text:
-                      ' ( هو تطبيق ُيعنى بعلاج اضطراب التلعثم/التأتأة ويمكنك الاطلاع على  ',
+                          '  هو تطبيق ُيعنى بعلاج اضطراب التلعثم/التأتأة ويمكنك الاطلاع على  ',
                       style: TextStyle(
                           fontSize: 14,
                           fontFamily: "DinMedium",
@@ -93,7 +96,8 @@ class _SplashScreenState extends State<SplashScreen> {
                               fontWeight: FontWeight.bold),
                         ),
                         TextSpan(
-                            text: '  للتعرف أكثر على طريقة العلاج التي نقدمها لك أو الاستمرار بالتسجيل ) ',
+                            text:
+                                '  للتعرف أكثر على طريقة العلاج التي نقدمها لك أو الاستمرار بالتسجيل  ',
                             style: TextStyle(
                                 fontSize: 14,
                                 fontFamily: "DinMedium",
@@ -104,39 +108,42 @@ class _SplashScreenState extends State<SplashScreen> {
                   ),
                 ),
               ),
-              SizedBox(height: context.height*0.1,),
+              SizedBox(
+                height: context.height * 0.1,
+              ),
               FadeInUpBig(
                 child: Card(
+                    child: SmallSplashButton(
+                        onPressed: () => userId.isNotEmpty
+                            ? {
+                                BlocProvider.of<HomeTabeBarCubit>(context)
+                                    .changeIndex(1),
+                                Get.offAll(() => const HomeTabScreen()),
+                              }
+                            : Get.offAll(() => LoginScreen()),
+                        color: kDarklyColor,
+                        title: "سجل الآن")
 
-                  child: SmallSplashButton(onPressed:   () => userId.isNotEmpty
-                ? {
-                BlocProvider.of<HomeTabeBarCubit>(context)
-                    .changeIndex(1),
-                Get.offAll(() => const HomeTabScreen()),
-                }
-                    : Get.offAll(() => LoginScreen()),color: kDarklyColor,title: "سجل الآن")
-
-
-                  // InkWell(
-                  //   onTap: () => userId.isNotEmpty
-                  //       ? {
-                  //     BlocProvider.of<HomeTabeBarCubit>(context)
-                  //         .changeIndex(1),
-                  //     Get.offAll(() => const HomeTabScreen()),
-                  //   }
-                  //       : Get.offAll(() => LoginScreen()),
-                  //   child: Image.asset(
-                  //     'assets/images/arrow splash icon.png',
-                  //     scale: 1.2,
-                  //   ),
-                  // ),
-                ),
+                    // InkWell(
+                    //   onTap: () => userId.isNotEmpty
+                    //       ? {
+                    //     BlocProvider.of<HomeTabeBarCubit>(context)
+                    //         .changeIndex(1),
+                    //     Get.offAll(() => const HomeTabScreen()),
+                    //   }
+                    //       : Get.offAll(() => LoginScreen()),
+                    //   child: Image.asset(
+                    //     'assets/images/arrow splash icon.png',
+                    //     scale: 1.2,
+                    //   ),
+                    // ),
+                    ),
               ),
             ],
           ),
         ),
-    ),
-      );
+      ),
+    );
   }
 
   /* FadeInUpBig(

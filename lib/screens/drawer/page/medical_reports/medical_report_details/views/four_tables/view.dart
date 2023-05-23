@@ -1,4 +1,3 @@
-import 'package:auto_size_text/auto_size_text.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -39,29 +38,8 @@ class FourTables extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         crossAxisAlignment: CrossAxisAlignment.center,
-        //ainAxisSize: MainAxisSize.max,
+        // mainAxisSize: MainAxisSize.min,
         children: [
-          //
-          // AutoSizeText(title1,
-          //     style:
-          //     TextStyle(color: textColor,
-          //         fontSize: 10, fontFamily: 'DinBold')),
-          // AutoSizeText(title1,
-          //     style:
-          //     TextStyle(color: textColor,
-          //         fontSize: 10, fontFamily: 'DinBold')),
-          // AutoSizeText(title1,
-          //     style:
-          //     TextStyle(color: textColor,
-          //         fontSize: 10, fontFamily: 'DinBold')),
-          // AutoSizeText(title1,
-          //     style:
-          //     TextStyle(color: textColor,
-          //         fontSize: 10, fontFamily: 'DinBold')),
-          // AutoSizeText(title1,
-          //     style:
-          //     TextStyle(color: textColor,
-          //         fontSize: 10, fontFamily: 'DinBold')),
           custom12Text(title: title1, color: textColor),
           custom12Text(title: title2, color: textColor),
           custom12Text(title: title3, color: textColor),

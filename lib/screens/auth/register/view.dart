@@ -21,6 +21,8 @@ import '../../widgets/custom_text_filed_country_code.dart';
 import '../../widgets/donotHave.dart';
 import '../../widgets/loading.dart';
 import '../login/view.dart';
+import '../policy_privacy/view.dart';
+import '../termination_conditions/view.dart';
 import 'cubit/register_cubit.dart';
 import 'page/back_icon.dart';
 import '../../../../../../config/keys.dart';
@@ -51,6 +53,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
   final _dadNameController = TextEditingController();
 
   final _firstNameController = TextEditingController();
+  final _firstNameENController = TextEditingController();
+  final _middleNameEnController = TextEditingController();
+  final _lastNameEnController = TextEditingController();
 
   final _confirmPassController = TextEditingController();
 
@@ -69,8 +74,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // double height = MediaQuery.of(context).size.height;
-    //  double width = MediaQuery.of(context).size.width;
+    const String sCharacters =
+        "المطلوب 8 حروف كبيرة,صغيرة وأرقام";
+
     return BlocProvider(
       create: (context) => RegisterCubit(),
       child: BlocConsumer<RegisterCubit, RegisterState>(
@@ -84,10 +90,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
               (Route<dynamic> route) => false);
           Alert.success('تم تسجيل بنجاح');
         } else if (state is RegisterError) {
-          //Alert.error(state.msg);
-          Alert.error("خطأ في  تسجيل البيانات",
-              desc:
-                  "المعلومات المدخلة غير صالحة الرجاء ملئ الحقول والتاكد من صحة البيانات المطلوبة");
+          Alert.error(state.msg);
+          // Alert.error("خطأ في  تسجيل البيانات",
+          //     desc:
+          //         "المعلومات المدخلة غير صالحة الرجاء ملئ الحقول والتاكد من صحة البيانات المطلوبة");
         }
       }, builder: (context, state) {
         final cubit = BlocProvider.of<RegisterCubit>(context);
@@ -117,103 +123,142 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   SizedBox(
                     height: context.height * 0.02,
                   ),
-                  FadeInLeftBig(
-                    child: CustomTextField(
-                      dIcon: Icons.person,
-                      label: KeysConfig.firstName,
-                      hint: KeysConfig.firstName,
-                      controller: _firstNameController,
-                      validator: qValidator([
-                        IsRequired(KeysConfig.thisFieldRequired),
-                        MinLength(3, "يجب ان ييكون 3 أحرف علي الاقل"),
-                      ]),
-                      textInputFormatter: [
-                        FilteringTextInputFormatter.allow(
-                            RegExp('[a-zA-Zء-ي]')),
-                      ],
-                      type: TextInputType.name,
-                    ),
+                  CustomTextField(
+                    dIcon: Icons.person,
+                    label: KeysConfig.firstName+" *",
+                    hint: KeysConfig.firstName,
+                    controller: _firstNameController,
+                    validator: qValidator([
+                      IsRequired(KeysConfig.thisFieldRequired),
+                      MinLength(3, "يجب ان ييكون 3 أحرف علي الاقل"),
+                    ]),
+                    textInputFormatter: [
+                      FilteringTextInputFormatter.allow(
+                          RegExp('[a-zA-Zء-ي]')),
+                    ],
+                    type: TextInputType.name,
                   ),
-                  FadeInRightBig(
-                    child: CustomTextField(
-                      dIcon: Icons.person,
-                      label: KeysConfig.dadName,
-                      hint: KeysConfig.dadName,
-                      controller: _dadNameController,
-                      validator: qValidator([
-                        IsRequired(KeysConfig.thisFieldRequired),
-                        MinLength(3, "يجب ان ييكون 3 أحرف علي الاقل"),
+                  CustomTextField(
+                    dIcon: Icons.person,
+                    label: KeysConfig.dadName+" *",
+                    hint: KeysConfig.dadName,
+                    controller: _dadNameController,
+                    validator: qValidator([
+                      IsRequired(KeysConfig.thisFieldRequired),
+                      MinLength(3, "يجب ان ييكون 3 أحرف علي الاقل"),
 
-                        // IsOptional(),
-                        MaxLength(30),
-                      ]),
-                      textInputFormatter: [
-                        FilteringTextInputFormatter.allow(
-                            RegExp('[a-zA-Zء-ي]')),
-                      ],
-                      type: TextInputType.name,
-                    ),
+                      // IsOptional(),
+                      MaxLength(30),
+                    ]),
+                    textInputFormatter: [
+                      FilteringTextInputFormatter.allow(
+                          RegExp('[a-zA-Zء-ي]')),
+                    ],
+                    type: TextInputType.name,
                   ),
-                  FadeInLeftBig(
-                    child: CustomTextField(
-                      dIcon: Icons.person,
-                      label: KeysConfig.familyName,
-                      hint: KeysConfig.familyName,
-                      controller: _familyNameControlller,
-                      validator: qValidator([
-                        IsRequired(KeysConfig.thisFieldRequired),
-                        MinLength(3, "يجب ان ييكون 3 أحرف علي الاقل"),
+                  CustomTextField(
+                    dIcon: Icons.person,
+                    label: KeysConfig.familyName+" *",
+                    hint: KeysConfig.familyName,
+                    controller: _familyNameControlller,
+                    validator: qValidator([
+                      IsRequired(KeysConfig.thisFieldRequired),
+                      MinLength(3, "يجب ان ييكون 3 أحرف علي الاقل"),
 
-                        // IsOptional(),
-                        MaxLength(30),
-                      ]),
-                      textInputFormatter: [
-                        FilteringTextInputFormatter.allow(
-                            RegExp('[a-zA-Zء-ي]')),
-                      ],
-                      type: TextInputType.name,
-                    ),
-                  ),
-                  FadeInRightBig(
-                    child: CustomTextField(
-                      hint: KeysConfig.email,
-                      dIcon: Icons.email,
-                      label: KeysConfig.email,
-                      controller: _emailController,
-                      validator: qValidator([
-                        IsRequired(KeysConfig.thisFieldRequired),
-                        const IsEmail(KeysConfig.MustBeEmail),
-                        MaxLength(30),
-                      ]),
-                      type: TextInputType.emailAddress,
-                    ),
+                      // IsOptional(),
+                      MaxLength(30),
+                    ]),
+                    textInputFormatter: [
+                      FilteringTextInputFormatter.allow(
+                          RegExp('[a-zA-Zء-ي]')),
+                    ],
+                    type: TextInputType.name,
                   ),
 
-                  FadeInRightBig(
-                    child: CustomTextFieldRange(
-                      dIcon: Icons.date_range_outlined,
-                      hint: "تاريخ الميلاد",
-                      controller: _dateController,
-                      validator: qValidator([
-                        IsRequired(KeysConfig.thisFieldRequired),
-                        //  IsOptional(),
-                        MaxLength(30),
-                      ]),
-                      onTap: () async {
-                        await showDatePicker(
-                          context: context,
-                          firstDate: DateTime(1950),
-                          lastDate: DateTime(2030),
-                          initialDate: DateTime(1950),
-                        ).then((value) {
-                          if (value == null) return;
-                          _dateController.text =
-                              value.toString().substring(0, 10);
+                  CustomTextField(
+                    dIcon: Icons.person,
+                    label: "الأسم الاول باللغة الانجليزية"" *",
+                    hint: "الأسم الاول باللغة الانجليزية",
+                    controller: _firstNameENController,
+                    validator: qValidator([
+                      IsRequired(KeysConfig.thisFieldRequired),
+                      MinLength(3, "يجب ان ييكون 3 أحرف علي الاقل"),
+                    ]),
+                    textInputFormatter: [
+                      FilteringTextInputFormatter.allow(
+                          RegExp('[a-zA-Z]')),
+                    ],
+                    type: TextInputType.name,
+                  ),
 
-                          //  provider.onRageChanges(value);
-                        });
-                      },
-                    ),
+
+                  CustomTextField(
+                    dIcon: Icons.person,
+                    label: "الأسم الأب باللغة الانجليزية"" *",
+                    hint: "الأسم الأب باللغة الانجليزية",
+                    controller: _middleNameEnController,
+                    validator: qValidator([
+                      IsRequired(KeysConfig.thisFieldRequired),
+                      MinLength(3, "يجب ان ييكون 3 أحرف علي الاقل"),
+                    ]),
+                    textInputFormatter: [
+                      FilteringTextInputFormatter.allow(
+                          RegExp('[a-zA-Z]')),
+                    ],
+                    type: TextInputType.name,
+                  ),
+
+                  CustomTextField(
+                    dIcon: Icons.person,
+                    label: "الأسم العائلة باللغة الانجليزية"" *",
+                    hint: "الأسم العائلة باللغة الانجليزية",
+                    controller: _lastNameEnController,
+                    validator: qValidator([
+                      IsRequired(KeysConfig.thisFieldRequired),
+                      MinLength(3, "يجب ان ييكون 3 أحرف علي الاقل"),
+                    ]),
+                    textInputFormatter: [
+                      FilteringTextInputFormatter.allow(
+                          RegExp('[a-zA-Z]')),
+                    ],
+                    type: TextInputType.name,
+                  ),
+                  CustomTextField(
+                    hint: KeysConfig.email,
+                    dIcon: Icons.email,
+                    label: KeysConfig.email+" *",
+                    controller: _emailController,
+                    validator: qValidator([
+                      IsRequired(KeysConfig.thisFieldRequired),
+                      const IsEmail(KeysConfig.mustBeEmail),
+                      MaxLength(30),
+                    ]),
+                    type: TextInputType.emailAddress,
+                  ),
+
+                  CustomTextFieldRange(
+                    dIcon: Icons.date_range_outlined,
+                    hint: "تاريخ الميلاد"" *",
+                    controller: _dateController,
+                    validator: qValidator([
+                      IsRequired(KeysConfig.thisFieldRequired),
+                      //  IsOptional(),
+                      MaxLength(30),
+                    ]),
+                    onTap: () async {
+                      await showDatePicker(
+                        context: context,
+                        firstDate: DateTime(1950),
+                        lastDate: DateTime(2030),
+                        initialDate: DateTime(1950),
+                      ).then((value) {
+                        if (value == null) return;
+                        _dateController.text =
+                            value.toString().substring(0, 10);
+
+                        //  provider.onRageChanges(value);
+                      });
+                    },
                   ),
                   // CustomTextField(
                   //   dIcon: Icons.date_range,
@@ -226,10 +271,8 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   //   ]),
                   //   type: TextInputType.emailAddress,
                   // ),
-                  FadeInLeftBig(
-                      child: DropDownSix(onChanged: cubit.onSexTypeChanged)),
-                  FadeInRightBig(
-                      child: DropDownRead(onChanged: cubit.onReadTypeChanged)),
+                  DropDownSix(onChanged: cubit.onSexTypeChanged),
+                  DropDownRead(onChanged: cubit.onReadTypeChanged),
                   /* Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 30.0,vertical: 12),
                     child: CSCPicker(
@@ -326,72 +369,68 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     ),
                   ),*/
 
-                  FadeInLeftBig(
-                    child: CustomTextField(
-                      read: true,
-                      dIcon: Icons.real_estate_agent,
-                      label: "الدولة",
-                      hint: "الدولة",
-                      controller: _countryController,
-                      validator: qValidator(
-                        [
-                          IsRequired(KeysConfig.thisFieldRequired),
-                          MaxLength(30),
-                        ],
-                      ),
-                      type: TextInputType.streetAddress,
-                      onTap: () {
-                        showCountryPicker(
-                          context: context,
+                  CustomTextField(
+                    read: true,
+                    dIcon: Icons.real_estate_agent,
+                    label: "الدولة"" *",
+                    hint: "الدولة",
+                    controller: _countryController,
+                    validator: qValidator(
+                      [
+                        IsRequired(KeysConfig.thisFieldRequired),
+                        MaxLength(30),
+                      ],
+                    ),
+                    type: TextInputType.streetAddress,
+                    onTap: () {
+                      showCountryPicker(
+                        context: context,
 
-                          exclude: <String>['ar', 'EG'],
-                          favorite: <String>['SA', 'EG'],
-                          //showPhoneCode: true,
+                        exclude: <String>['ar', 'EG'],
+                        favorite: <String>['SA', 'EG'],
+                        //showPhoneCode: true,
 
-                          onSelect: (Country country) {
-                            setState(() {
-                              _countryController.text = country.nameLocalized!;
+                        onSelect: (Country country) {
+                          setState(() {
+                            _countryController.text = country.nameLocalized!;
 
-                              //.replaceAll(RegExp('[^A-Za-z]'), ' ')
-                            });
+                            //.replaceAll(RegExp('[^A-Za-z]'), ' ')
+                          });
 
-                            print('Select country: ${country.displayName}');
-                          },
-                          countryListTheme: CountryListThemeData(
-                            borderRadius: const BorderRadius.only(
-                              topLeft: Radius.circular(40.0),
-                              topRight: Radius.circular(40.0),
-                            ),
-                            inputDecoration: InputDecoration(
-                              labelText: 'البحث',
-                              hintText: 'ابدأ الكتابة للبحث',
-                              prefixIcon: const Icon(Icons.search),
-                              border: OutlineInputBorder(
-                                borderSide: BorderSide(
-                                  color:
-                                      const Color(0xFF8C98A8).withOpacity(0.2),
-                                ),
+                          print('Select country: ${country.displayName}');
+                        },
+                        countryListTheme: CountryListThemeData(
+                          borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(40.0),
+                            topRight: Radius.circular(40.0),
+                          ),
+                          inputDecoration: InputDecoration(
+                            labelText: 'البحث',
+                            hintText: 'ابدأ الكتابة للبحث',
+                            prefixIcon: const Icon(Icons.search),
+                            border: OutlineInputBorder(
+                              borderSide: BorderSide(
+                                color:
+                                    const Color(0xFF8C98A8).withOpacity(0.2),
                               ),
                             ),
                           ),
-                        );
-                      },
-                    ),
+                        ),
+                      );
+                    },
                   ),
-                  FadeInRightBig(
-                    child: CustomTextField(
-                      dIcon: Icons.location_on_rounded,
-                      label: "المدينة",
-                      hint: "المدينة",
-                      controller: _city,
-                      validator: qValidator([
-                        IsRequired(KeysConfig.thisFieldRequired),
-                        //   IsOptional(),
-                        // MinLength(3),
-                        MaxLength(30),
-                      ]),
-                      type: TextInputType.streetAddress,
-                    ),
+                  CustomTextField(
+                    dIcon: Icons.location_on_rounded,
+                    label: "المدينة"" *",
+                    hint: "المدينة",
+                    controller: _city,
+                    validator: qValidator([
+                      IsRequired(KeysConfig.thisFieldRequired),
+                      //   IsOptional(),
+                      // MinLength(3),
+                      MaxLength(30),
+                    ]),
+                    type: TextInputType.streetAddress,
                   ),
                   CustomTextField(
                     dIcon: Icons.add_location_alt_outlined,
@@ -413,8 +452,10 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     controller: _entityWorkController,
                     validator: qValidator(
                       [
-                        IsRequired(KeysConfig.thisFieldRequired),
-                        MinLength(3, "يجب ان ييكون 3 أحرف علي الاقل"),
+                        // IsRequired(KeysConfig.thisFieldRequired),
+                        // MinLength(3, "يجب ان ييكون 3 أحرف علي الاقل"),
+
+                        IsOptional(),
                         MaxLength(30),
                       ],
                     ),
@@ -423,7 +464,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                   CustomTextField(
                     read: true,
                     dIcon: Icons.location_city_rounded,
-                    label: "الجنسية",
+                    label: "الجنسية"" *",
                     hint: "الجنسية",
                     controller: _nationality,
                     validator: qValidator(
@@ -484,30 +525,43 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         MaxLength(30),
                       ],
                     ),
-                    textInputFormatter: [
-                      FilteringTextInputFormatter.allow(RegExp('[0-9]')),
-                    ],
+                    // textInputFormatter: [
+                    //   FilteringTextInputFormatter.allow(RegExp('[0-30]')),
+                    // ],
                     type: TextInputType.number,
                   ),
                   CustomTextField(
                     hint: KeysConfig.password,
                     icon: Icons.lock_outline,
                     dIcon: Icons.lock_outline,
-                    label: KeysConfig.password,
+                    label: KeysConfig.password+" *",
                     controller: _passController,
                     validator: qValidator([
                       IsRequired(KeysConfig.enterPass),
-                      MinLength(6,
-                          "يجب أن تحتوي كلمة المرور على 6 حروف على الأقل منها حروف كبيرة وحروف صغيرة وأرقام وعلامات خاصة"),
+                     //  ContainsAny([r'^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9]).{8,}$'],sCharacters),
+                     //  RegExpRule(
+                     //      RegExp('[a-zA-Z0-9]')
+                     //      ,
+                     //      sCharacters),
+
+                      RegExpRule(
+                          RegExp(r'^(?=.*?[A-Za-z])(?=.*?[0-9])[A-Za-z0-9!@#\$&*~-]*$'),
+                          sCharacters),
+                      MinLength(6, sCharacters),
                       MaxLength(30),
                     ]),
-                    type: TextInputType.text,
+                    // type: TextInputType.text,
+
+                    // textInputFormatter: [
+                    //   FilteringTextInputFormatter.allow(
+                    //       RegExp('[a-zA-Z0-9]')),
+                    // ],
                   ),
                   CustomTextField(
                     hint: KeysConfig.confirmPass,
                     icon: Icons.lock_outline,
                     dIcon: Icons.lock_outline,
-                    label: KeysConfig.confirmPass,
+                    label: KeysConfig.confirmPass+" *",
                     controller: _confirmPassController,
                     validator: (val) {
                       if (val!.isEmpty) {
@@ -518,7 +572,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       }
                       return null;
                     },
-                    type: TextInputType.text,
+
+                    // textInputFormatter: [
+                    //   FilteringTextInputFormatter.allow(
+                    //       RegExp('[a-zA-Z0-9]')),
+                    // ],
                   ),
                   /* Container(
                     height: context.height * 0.13,
@@ -565,7 +623,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         read: true,
                         dIcon: Icons.key,
                         hint: "مثال : +966",
-                        label: "كود الدولة",
+                        label: "كود الدولة"" *",
                         controller: _countryPhoneCode,
                         validator: qValidator([
                           IsRequired(KeysConfig.thisFieldRequired),
@@ -609,7 +667,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       CustomTextFieldPhone(
                         hint: KeysConfig.phoneNumber,
                         dIcon: Icons.phone,
-                        label: KeysConfig.phoneNumber,
+                        label: KeysConfig.phoneNumber+" *",
                         controller: _phoneController,
                         validator: qValidator([
                           IsRequired(KeysConfig.thisFieldRequired),
@@ -655,7 +713,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                       },
                     ),
                     trailing: GestureDetector(
-                      onTap: () {},
+                      onTap: () {
+                        Get.to(() => const TerminationConditions());
+                      },
                       child: const Text(KeysConfig.conditions,
                           style: TextStyle(
                               fontSize: 10,
@@ -691,6 +751,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                                 firstName: _firstNameController.text,
                                 middleName: _dadNameController.text,
                                 lastName: _familyNameControlller.text,
+                                firstNameEn: _firstNameENController.text,
+                                middleNameEn: _middleNameEnController.text,
+                                lastNameEn: _lastNameEnController.text,
                                 email: _emailController.text,
                                 password: _passController.text,
                                 phoneNumber: _phoneController.text,
@@ -708,7 +771,22 @@ class _SignUpScreenState extends State<SignUpScreen> {
                     text: KeysConfig.login,
                     route: () => navigateTo(context, LoginScreen()),
                     have: KeysConfig.donHave,
-                  )
+                  ),
+
+                  GestureDetector(
+                    onTap: () {
+                      Get.to(() => const PrivacyPolicy());
+                    },
+                    child: const Text(KeysConfig.policy,
+                        style: TextStyle(
+                            fontSize: 10,
+                            decoration: TextDecoration.underline,
+                            fontFamily: "DinMedium",
+                            color: kSkyButton,
+                            fontWeight: FontWeight.bold)),
+                  ),
+                  SizedBox(height: context.height*0.03,),
+                  
                 ],
               ),
             ),
@@ -716,5 +794,14 @@ class _SignUpScreenState extends State<SignUpScreen> {
         );
       }),
     );
+  }
+
+  bool isPasswordValid(String password) {
+    if (password.length < 6) return false;
+    if (!password.contains(RegExp(r"[a-z]"))) return false;
+    if (!password.contains(RegExp(r"[A-Z]"))) return false;
+    if (!password.contains(RegExp(r"[0-9]"))) return false;
+    if (!password.contains(RegExp(r'[!@#$%^&*(),.?":{}|<>]'))) return false;
+    return true;
   }
 }

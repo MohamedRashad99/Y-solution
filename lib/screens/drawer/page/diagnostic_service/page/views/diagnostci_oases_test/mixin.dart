@@ -1,3 +1,4 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:tal3thoom/models/section.dart';
 import 'package:tal3thoom/screens/drawer/page/diagnostic_service/page/views/diagnostci_oases_test/view.dart';
@@ -5,19 +6,18 @@ import 'package:tal3thoom/screens/drawer/page/diagnostic_service/page/views/diag
 import 'package:get/get.dart';
 import 'dart:developer';
 import 'package:flutter/material.dart';
-import '../../../../../../../serives/diagnostic_oases_service/answers_service.dart';
-import '../../../../../../../serives/diagnostic_oases_service/question_serives.dart';
-import '../../../../../../widgets/alerts.dart';
-import '../../../../../../widgets/fast_widget.dart';
+import 'package:tal3thoom/serives/diagnostics_injects/diagnostic_oases_service/answers_service.dart';
+import 'package:tal3thoom/serives/diagnostics_injects/diagnostic_oases_service/question_serives.dart';
+import '../../../../../../widgets/constants.dart';
 import '../diagnostic_ssrs_test/view.dart';
 import '../success_page.dart';
 
 mixin QMixer on State<DiagnosticOasesTest> {
   final sections = <AppSectionModel>[
-    const AppSectionModel("1- قباس المعلومات العامة في حياتك"),
-    const AppSectionModel("2- قباس رد فعلك بالنسبة لاضطراب التلعثم"),
-    const AppSectionModel("3- قباس التواصل مع المواقف اليومية"),
-    const AppSectionModel("4- قباس جودة الحياة"),
+    const AppSectionModel("1- قياس المعلومات العامة في حياتك"),
+    const AppSectionModel("2- قياس رد فعلك بالنسبة لاضطراب التلعثم"),
+    const AppSectionModel("3- قياس التواصل مع المواقف اليومية"),
+    const AppSectionModel("4- قياس جودة الحياة"),
   ];
 
   final questionsBySection = <AppSectionModel, List<Question>>{};
@@ -116,14 +116,14 @@ mixin QMixer on State<DiagnosticOasesTest> {
       log('${qList.length} loaded from api');
 
       for (final q in qList) {
-        final section = sections[(q.sectionId as int) - 1];
+        final section = sections[(q.sectionId) - 1];
         questionsBySection[section]!.add(q);
       }
       selectedQuestion = questionsBySection[sections.first]!.first;
       setState(() {});
       log('${qList.length} loaded from api and filtered by sectionID');
     } catch (e) {
-     // Alert.error('الرجاء قيد الإنتظار !!!');
+      // Alert.error('الرجاء قيد الإنتظار !!!');
       Get.snackbar(e.toString(), '');
     } finally {
       setState(() => isSubmiting = false);
@@ -161,29 +161,27 @@ mixin QMixer on State<DiagnosticOasesTest> {
 
   void answerSelectedQ(Answers answer) {
     allAnswers[selectedQuestion!] = answer;
-    if (shouldEnableNextSectionButton) {
-      selectNextQuestion();
-    } else {
-      submit();
-    }
+    // if (shouldEnableNextSectionButton) {
+    //   selectNextQuestion();
+    // } else {
+    //  submit();
+    //  }
   }
 
   bool isSubmiting = false;
-
-  // final answersTxt = <Question, String>{};
-
   Future<void> submit() async {
     try {
       setState(() => isSubmiting = true);
       await DiagnosticOasesAnswers.postDiagnosticOasesAnswers(
         answers: allAnswers,
-        answersTxt: {},
       );
-      Get.off(() => SuccessView(
+      Get.offAll(() => SuccessView(
             title1: "لقد تم إنتهاء إختبار OASES بنجاح",
             title2: "إنتقال إلي إختبار SSRS",
-            onTap: () => Get.off(() => const SSRSDiagnosticsScreen()),
+            onTap: () => Get.offAll(() => const SSRSDiagnosticsScreen()),
           ));
+    } on DioError catch (_) {
+      customText2(title: "لا يوجد اتصال بالانترنت ", color: kBlackText);
     } catch (e) {
       Get.snackbar(e.toString(), '');
     } finally {

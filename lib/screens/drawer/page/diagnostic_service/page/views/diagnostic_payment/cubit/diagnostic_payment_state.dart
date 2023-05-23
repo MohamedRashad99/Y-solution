@@ -8,9 +8,9 @@ class DiagnosticPaymentInitial extends DiagnosticPaymentState {}
 class DiagnosticPaymentLoading extends DiagnosticPaymentState {}
 
 class DiagnosticPaymentSuccess extends DiagnosticPaymentState {
-  final DiagnosticPaymentModel diagnosticPaymentModel;
+  final PaymentAllTreatmentModel firstPaymentModel;
 
-  DiagnosticPaymentSuccess({required this.diagnosticPaymentModel});
+  DiagnosticPaymentSuccess({required this.firstPaymentModel});
 }
 
 class DiagnosticPaymentError extends DiagnosticPaymentState {

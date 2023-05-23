@@ -1,17 +1,18 @@
-
 class SsrsQuestionModel {
   Question? question;
 
   SsrsQuestionModel({this.question});
 
   SsrsQuestionModel.fromJson(Map<String, dynamic> json) {
-    question = json["question"] == null ? null : Question.fromJson(json["question"]);
+    question =
+        json["question"] == null ? null : Question.fromJson(json["question"]);
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
-    if(question != null)
+    final Map<String, dynamic> data = <String, dynamic>{};
+    if (question != null) {
       data["question"] = question?.toJson();
+    }
     return data;
   }
 }
@@ -45,7 +46,34 @@ class Question {
   Section? section;
   List<Answers>? answers;
 
-  Question({this.id, this.qype, this.bankId, this.language, this.time, this.evalType, this.courseCode, this.examMode, this.difficultyLevel, this.questionType, this.description, this.hint, this.videoFile, this.audioFile, this.mark, this.tags, this.published, this.createdBy, this.createdAt, this.deleted, this.examId, this.categoryId, this.sectionId, this.exam, this.category, this.section, this.answers});
+  Question(
+      {this.id,
+      this.qype,
+      this.bankId,
+      this.language,
+      this.time,
+      this.evalType,
+      this.courseCode,
+      this.examMode,
+      this.difficultyLevel,
+      this.questionType,
+      this.description,
+      this.hint,
+      this.videoFile,
+      this.audioFile,
+      this.mark,
+      this.tags,
+      this.published,
+      this.createdBy,
+      this.createdAt,
+      this.deleted,
+      this.examId,
+      this.categoryId,
+      this.sectionId,
+      this.exam,
+      this.category,
+      this.section,
+      this.answers});
 
   Question.fromJson(Map<String, dynamic> json) {
     id = json["id"];
@@ -73,12 +101,15 @@ class Question {
     sectionId = json["sectionId"];
     exam = json["exam"];
     category = json["category"];
-    section = json["section"] == null ? null : Section.fromJson(json["section"]);
-    answers = json["answers"]==null ? null : (json["answers"] as List).map((e)=>Answers.fromJson(e)).toList();
+    section =
+        json["section"] == null ? null : Section.fromJson(json["section"]);
+    answers = json["answers"] == null
+        ? null
+        : (json["answers"] as List).map((e) => Answers.fromJson(e)).toList();
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data["id"] = id;
     data["qype"] = qype;
     data["bankId"] = bankId;
@@ -104,10 +135,12 @@ class Question {
     data["sectionId"] = sectionId;
     data["exam"] = exam;
     data["category"] = category;
-    if(section != null)
+    if (section != null) {
       data["section"] = section?.toJson();
-    if(answers != null)
-      data["answers"] = answers?.map((e)=>e.toJson()).toList();
+    }
+    if (answers != null) {
+      data["answers"] = answers?.map((e) => e.toJson()).toList();
+    }
     return data;
   }
 }
@@ -121,7 +154,14 @@ class Answers {
   double? mark;
   dynamic? altAnswers;
 
-  Answers({this.id, this.questionId, this.answerOption, this.isTrueAnswer, this.isOther, this.mark, this.altAnswers});
+  Answers(
+      {this.id,
+      this.questionId,
+      this.answerOption,
+      this.isTrueAnswer,
+      this.isOther,
+      this.mark,
+      this.altAnswers});
 
   Answers.fromJson(Map<String, dynamic> json) {
     id = json["id"];
@@ -134,7 +174,7 @@ class Answers {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data["id"] = id;
     data["questionId"] = questionId;
     data["answerOption"] = answerOption;
@@ -164,7 +204,23 @@ class Section {
   dynamic? exam;
   dynamic? questions;
 
-  Section({this.id, this.sectionName, this.sectionNameEn, this.examId, this.lightStart, this.lightEnd, this.lightToMediumStart, this.lightToMediumEnd, this.mediumStart, this.mediumEnd, this.mediumToExtremeStart, this.mediumToExtremeEnd, this.extremeStart, this.extremeEnd, this.exam, this.questions});
+  Section(
+      {this.id,
+      this.sectionName,
+      this.sectionNameEn,
+      this.examId,
+      this.lightStart,
+      this.lightEnd,
+      this.lightToMediumStart,
+      this.lightToMediumEnd,
+      this.mediumStart,
+      this.mediumEnd,
+      this.mediumToExtremeStart,
+      this.mediumToExtremeEnd,
+      this.extremeStart,
+      this.extremeEnd,
+      this.exam,
+      this.questions});
 
   Section.fromJson(Map<String, dynamic> json) {
     id = json["id"];
@@ -186,7 +242,7 @@ class Section {
   }
 
   Map<String, dynamic> toJson() {
-    final Map<String, dynamic> data = new Map<String, dynamic>();
+    final Map<String, dynamic> data = <String, dynamic>{};
     data["id"] = id;
     data["sectionName"] = sectionName;
     data["sectionNameEn"] = sectionNameEn;

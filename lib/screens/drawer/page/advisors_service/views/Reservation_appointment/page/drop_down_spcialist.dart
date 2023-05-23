@@ -1,22 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../../../../../config/dio_helper/dio.dart';
 import '../../../../../../widgets/constants.dart';
+import '../../../models/advisor_model.dart';
 
 class DropDownSpecialist extends StatefulWidget {
-  const DropDownSpecialist({Key? key}) : super(key: key);
+  final ValueChanged<AllAdvisors> onChanged;
+  final AllAdvisors? initial;
+  const DropDownSpecialist({Key? key, required this.onChanged, this.initial})
+      : super(key: key);
 
   @override
   State<DropDownSpecialist> createState() => _DropDownSpecialistState();
 }
 
 class _DropDownSpecialistState extends State<DropDownSpecialist> {
-  String? dropdownValue;
+  AllAdvisors? selected;
+  final libs = <AllAdvisors>[];
+  @override
+  void initState() {
+    if (widget.initial != null) {
+      selected = widget.initial;
+    }
+    getAllAdvisors();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
-    // double height = MediaQuery.of(context).size.height;
-    //  double width = MediaQuery.of(context).size.width;
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 8),
       margin: const EdgeInsets.symmetric(horizontal: 14, vertical: 8),
@@ -27,11 +39,9 @@ class _DropDownSpecialistState extends State<DropDownSpecialist> {
           color: Colors.white,
           border: Border.all(color: kPrimaryColor)),
       child: DropdownButtonHideUnderline(
-        child: DropdownButton<String>(
-          value: dropdownValue,
-          // autofocus: true,
-          // isDense: true,
-          //isExpanded: true,
+        child: DropdownButton<AllAdvisors>(
+          value: selected,
+
           hint: const Text(
             "الأخصائي" ' :',
             style: TextStyle(
@@ -49,20 +59,19 @@ class _DropDownSpecialistState extends State<DropDownSpecialist> {
             fontFamily: "DinReguler",
           ),
           underline: null,
-          onChanged: (String? newValue) {
-            setState(() {
-              dropdownValue = newValue!;
-            });
+          onChanged: (AllAdvisors? newValue) {
+            if (newValue == null) return;
+            selected = newValue;
+
+            widget.onChanged(selected!);
+
+            setState(() {});
           },
-          items: <String>[
-            "أحمد الكامل ",
-            " خالد الرفاعي",
-            "محمد رشاد",
-          ].map<DropdownMenuItem<String>>((String value) {
-            return DropdownMenuItem<String>(
+          items: libs.map<DropdownMenuItem<AllAdvisors>>((AllAdvisors value) {
+            return DropdownMenuItem<AllAdvisors>(
               value: value,
               child: Text(
-                value,
+                value.fullName!,
                 style: const TextStyle(
                   color: kPrimaryColor,
                   fontSize: 16,
@@ -74,5 +83,22 @@ class _DropDownSpecialistState extends State<DropDownSpecialist> {
         ),
       ),
     );
+  }
+
+  Future<void> getAllAdvisors() async {
+    libs.clear();
+    final res =
+        await NetWork.get('Specialist/GetSpecialistsThatHaveConsultationDates');
+    (res.data['data'] as List)
+        .map((e) => libs.add(AllAdvisors.fromJson(e)))
+        .toList();
+
+    setState(() {});
+
+    // AllAdvisors allAdvisors = AllAdvisors.fromJson((res.data['data']));
+    //
+    //
+    // Prefs.setString("userId", allAdvisors.userId!);
+    // log("${res.data["data"]["userId"]}");
   }
 }

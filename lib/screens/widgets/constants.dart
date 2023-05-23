@@ -1,13 +1,17 @@
 // ignore_for_file: non_constant_identifier_names
 
 import 'dart:io';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart' hide Trans;
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:html/parser.dart';
 
 import 'package:queen/core/helpers/prefs.dart';
+import 'package:text_scroll/text_scroll.dart';
+
+import '../home/cubit/home_tabebar_cubit.dart';
+import '../home/view.dart';
 
 const kPrimaryColor = Color(0xFF2471D4);
 
@@ -85,6 +89,27 @@ final headingStyle = TextStyle(
   color: Colors.black,
 );
 
+Widget ScrollText({required String title}){
+  return     Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 8.0),
+    child: TextScroll(
+      textDirection: TextDirection.rtl,
+      title,
+      mode: TextScrollMode.endless,
+      velocity:  const Velocity(pixelsPerSecond: Offset(150, 0)),
+      delayBefore:  const Duration(seconds: 2),
+      numberOfReps: 10,
+      pauseBetween:  const Duration(seconds: 2),
+      style:  const TextStyle(  fontFamily: 'DinMedium',
+          fontSize: 14,
+          color: kButtonRedDark),
+      textAlign: TextAlign.right,
+      selectable: true,
+    ),
+  );
+}
+
+
 Widget customNormalText({required BuildContext context, String? title}) {
   return Text(
     title!,
@@ -139,7 +164,7 @@ Widget CustomCurvedContainer({required String title}) {
   // double height = MediaQuery.of(context).size.height;
   // double width = MediaQuery.of(context).size.width;
   return Container(
-    margin: const EdgeInsets.symmetric(vertical: 10),
+    margin: const EdgeInsets.symmetric(vertical: 10, horizontal: 5),
     width: Get.width / 1.8,
     height: Get.height * 0.075,
     decoration: const BoxDecoration(
@@ -165,6 +190,7 @@ Widget customMeduimBoldText(String? title) {
 
 Widget custom12Text({required String title, required Color color}) {
   return Text(title,
+      textDirection: TextDirection.ltr,
       style: TextStyle(color: color, fontSize: 10, fontFamily: 'DinBold'));
 }
 
@@ -175,25 +201,35 @@ Widget customBoldText({required String title, required Color color}) {
 
 Widget customText2({required String title, required Color color}) {
   return Text(title,
-      style:
-      TextStyle(color: color, fontSize: 18, fontFamily: 'DinBold'));
+      style: TextStyle(color: color, fontSize: 18, fontFamily: 'DinBold'));
+}Widget customText16({required String title, required Color color}) {
+  return Text(title,
+      style: TextStyle(color: color, fontSize: 22, fontFamily: 'DinBold'));
 }
 
 Widget customText3({required String title, required Color color}) {
   return Text(title,
       style: TextStyle(color: color, fontSize: 14, fontFamily: 'DinLight'));
 }
+Widget customTextWatchVideo({required String title, required Color color ,required VoidCallback onTap}) {
+  return GestureDetector(
+    onTap: onTap,
+    child: Text(title,
+        style: TextStyle(color: color, decoration: TextDecoration.underline, fontSize: 16, fontFamily: 'DinMedium')),
+  );
+}
 
 Widget customText4({required String title, required Color color}) {
   return Text(title,
-      textAlign: TextAlign.start,
-
+      textAlign: TextAlign.center,
       style: TextStyle(color: color, fontSize: 16, fontFamily: 'DinMedium'));
 }
 
 Widget customText10({required String title, required Color color}) {
   return Text(title,
       textAlign: TextAlign.center,
+      overflow: TextOverflow.ellipsis,
+      softWrap: true,
       style: TextStyle(color: color, fontSize: 14, fontFamily: 'DinMedium'));
 }
 
@@ -203,7 +239,7 @@ Widget customText5({required String title, required Color color}) {
 }
 
 Widget customText6({required String title, required Color color}) {
-  return Text(title,
+  return Text(title,textAlign: TextAlign.center,
       style: TextStyle(color: color, fontSize: 18, fontFamily: 'DinBold'));
 }
 
@@ -217,6 +253,10 @@ Widget customText8({required String title, required Color color}) {
   return Text(title,
       textAlign: TextAlign.center,
       style: TextStyle(color: color, fontSize: 17, fontFamily: 'DinReguler'));
+}Widget customText18({required String title, required Color color}) {
+  return Text(title,
+      textAlign: TextAlign.center,
+      style: TextStyle(color: color, fontSize: 22, fontFamily: 'DinReguler'));
 }
 
 Widget customText9({required String title, required Color color}) {
@@ -251,6 +291,42 @@ void showAlertDialog(BuildContext context, VoidCallback onTap) {
                   child: const Text("no")),
             ],
           ));
+}
+
+void showAlertDialogDeleteAccount(BuildContext context, VoidCallback onTap) {
+  showCupertinoModalPopup<void>(
+      context: context,
+      builder: (BuildContext context) => CupertinoAlertDialog(
+            title: const Text("حذف الحساب"),
+            content: const Text("هل تريد حذف الحساب نهائيا ؟"),
+            actions: <Widget>[
+              CupertinoDialogAction(
+                  isDefaultAction: true,
+                  onPressed: () {
+                    onTap();
+                  },
+                  child: const Text("أوافق")),
+              CupertinoDialogAction(
+                  textStyle: const TextStyle(color: Colors.red),
+                  isDefaultAction: true,
+                  onPressed: () async {
+                    BlocProvider.of<HomeTabeBarCubit>(context).changeIndex(1);
+                    Get.offAll(() => const HomeTabScreen());
+                  },
+                  child: const Text("لا")),
+            ],
+          ));
+}
+
+void showAlertDialogVideo(BuildContext context, Widget video) {
+  showCupertinoModalPopup<void>(
+      context: context,
+      builder: (BuildContext context) => CupertinoAlertDialog(
+          content: Container(
+              margin: const EdgeInsets.symmetric(vertical: 8),
+              width: context.width * 0.8,
+              height: context.height * 0.25,
+              child: video)));
 }
 
 Widget customSliderText({required String title, required Color color}) {
@@ -364,8 +440,6 @@ Future<void> showConfirmationDialog(BuildContext context,
     required String title,
     required Widget done,
     required Widget cancelled}) {
-  double height = MediaQuery.of(context).size.height;
-  double width = MediaQuery.of(context).size.width;
   return showDialog<String>(
     context: context,
     builder: (BuildContext context) => CupertinoAlertDialog(
@@ -516,6 +590,7 @@ Future<bool> onWillPopSignIn(BuildContext context) async {
 
   return shouldPop ?? false;
 }
+
 Future<bool> onWillPopWebEmpty(BuildContext context) async {
   final shouldPop = await showDialog(
     context: context,

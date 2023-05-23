@@ -1,12 +1,12 @@
 import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
+import 'package:dio/dio.dart';
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:meta/meta.dart';
 import 'package:dio/dio.dart' as _dio;
 import 'package:queen/core/helpers/prefs.dart';
-import 'package:tal3thoom/serives/diagnostic_ssi4/question.dart';
+import 'package:tal3thoom/serives/diagnostics_injects/diagnostic_ssi4/question.dart';
 
 import '../../../../../../../../config/dio_helper/dio.dart';
 import '../../../../../../../widgets/alerts.dart';
@@ -34,6 +34,8 @@ class DiagnosticSsi4FirstCubit extends Cubit<DiagnosticSsi4FirstState> {
       print(questionList);
 
       emit(DiagnosticSsi4FirstSuccess(ssi4QuestionModel: questionList));
+    } on DioError catch (_) {
+      emit(DiagnosticSsi4FirstError(msg: "لا يوجد اتصال بالانترنت "));
     } catch (e, es) {
       print("err");
       log(e.toString());
@@ -47,24 +49,24 @@ class DiagnosticSsi4FirstCubit extends Cubit<DiagnosticSsi4FirstState> {
     required int examId,
     required dynamic video,
   }) async {
-
-   final formData = _dio.FormData.fromMap({
-     "record": _dio.MultipartFile.fromFileSync(video.path,
-         filename: video.path),
-   });
+    final formData = _dio.FormData.fromMap({
+      "record":
+          _dio.MultipartFile.fromFileSync(video.path, filename: video.path),
+    });
     try {
-
       final body = formData;
       final res = await NetWork.post(
           'PatientExams/AddPatientSSI4ExamAnswers/$userId/$examId/$id/1',
           body: body);
       if (res.data['status'] == 0 || res.data['status'] == -1) {
-        throw res.data['message'];
+        throw res.data['messages'][0]['title'].toString();
       }
       emit(DiagnosticSsi4FirstSuccess(ssi4QuestionModel: questionList));
       Alert.success('تم رفع الفيديو بنجاح');
-
+    } on DioError catch (_) {
+      emit(DiagnosticSsi4FirstError(msg: "لا يوجد اتصال بالانترنت "));
     } catch (e, st) {
+      Alert.error(e.toString());
       log(e.toString());
       log(st.toString());
       emit(DiagnosticSsi4FirstError(msg: e.toString()));

@@ -1,19 +1,15 @@
-import 'dart:developer';
-import 'dart:io';
-
-import 'package:tal3thoom/screens/widgets/fast_widget.dart';
-import 'package:file_picker/file_picker.dart';
+import 'package:fijkplayer/fijkplayer.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:video_player/video_player.dart';
 
+import '../../../../../../../home/cubit/home_tabebar_cubit.dart';
+import '../../../../../../../home/view.dart';
 import '../../../../../../../widgets/appBar.dart';
+import '../../../../../../../widgets/better_video_widget.dart';
 import '../../../../../../../widgets/constants.dart';
 import '../../../../../../../widgets/mediaButton.dart';
-import '../../../../../../../widgets/video_items.dart';
 import '../../../../../../view.dart';
-import '../../../../../diagnostic_service/page/views/success_page.dart';
-import '../sloki/views/build_three.dart';
 
 // ignore: must_be_immutable
 class FirstStageAdditionalTrainingScreen extends StatefulWidget {
@@ -27,6 +23,13 @@ class FirstStageAdditionalTrainingScreen extends StatefulWidget {
 class _FirstStageAdditionalTrainingScreenState
     extends State<FirstStageAdditionalTrainingScreen> {
   final _firstController = TextEditingController();
+  final FijkPlayer player = FijkPlayer();
+
+  @override
+  void dispose() {
+    super.dispose();
+    player.release();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,6 +41,7 @@ class _FirstStageAdditionalTrainingScreenState
       appBar: DynamicAppbar(
           context: context,
           press: (context) => Scaffold.of(context).openDrawer()),
+
       body: Container(
         margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
         height: context.height,
@@ -47,6 +51,9 @@ class _FirstStageAdditionalTrainingScreenState
           child: Column(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
+                SizedBox(
+                  height: context.height * 0.05,
+                ),
                 CustomTileContainer(
                     widthh: context.width / 1.8,
                     title: "تتدريب إضافي",
@@ -55,10 +62,12 @@ class _FirstStageAdditionalTrainingScreenState
                   margin: const EdgeInsets.symmetric(vertical: 8),
                   width: context.width * 0.8,
                   height: context.height * 0.25,
-                  child: VideoItems(
-                    videoPlayerController: VideoPlayerController.network(
-                      'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-                    ),
+                  child:
+
+
+                      const VideoScreen(
+                    url:
+                        'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
                   ),
                 ),
                 customText3(
@@ -68,53 +77,21 @@ class _FirstStageAdditionalTrainingScreenState
                 SizedBox(
                   height: context.height * 0.02,
                 ),
-                const BuildTable(
-                    color: kHomeColor,
-                    title1: "مثال1",
-                    title2: "مثال1",
-                    title3: "مثال1"),
-                const BuildTable(
-                    color: kAppBarColor,
-                    title1: "مثال1",
-                    title2: "مثال1",
-                    title3: "مثال1"),
-                const BuildTable(
-                    color: kHomeColor,
-                    title1: "مثال1",
-                    title2: "مثال1",
-                    title3: "مثال1"),
-                const BuildTable(
-                    color: kAppBarColor,
-                    title1: "مثال1",
-                    title2: "مثال1",
-                    title3: "مثال1"),
-                const BuildTable(
-                    color: kHomeColor,
-                    title1: "مثال1",
-                    title2: "مثال1",
-                    title3: "مثال1"),
-                const BuildTable(
-                    color: kAppBarColor,
-                    title1: "مثال1",
-                    title2: "مثال1",
-                    title3: "مثال1"),
+                SizedBox(
+                  height: context.height * 0.3,
+                  child: Image.asset("assets/images/t1.jpeg"),
+                ),
+                SizedBox(
+                  height: context.height * 0.25,
+                  child: Image.asset("assets/images/t2.jpeg"),
+                ),
                 SizedBox(
                   height: context.height * 0.05,
                 ),
                 MediaButton(
                   onPressed: () {
-                    navigateTo(
-                        context,
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 8.0),
-                          child: SuccessView(
-                            title1:
-                                "لقد اتممت الجلسة العلاجية وسيتم تحويلك إلي الجلسة التالية عن طريق المختص بعد تقييمة لنتائج الجلسة والفيديو التي قمت بارسالة",
-                            title2: "تدريب وتعليم إضافي",
-                            onTap: () => navigateTo(context,
-                                const FirstStageAdditionalTrainingScreen()),
-                          ),
-                        ));
+                    BlocProvider.of<HomeTabeBarCubit>(context).changeIndex(1);
+                    Get.offAll(() => const HomeTabScreen());
                   },
                   color: kPrimaryColor,
                   title: "خروج",
@@ -123,30 +100,5 @@ class _FirstStageAdditionalTrainingScreenState
         ),
       ),
     );
-  }
-
-  dynamic video;
-
-  File? _file1;
-
-  void _uploadFile(int step) async {
-    FilePickerResult? result = await FilePicker.platform.pickFiles(
-      type: FileType.custom,
-      allowedExtensions: ['jpg', 'pdf', 'doc', 'png'],
-    );
-
-    if (result != null) {
-      File? file = File(result.files.single.path!);
-
-      log("-=-=-=-=- selected file is => ${file.toString()}");
-      setState(() {
-        _file1 = file;
-        //  filesInputData.thesisFile = file;
-
-        _firstController.text = file.path;
-      });
-    } else {
-      log("NOT Catch ONE SORRY FOR THAT .... TRY AGAIN");
-    }
   }
 }

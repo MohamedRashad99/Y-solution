@@ -40,17 +40,19 @@ class SmallButtonSizerUploadFile extends StatelessWidget {
         child: Center(
           child: isLoading != true
               ? Row(
+                  crossAxisAlignment: CrossAxisAlignment.end,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
                     Image.asset(image!),
                     // SizedBox(width: width*0.02,),
-                    Text(title!,
-                        textAlign: TextAlign.center,
-                        style: const TextStyle(
-                            color: Colors.white,
-                            fontFamily: 'DinReguler',
-                            fontWeight: FontWeight.bold,
-                            fontSize: 16)),
+                    Text(
+                      title!,
+                      textAlign: TextAlign.center,
+                      style: const TextStyle(
+                          fontSize: 14,
+                          color: kHomeColor,
+                          fontFamily: "DinReguler"),
+                    ),
                   ],
                 )
               : SpinKitChasingDots(

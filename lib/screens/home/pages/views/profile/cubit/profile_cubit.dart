@@ -1,7 +1,7 @@
 import 'dart:developer';
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:bloc/bloc.dart';
-import 'package:meta/meta.dart';
 import 'package:queen/core/helpers/prefs.dart';
 
 import '../../../../../../config/dio_helper/dio.dart';
@@ -15,10 +15,10 @@ class ProfileCubit extends Cubit<ProfileState> {
     getProfile();
   }
 
-
   final phoneController = TextEditingController();
 
   final emailController = TextEditingController();
+  final passwordController = TextEditingController();
   final dadNameController = TextEditingController();
   final familyNameControlller = TextEditingController();
   final countryPhoneCode = TextEditingController();
@@ -54,7 +54,6 @@ class ProfileCubit extends Cubit<ProfileState> {
 
       ProfileModel loginModel = ProfileModel.fromMap((res.data));
 
-
       Prefs.setString("fullName", loginModel.data.fullName);
       Prefs.setString("email", loginModel.data.email);
       Prefs.setString("phoneNumber", loginModel.data.phoneNumber);
@@ -66,24 +65,39 @@ class ProfileCubit extends Cubit<ProfileState> {
       Prefs.setString("gender", loginModel.data.gender);
       Prefs.setString("idCardNumber", loginModel.data.idCardNumber);
       Prefs.setString("type", loginModel.data.type);
+      Prefs.setString("currentStage", loginModel.data.currentStage.toString());
+      Prefs.setString(
+          "currentDiagnoses", loginModel.data.currentDiagnoses.toString());
+      Prefs.setString("currentDiagnosesStatus",
+          loginModel.data.currentDiagnosesStatus.toString());
+      Prefs.setString("nextSession", loginModel.data.nextSession.toString());
 
       log("${res.data["data"]["userId"]}");
 
       log("${res.data["data"]["fullName"]}");
       log("${res.data["data"]["email"]}");
       log("${res.data["data"]["phoneNumber"]}");
+
+      log("${res.data["data"]["currentStage"]}");
+      log("${res.data["data"]["currentDiagnoses"]}");
+      log("${res.data["data"]["currentDiagnosesStatus"]}");
+      log("${res.data["data"]["nextSession"]}");
+    } on DioError catch (_) {
+      emit(ProfileError(msg: "لا يوجد اتصال بالانترنت "));
     } catch (e, es) {
       log(e.toString());
       log(es.toString());
       emit(ProfileError(msg: e.toString()));
     }
   }
+
   final userId = Prefs.getString("userId");
 
   String? typeSexId;
   String onSexTypeChanged(String value) => typeSexId = value;
   String? typeReadId;
   String onReadTypeChanged(String value) => typeReadId = value;
+
   Future<void> updateProfile({
     required int id,
     required String firstName,
@@ -95,7 +109,6 @@ class ProfileCubit extends Cubit<ProfileState> {
     required String birthDate,
     required String nationality,
     required String idCardNumber,
-
     required String country,
     required String city,
     required String workPlace,
@@ -111,7 +124,7 @@ class ProfileCubit extends Cubit<ProfileState> {
           "lastName": lastName,
           "email": email,
           "phoneNumber": phoneNumber,
-          "countryPhoneCode":countryPhoneCode,
+          "countryPhoneCode": countryPhoneCode,
           "gender": typeSexId,
           "birthDate": "2022-10-10",
           "nationality": nationality,
@@ -119,7 +132,6 @@ class ProfileCubit extends Cubit<ProfileState> {
           "country": country,
           "city": city,
           "userId": userId,
-
           "workPlace": workPlace,
           "type": typeReadId
         },

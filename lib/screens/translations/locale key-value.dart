@@ -31,7 +31,7 @@ class LocaleString extends Translations {
           "periods": "From Available Enter Period From : To",
           "welcome": "Welcome ..",
           "signIn": "Sign In",
-          "IdentificationNumber": "ID Number",
+          "identificationNumber": "ID Number",
           "password": "Password",
           "passwordRecovery": "Password Recovery?",
           "login": "Login",
@@ -51,7 +51,7 @@ class LocaleString extends Translations {
           "sendCode": "Send VCode",
           "resend": "Resend",
           // Via Code
-          "EnterVcode": "Enter the sent code",
+          "enterVcode": "Enter the sent code",
           "confirm": "Confirm",
           //New password
           "newPassword": "New password",
@@ -69,7 +69,7 @@ class LocaleString extends Translations {
           "enterFullName": "Please enter your full name",
           "enterName": "Please enter your name",
           "enterEmail": "Please enter your email",
-          "MustBeEmail": "Must be an valid email",
+          "mustBeEmail": "Must be an valid email",
           "enterPass": "Please enter the password",
           "enterConfPassword": "Please enter confirm password",
           "enterCountry": "Please select the country",
@@ -78,7 +78,7 @@ class LocaleString extends Translations {
           "emailDots": "The email   :",
           "phoneDots": "Phone No   :",
           "countryDots": "The county :",
-          "AccessNumberDots": "Access No:",
+          "accessNumberDots": "Access No:",
           "passwordDots": "Password :",
           "fakeName": "Mohamed Rashad",
           "saudi": "Saudi Arabia",
@@ -92,19 +92,19 @@ class LocaleString extends Translations {
           "relation": "Ask Library Relations",
           "specialist": "Ask librarian",
           "libraryExternalServices": "Services outside the Kingdom",
-          "SuggestionBuyBook": "Suggestion to buy a book",
+          "suggestionBuyBook": "Suggestion to buy a book",
           "Inter-LibraryExchangeAndLending":
               "Inter-library exchange and lending",
-          "RequestDepositScientificThesis":
+          "requestdepositScientificThesis":
               "Request to deposit a scientific thesis",
-          "SelectiveBroadcastingInformation":
+          "selectiveBroadcastingInformation":
               "Selective broadcasting of information",
           "manuscriptRequest": "Manuscript request",
-          "RequestVisit": "Request to visit",
-          "RequestReserveArticleOrResearchRetreat":
+          "requestVisit": "Request to visit",
+          "requestreserveArticleOrResearchRetreat":
               "Request to reserve an article or research retreat",
-          "BookGiftRequest": "Book gift request",
-          "RequestGiftBook": "Request to gift a book",
+          "bookGiftRequest": "Book gift request",
+          "requestGiftBook": "Request to gift a book",
           "potPhotographyRequest": "pot photography request",
           "toShowEveryServicesMustLogin":
               "To learn about all services Please login",
@@ -116,7 +116,7 @@ class LocaleString extends Translations {
           "gallery": "Gallery",
           "cancel": "Cancel",
           "changeImage": "Change image",
-          "YouCanFollowUsSocialMedia": "You can follow us on social media",
+          "youCanFollowUsSocialMedia": "You can follow us on social media",
           // language
           "language": "Languages",
           "changeLang": "Change language",
@@ -136,7 +136,7 @@ class LocaleString extends Translations {
 
           // reserve retreat
           "archive": "Archive",
-          "ReserveArticleOrResearchRetreat": "Book a research retreat",
+          "reserveArticleOrResearchRetreat": "Book a research retreat",
           "headReserve":
               "It is a service that enables the beneficiary to reserve a designated place in the library, where all office supplies are placed, in order to prepare the beneficiary to complete his research and study and achieve practical.",
           "followRequest": "Follow request",
@@ -226,7 +226,7 @@ class LocaleString extends Translations {
           "removeFromArchive": "Remove from archive",
           "kArchive": "(Archive)",
           // إيداع رسالة علمية
-          "DepositScientificThesis": "scientific thesis",
+          "depositScientificThesis": "scientific thesis",
           "terms": "(Terms and Conditions)",
           "termsHead":
               "You must first review and agree to the terms of delivery of the thesis",
@@ -321,7 +321,38 @@ class LocaleString extends Translations {
           "alertRemoveToArchive": "Request has been removed from archive",
 
           "des":
-              "The Library of the Holy Mosque in Makkah is considered one of the scientific and cultural edifices in Makkah Al-Mukarramah (the holy capital) that has communicated with its patrons for years, as it interacted with them with what it prepared for them of information containers in different forms and what it provides for them throughout the week, in two shifts, morning and evening, and with various services that keep pace with modern developments, which made it live up to Because, by the grace of God, it will become one of the most important libraries because its name is associated with the purest of all regions and the heart of the hearts of Muslims. And with the services it provides to researchers, readers, students of knowledge, pilgrims and Umrah pilgrims, and women as well as their share, just like men. The library has invested what God has blessed it with capabilities and features, so it worked to develop its services and rehabilitate its employees to keep pace with the renaissance that our country is experiencing in all fields and to go hand in hand with its guests the rest of the libraries and information centers and made use of that All for its pioneers to take from its particular."
+              "The Library of the Holy Mosque in Makkah is considered one of the scientific and cultural edifices in Makkah Al-Mukarramah (the holy capital) that has communicated with its patrons for years, as it interacted with them with what it prepared for them of information containers in different forms and what it provides for them throughout the week, in two shifts, morning and evening, and with various services that keep pace with modern developments, which made it live up to Because, by the grace of God, it will become one of the most important libraries because its name is associated with the purest of all regions and the heart of the hearts of Muslims. And with the services it provides to researchers, readers, students of knowledge, pilgrims and Umrah pilgrims, and women as well as their share, just like men. The library has invested what God has blessed it with capabilities and features, so it worked to develop its services and rehabilitate its employees to keep pace with the renaissance that our country is experiencing in all fields and to go hand in hand with its guests the rest of the libraries and information centers and made use of that All for its pioneers to take from its particular.",
+
+          "EX_TRE_S1": " Session one",
+          "EX_TRE_S2": " Session two",
+          "EX_TRE_S3": " Session three",
+          "EX_TRE_S4": " Session four",
+          "EX_TRE_S5": " Session five",
+          "EX_TRE_S6": " Session six",
+          "EX_TRE_S7": " Session seven",
+          "EX_TRE_S8": " Session eight",
+          "EX_TRE_S9": " Session nine",
+          "EX_TRE_S10": " Session ten",
+          "EX_TRE_S11": " Session eleven",
+          "EX_TRE_S12": " Session twelve",
+          "EX_TRE_S13": " Session thirteen",
+          "EX_TRE_S14": " Session fourteen",
+          "EX_TRE_S15": " Session fifteen",
+          "EX_TRE_S16": " Session sixteen",
+          "EX_TRE_S17": " Session seventeen",
+          "EX_TRE_S18": " Session eighteen",
+          "EX_TRE_S19": " Session nineteen",
+          "EX_TRE_S20": " Session twenty",
+          "EX_TRE_S21": " Session twenty-one",
+          "EX_TRE_S22": " Session twenty-two",
+          "EX_TRE_S23": " Session twenty-three",
+          "EX_TRE_S24": " Session twenty-foure",
+          "EX_TRE_S25": " Session twenty-five",
+          "EX_TRE_S26": " Session twenty-six",
+          "EX_TRE_S27": " Session twenty-seven",
+          "EX_TRE_S28": " Session twenty-eight",
+          "EX_TRE_S29": " Session twenty-nine",
+          "EX_TRE_S30": " Session thirty"
         },
         'ar_EG': {
           "aboutLibrary": "عن المكتبة",
@@ -330,7 +361,7 @@ class LocaleString extends Translations {
           "responded": "تم الرد",
 
           'Male': 'ذكر',
-          'Female': "أنثي",
+          'Female': "أنثى",
           "Read": "قارئ",
           'UnRead': "غير قارئ",
 
@@ -348,7 +379,7 @@ class LocaleString extends Translations {
           // login
           "welcome": "مرحبا..",
           "signIn": "تسجيل الدخول",
-          "IdentificationNumber": "رقم الهوية",
+          "identificationNumber": "رقم الهوية",
           "password": "كلمة المرور",
           "passwordRecovery": "إسترجاع كلمة المرور؟",
           "login": "تسجيل الدخول",
@@ -360,7 +391,7 @@ class LocaleString extends Translations {
           "enterId": "الرجاء إدخال رقم الهوية الخاص بك!",
           "enterPassword": "من فضلك أدخل رقمك السري!",
           "id": "رقمك الخاص",
-          "minPassword": " الحد الأدني لكلمه المرور 11 أنماط ",
+          "minPassword": " الحد الأدني لكلمه المرور 6 أنماط ",
           // notifications
           "notification": "الإشعارات",
           "periods": " من الفترات  أدخل المدة المطلوبة من : إلي",
@@ -373,7 +404,7 @@ class LocaleString extends Translations {
           "sendCode": "إرسال الرمز",
           "resend": "إعادة إرسال الرمز",
           // Via Code
-          "EnterVcode": "أدخل الرمز المرسل",
+          "enterVcode": "أدخل الرمز المرسل",
           "confirm": "تاكيد",
           //New password
           "newPassword": "كلمة مرور جديدة",
@@ -390,7 +421,7 @@ class LocaleString extends Translations {
           "doHave": "  هل لديك حساب؟\t ",
           "enterFullName": "من فضلك أدخل الاسم كاملاَ",
           "enterName": "من فضلك أدخل أسمك",
-          "MustBeEmail": "لابد ان يكون بريد الكتروني",
+          "mustBeEmail": "لابد ان يكون بريد الكتروني",
 
           "enterEmail": "من فضلك أدخل بريدك الإلكتروني",
           "enterPass": "من فضلك أدخل كلمة المرور",
@@ -402,7 +433,7 @@ class LocaleString extends Translations {
           "emailDots": "البريد الإلكتروني :",
           "phoneDots": "رقم الهاتف   : ",
           "countryDots": "أسم الدولة   : ",
-          "AccessNumberDots": "رقم النفاذ   : ",
+          "accessNumberDots": "رقم النفاذ   : ",
           "passwordDots": "كلمة المرور : ",
           "fakeName": "محمد رشاد",
           "saudi": "المملكه العربية السعودية",
@@ -415,18 +446,18 @@ class LocaleString extends Translations {
           "relation": "أسال علاقات المكتبة",
           "specialist": "أسال أخصائي المكتبة",
           "libraryExternalServices": "خدمات خارجي الممكلة",
-          "SuggestionBuyBook": "اقتراح شراء كتاب",
+          "suggestionBuyBook": "اقتراح شراء كتاب",
           "Inter-LibraryExchangeAndLending": "التبادل والإعارة بين المكتبات",
-          "RequestDepositScientificThesis": "طلب إيداع رسالة علمية",
+          "requestdepositScientificThesis": "طلب إيداع رسالة علمية",
           "depositScientificThesis": "إيداع رسالة علمية",
 
-          "SelectiveBroadcastingInformation": "البث الإنتقالي للمعلومات",
+          "selectiveBroadcastingInformation": "البث الإنتقالي للمعلومات",
           "manuscriptRequest": "طلب مخطوطة",
-          "RequestVisit": "طلب زيارة",
-          "RequestReserveArticleOrResearchRetreat":
+          "requestVisit": "طلب زيارة",
+          "requestreserveArticleOrResearchRetreat":
               "طلب حجز مادة أو خلوة بحثية",
-          "BookGiftRequest": "طلب إهداء كتاب",
-          "RequestGiftBook": "طلب إستهداء كتاب",
+          "bookGiftRequest": "طلب إهداء كتاب",
+          "requestGiftBook": "طلب إستهداء كتاب",
           "potPhotographyRequest": "طلب تصوير وعاء",
           "toShowEveryServicesMustLogin":
               "لتعرف علي جميع الجدمات  يرجي تسجيل الدخول",
@@ -440,7 +471,7 @@ class LocaleString extends Translations {
           "gallery": "الاستوديو",
           "cancel": "الغاء",
           "changeImage": "تغير الصورة",
-          "YouCanFollowUsSocialMedia":
+          "youCanFollowUsSocialMedia":
               "يمكنك متابعتنا علي مواقع التواصل الإجتماعي",
           // language
           "language": "إعدادات اللغة",
@@ -461,7 +492,7 @@ class LocaleString extends Translations {
           "askStaff": "إسال موظفي المكتبة",
 
           // reserve retreat
-          "ReserveArticleOrResearchRetreat": "حجز خلوة بحثية",
+          "reserveArticleOrResearchRetreat": "حجز خلوة بحثية",
           "headReserve":
               "هي خدمة تمكن المستفيد من حجز مكان مخصص بالمكتبة ، حيث يوضع فية جميع المستلزمات المكتبية وذالك تهيئة للمستفيد في إكمال أبحاثة ودراستة ونحقيقة العملي.",
           "followRequest": "متابعة الطلب",
@@ -549,7 +580,7 @@ class LocaleString extends Translations {
           "kArchive": "(الأرشيف)",
           "archive": "الأرشيف",
           // إيداع رسالة علمية
-          "DepositScientificThesis": "إيداع رسالة علمية",
+          "depositScientificThesis": "إيداع رسالة علمية",
           "terms": "(الشروط والأحكام)",
           "youMust": "عليك أن توافق على الشروط والأحكام أولاً قبل المواصلة",
           "termsHead":
@@ -642,7 +673,38 @@ class LocaleString extends Translations {
           "alertAddToArchive": "تم إضافة الطلب إلي الأرشيف",
           "alertRemoveToArchive": "تم إزلة الطلب من الأرشيف",
           "des":
-              "تعتبر مكتبة الحرم المكي الشريف أحد الصروح العلمية الثقافية بمكة المكرمة (العاصمة المقدسة) التي تواصلت مع روادها لسنين مضت حيث تفاعلت معهم بما هيأته لهم من أوعية معلومات بأشكال مختلفة وما تقدمه لهم طيلة أيام الأسبوع على فترتين صباحية ومسائية وبخدمات متنوعة تتواكب والمستجدات الحديثة مما جعلها ترقى لأن تصبح بتوفيق الله إحدى أهم المكتبات لاقتران اسمها بأطهر البقاع قاطبة ومهوى أفئدة المسلمين. وبما تقدمه من خدمات للباحثين والقراء وطالبي العلم والحجاج والمعتمرين ، وللنساء كذلك نصيبهن أسوة بالرجال واستثمرت المكتبة ما حباها الله من إمكانات ومميزات فعملت على تطوير خدماتها وتأهيل منسوبيها لتواكب النهضة التي تعيشها بلادنا في كافة المجالات ولتسير جنباً إلى جنب مع وضيفاتها بقية المكتبات ومراكز المعلومات وسخرت ذلك كله لروادها للنهل من معينها."
+              "تعتبر مكتبة الحرم المكي الشريف أحد الصروح العلمية الثقافية بمكة المكرمة (العاصمة المقدسة) التي تواصلت مع روادها لسنين مضت حيث تفاعلت معهم بما هيأته لهم من أوعية معلومات بأشكال مختلفة وما تقدمه لهم طيلة أيام الأسبوع على فترتين صباحية ومسائية وبخدمات متنوعة تتواكب والمستجدات الحديثة مما جعلها ترقى لأن تصبح بتوفيق الله إحدى أهم المكتبات لاقتران اسمها بأطهر البقاع قاطبة ومهوى أفئدة المسلمين. وبما تقدمه من خدمات للباحثين والقراء وطالبي العلم والحجاج والمعتمرين ، وللنساء كذلك نصيبهن أسوة بالرجال واستثمرت المكتبة ما حباها الله من إمكانات ومميزات فعملت على تطوير خدماتها وتأهيل منسوبيها لتواكب النهضة التي تعيشها بلادنا في كافة المجالات ولتسير جنباً إلى جنب مع وضيفاتها بقية المكتبات ومراكز المعلومات وسخرت ذلك كله لروادها للنهل من معينها.",
+
+          "EX_TRE_S1": "الجلسة العلاجية الأولي",
+          "EX_TRE_S2": "الجلسة العلاجية الثانية",
+          "EX_TRE_S3": "الجلسة العلاجية الثالثة",
+          "EX_TRE_S4": "الجلسة العلاجية الرابعة",
+          "EX_TRE_S5": "الجلسة العلاجية الخامسة",
+          "EX_TRE_S6": "الجلسة العلاجية السادسة",
+          "EX_TRE_S7": "الجلسة العلاجية السابعة",
+          "EX_TRE_S8": "الجلسة العلاجية الثامنة",
+          "EX_TRE_S9": "الجلسة العلاجية التاسعة",
+          "EX_TRE_S10": "الجلسة العلاجية العاشرة",
+          "EX_TRE_S11": "الجلسة العلاجية الحادية عشر",
+          "EX_TRE_S12": "الجلسة العلاجية الثانية عشر",
+          "EX_TRE_S13": "الجلسة العلاجية الثالثة عشر",
+          "EX_TRE_S14": "الجلسة العلاجية الرابعة عشر",
+          "EX_TRE_S15": "الجلسة العلاجية الخامسة عشر",
+          "EX_TRE_S16": "الجلسة العلاجية السادسة عشر",
+          "EX_TRE_S17": "الجلسة العلاجية السابعة عشر",
+          "EX_TRE_S18": "الجلسة العلاجية الثامنة عشر",
+          "EX_TRE_S19": "الجلسة العلاجية التاسعة عشر",
+          "EX_TRE_S20": "الجلسة العلاجية العشرون",
+          "EX_TRE_S21": "الجلسة العلاجية الواحدة و العشرون",
+          "EX_TRE_S22": "الجلسة العلاجية الثانية و العشرون",
+          "EX_TRE_S23": "الجلسة العلاجية الثالثة و العشرون",
+          "EX_TRE_S24": "الجلسة العلاجية الرابعة و العشرون",
+          "EX_TRE_S25": "الجلسة العلاجية الخامسة و العشرون",
+          "EX_TRE_S26": "الجلسة العلاجية السادسة و العشرون",
+          "EX_TRE_S27": "الجلسة العلاجية السابعة و العشرون",
+          "EX_TRE_S28": "الجلسة العلاجية الثامنة و العشرون",
+          "EX_TRE_S29": "الجلسة العلاجية التاسعة و العشرون",
+          "EX_TRE_S30": "الجلسة العلاجية الثلاثون"
         }
       };
 }

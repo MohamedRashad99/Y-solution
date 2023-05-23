@@ -53,8 +53,6 @@ class _DropDownGenderState extends State<DropDownGender> {
         //
         //  ),
         child: DropdownButtonFormField<TypeSex>(
-
-
           isExpanded: true,
           value: selected,
           // autofocus: true,
@@ -68,9 +66,9 @@ class _DropDownGenderState extends State<DropDownGender> {
           },
 
           isDense: true,
-          hint:  Text(
-            Prefs.getString('gender'),
-            style: TextStyle(
+          hint: Text(
+            "الجنس : " + Prefs.getString('gender'),
+            style: const TextStyle(
               color: kPrimaryColor,
               fontSize: 16,
               fontFamily: "DinReguler",
@@ -79,7 +77,7 @@ class _DropDownGenderState extends State<DropDownGender> {
 
           decoration: InputDecoration(
             contentPadding:
-            const EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
+                const EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
             fillColor: Colors.white,
             enabledBorder: OutlineInputBorder(
               borderSide: const BorderSide(color: kPrimaryColor, width: 1),

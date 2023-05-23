@@ -1,22 +1,16 @@
+import 'package:fijkplayer/fijkplayer.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:tal3thoom/screens/widgets/customButton.dart';
-import 'package:tal3thoom/screens/widgets/smallButton.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:queen/core/helpers/prefs.dart';
-import 'package:video_player/video_player.dart';
 
 import '../../../../../../widgets/alerts.dart';
 import '../../../../../../widgets/appBar.dart';
 import '../../../../../../widgets/constants.dart';
-import '../../../../../../widgets/fast_widget.dart';
 import '../../../../../../widgets/loading.dart';
-import '../../../../../../widgets/video_items.dart';
 import '../../../../../view.dart';
 import '../../../../treatment_service/page/views/first_session/first_stage_ssrs_test/page/card_number.dart';
 import '../diagnostci_oases_test/views/alert_message.dart';
-import '../diagnostic_ssi4/views/department_one/view.dart';
-import '../success_page.dart';
 import 'cubit/diagnostic_ssrs_cubit.dart';
 
 // ignore: must_be_immutable
@@ -29,10 +23,17 @@ class SSRSDiagnosticsScreen extends StatefulWidget {
 
 class _SSRSDiagnosticsScreenState extends State<SSRSDiagnosticsScreen> {
   int? selectedNumber;
+  final FijkPlayer player = FijkPlayer();
+
+  @override
+  void dispose() {
+    player.release();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
-       return Scaffold(
+    return Scaffold(
       backgroundColor: kHomeColor,
       drawer: const MenuItems(),
       appBar: DynamicAppbar(
@@ -63,7 +64,7 @@ class _SSRSDiagnosticsScreenState extends State<SSRSDiagnosticsScreen> {
                       // final qList = cubit.questionList
                       //     .where((e) => e.categoryId == categoryNumber)
                       //     .toList();
-                     // final currentQuestion = qList[index];
+                      // final currentQuestion = qList[index];
                       return Column(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                           children: [
@@ -80,22 +81,13 @@ class _SSRSDiagnosticsScreenState extends State<SSRSDiagnosticsScreen> {
                               padding: const EdgeInsets.symmetric(vertical: 12),
                               child: Image.asset("assets/images/255.png"),
                             ),
-                            SizedBox(
-                              width: context.width * 0.8,
-                              height: context.height * 0.25,
-                              child: VideoItems(
-                                videoPlayerController:
-                                    VideoPlayerController.network(
-                                  'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
-                                ),
-                              ),
-                            ),
+
                             CustomButton(
                               onPressed: () {},
                               title: state.ssrsQuestionModel[index].description,
                               color: kPrimaryColor,
                             ),
-                            AlertMessage(),
+                            const AlertMessage(),
                             Wrap(
                                 textDirection: TextDirection.ltr,
                                 spacing: 15,
@@ -103,9 +95,13 @@ class _SSRSDiagnosticsScreenState extends State<SSRSDiagnosticsScreen> {
                                 children: cubit.questionList[0].answers
                                     .map((e) => CardNumber(
                                         onTap: () {
+                                          cubit.answer = {
+                                            cubit.questionList[0]: e
+                                          };
                                           selectedNumber = e.id;
-                                          setState(() {
-                                          });
+                                          print("الرقم" +
+                                              selectedNumber.toString());
+                                          setState(() {});
                                         },
                                         title: e.answerOption,
                                         isSelected: e.id == selectedNumber))
@@ -123,15 +119,6 @@ class _SSRSDiagnosticsScreenState extends State<SSRSDiagnosticsScreen> {
                                     "عملية التقييم ناجحة ",
                                   );
                                   cubit.postSSRSAnswers();
-
-                                  // Get.off(() {
-                                  //   return SuccessView(
-                                  //       title1:
-                                  //           "لقد تم إنتهاء إختبار SSRS بنجاح",
-                                  //       title2: "إنتقال إلي إختبار SSI-4",
-                                  //       onTap: () =>
-                                  //           Get.off(() => DiagnosticSSI4()));
-                                  // });
                                 }
                               },
                             ),

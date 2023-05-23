@@ -17,9 +17,7 @@ import 'views/description_results/no_head.dart';
 import 'views/description_results/recommendation.dart';
 import 'views/description_results/ssrc.dart';
 import 'views/description_results/testing.dart';
-import 'views/four_tables/view.dart';
 import 'views/head_subtitle/view.dart';
-import 'views/three_tables/views.dart';
 
 // ignore: must_be_immutable
 class MedicalReportsDetails extends StatelessWidget {
@@ -50,8 +48,8 @@ class MedicalReportsDetails extends StatelessWidget {
           width: context.width,
           child: SingleChildScrollView(
             child: BlocProvider(
-              create: (context) =>
-                  MedicalReportDetailsCubit(allReportsDetails: allReportsDetails),
+              create: (context) => MedicalReportDetailsCubit(
+                  allReportsDetails: allReportsDetails),
               child: BlocConsumer<MedicalReportDetailsCubit,
                   MedicalReportDetailsState>(
                 listener: (context, state) {
@@ -73,9 +71,10 @@ class MedicalReportsDetails extends StatelessWidget {
 
                       var oasesResult = cubit.allReportsDetails.oasesResults;
 
-                      var videoFrequency = cubit.allReportsDetails.videosFrequencyDetails;
+                      var videoFrequency =
+                          cubit.allReportsDetails.videosFrequencyDetails;
                       if (state is MedicalReportDetailsLoading) {
-                        return const Center(child: LoadingFadingCubeGrid());
+                        return const Center(child: LoadingFadingCircle());
                       }
                       if (state is MedicalReportDetailsSuccess) {
                         return Column(
@@ -84,11 +83,11 @@ class MedicalReportsDetails extends StatelessWidget {
                             HeadSubHead(
                                 head1: "أسم المريض  ",
                                 head2: "Client Name",
-                                sunHead: content!.fullName!.toString()),
+                                sunHead: content!.firstNameEn!+" "+content.lastName!.toString()),
                             HeadSubHead(
                                 head1: "رقم الهوية  ",
                                 head2: "ID No",
-                                sunHead: content.idCardNumber ?? ""),
+                                sunHead: content.idCardNumber.toString()),
                             HeadSubHead(
                                 head1: "الجنس  ",
                                 head2: "Gender",
@@ -113,32 +112,45 @@ class MedicalReportsDetails extends StatelessWidget {
                             HeadSubHead(
                               head1: "تاريخ التسجيل ",
                               head2: "Date of enrolment",
-                              sunHead: pContent.enrolmentDate ??"",
+                              sunHead: DateConverter.dateConverterMonth(state
+                                  .allReports.data!.enrolmentDate!
+                                  .toString()),
                             ),
                             //DateConverter.dateConverterMonth(pContent.enrolmentDate!.toString())??""),
-                            HeadSubHead(
-                                head1: "تاريخ الخروج ",
-                                head2: "Discharge date",
-                                sunHead: pContent.dischargeDate??""),
+                            // (state.allReports.data!.dischargeDate!
+                            //         .toString().isEmpty)
+                            //     ? const SizedBox.shrink()
+                            //     : HeadSubHead(
+                            //         head1: "تاريخ الخروج ",
+                            //         head2: "Discharge date",
+                            //         sunHead: DateConverter.dateConverterMonth(
+                            //             state.allReports.data!.dischargeDate!
+                            //                 .toString() ??""),
+                            //       ),
                             ConcernResult(
                               title1: " Area of",
                               title2: "Concern",
-                              name: content.firstName!,
-                              age: pContent.patientAge??"",
+                              name: content.firstNameEn!,
+                              age: state.allReports.data!.patientAge.toString(),
                               sex: content.gender!,
-                              fav: pContent.heOrShe??"",
-                              cases: pContent.stutteringWasBecoming??"",
+                              fav: state.allReports.data!.heOrShe.toString(),
+                              cases: state
+                                  .allReports.data!.stutteringWasBecoming
+                                  .toString(),
                             ),
                             BackGroundInfo(
                               title1: " Background ",
                               title2: "Information",
                               name: content.firstName!,
-                              cases: pContent.bornWith??"",
-                              schollDegree:
-                                  pContent.stutteringNoticedAge??"",
+                              cases: state.allReports.data!.bornWith.toString(),
+                              schollDegree: state
+                                  .allReports.data!.stutteringNoticedAge
+                                  .toString(),
                               sex: content.gender!,
-                              upTo: pContent.theStuttering.toString(),
-                              finish: pContent.hasBecome.toString(),
+                              upTo: state.allReports.data!.theStuttering
+                                  .toString(),
+                              finish:
+                                  state.allReports.data!.hasBecome.toString(),
                             ),
                             TestingCase(
                                 title1: " Fluency ",
@@ -148,54 +160,95 @@ class MedicalReportsDetails extends StatelessWidget {
                               title1: " Overall Assessment",
                               title2: "(OASES)",
                               name: content.firstName!,
-                              her: pContent.hisOrHer??"",
+                              her: state.allReports.data!.hisOrHer.toString(),
                             ),
                             OverAll(
                               title1: " Overall Assessment",
                               title2: "(Summary)",
                               name: content.firstName!,
-                              age: pContent.patientAge??"",
-                              mild: pContent.severityEquivalent??"",
+                              age: state.allReports.data!.patientAge.toString(),
+                              mild: state.allReports.data!.severityEquivalent
+                                  .toString(),
                             ),
                             SizedBox(
                               height: context.height * 0.02,
                             ),
-                            const Tables(
-                                textColor: kHomeColor,
-                                color: kPrimaryColor,
-                                title3: "Section SSI-4",
-                                title2: "Findings / Observations",
-                                title1: "Total Score"),
-                            const Tables(
-                                textColor: kTextFieldColor,
-                                color: kAppBarColor,
-                                title1: "مثال1",
-                                title2: "مثال1",
-                                title3: "مثال1"),
-                            const Tables(
-                                textColor: kTextFieldColor,
-                                color: kHomeColor,
-                                title1: "مثال1",
-                                title2: "مثال1",
-                                title3: "مثال1"),
-                            const Tables(
-                                textColor: kTextFieldColor,
-                                color: kAppBarColor,
-                                title1: "مثال1",
-                                title2: "مثال1",
-                                title3: "مثال1"),
-                            const Tables(
-                                textColor: kTextFieldColor,
-                                color: kHomeColor,
-                                title1: "مثال1",
-                                title2: "مثال1",
-                                title3: "مثال1"),
-                            const Tables(
-                                textColor: kTextFieldColor,
-                                color: kAppBarColor,
-                                title1: "مثال1",
-                                title2: "مثال1",
-                                title3: "مثال1"),
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                buildColumnOases(
+                                  context,
+                                  width: context.width * 0.15,
+                                  title1: "Total Score",
+                                  title2: state.allReports.data!.frequencyScore
+                                      .toString(),
+                                  title3: state.allReports.data!.frequencyScore
+                                      .toString(),
+                                  title4: state.allReports.data!.durationScore
+                                      .toString(),
+                                  title5: state.allReports.data!.physicalScore
+                                      .toString(),
+                                  title6: state.allReports.data!.totalScore
+                                      .toString(),
+                                  title7: state.allReports.data!.percentileRank
+                                      .toString(),
+                                  title8: state
+                                      .allReports.data!.severityEquivalent
+                                      .toString(),
+                                ),
+                                buildColumnOases(context,
+                                    width: context.width * 0.28,
+                                    title1: "Findings / Observations",
+                                    title2:
+                                        "${state.allReports.data!.videosFrequencyDetails!.speakingSample!.sttCount!.toInt()}"
+                                                "/" +
+                                            state
+                                                .allReports
+                                                .data!
+                                                .videosFrequencyDetails!
+                                                .speakingSample!
+                                                .ssValue!
+                                                .toString(),
+                                    title3:
+                                        "${state.allReports.data!.videosFrequencyDetails!.readingSample!.sttCount!.toInt()}"
+                                                "/" +
+                                            state
+                                                .allReports
+                                                .data!
+                                                .videosFrequencyDetails!
+                                                .readingSample!
+                                                .ssValue!
+                                                .toString(),
+                                    title4: state
+                                        .allReports.data!.stutteringDuration!,
+                                    title5: "",
+                                    title6: "",
+                                    title7: "",
+                                    title8: ""),
+                                buildColumnOases(context,
+                                    width: context.width * 0.4,
+                                    title1: "Section of the SSI4",
+                                    title2: state
+                                        .allReports
+                                        .data!
+                                        .videosFrequencyDetails!
+                                        .speakingSample!
+                                        .sectionNameEn!,
+                                    title3: state
+                                        .allReports
+                                        .data!
+                                        .videosFrequencyDetails!
+                                        .readingSample!
+                                        .sectionNameEn!,
+                                    title4:
+                                        "Duration (average of 3 longest stuttering events)	",
+                                    title5: "Physical concomitants",
+                                    title6: "Total Overall Score",
+                                    title7: "Percentile",
+                                    title8: "SSI-4 Severity Rating"),
+                              ],
+                            ),
+
                             SizedBox(
                               height: context.height * 0.05,
                             ),
@@ -208,124 +261,94 @@ class MedicalReportsDetails extends StatelessWidget {
                             SizedBox(
                               height: context.height * 0.02,
                             ),
-                            const FourTables(
-                              textColor: kHomeColor,
-                              color: kPrimaryColor,
-                              title1: "oasasResult",
-                              title2: "Impact rating",
-                              title3: "Items answered",
-                              title4: "Raw score",
-                              title5: "Scale",
-                            ),
-                            const FourTables(
-                              textColor: kTextFieldColor,
-                              color: kAppBarColor,
-                              title1: "",
-                              title2: "Impact rating",
-                              title3: "Items answered",
-                              title4: "Raw score",
-                              title5: "Scale",
-                            ),
-                            const FourTables(
-                              textColor: kTextFieldColor,
-                              color: kHomeColor,
-                              title1: "Impact score",
-                              title2: "Impact rating",
-                              title3: "Items answered",
-                              title4: "Raw score",
-                              title5: "Scale",
-                            ),
-                            const FourTables(
-                              textColor: kTextFieldColor,
-                              color: kAppBarColor,
-                              title1: "Impact score",
-                              title2: "Impact rating",
-                              title3: "Items answered",
-                              title4: "Raw score",
-                              title5: "Scale",
-                            ),
-                            const FourTables(
-                              textColor: kTextFieldColor,
-                              color: kHomeColor,
-                              title1: "Impact score",
-                              title2: "Impact rating",
-                              title3: "Items answered",
-                              title4: "Raw score",
-                              title5: "Scale",
+
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              // mainAxisSize: MainAxisSize.min,
+                              children: [
+                                buildColumnOases(context,
+                                    width: context.width * 0.25,
+                                    title1: "Impact rating",
+                                    title2: state.allReports.data!.oasesResults!
+                                        .section1!.impactRating!,
+                                    title3: state.allReports.data!.oasesResults!
+                                        .section2!.impactRating!,
+                                    title4: state.allReports.data!.oasesResults!
+                                        .section3!.impactRating!,
+                                    title5: state.allReports.data!.oasesResults!
+                                        .section5!.impactRating!),
+                                buildColumnOases(context,
+                                    width: context.width * 0.12,
+                                    title1: "Impact Score",
+                                    title2:
+                                        "${state.allReports.data!.oasesResults!.section1!.impactDegree}",
+                                    title3:
+                                        "${state.allReports.data!.oasesResults!.section2!.impactDegree}",
+                                    title4:
+                                        "${state.allReports.data!.oasesResults!.section3!.impactDegree}",
+                                    title5:
+                                        "${state.allReports.data!.oasesResults!.section5!.impactDegree}"),
+                                buildColumnOases(context,
+                                    width: context.width * 0.12,
+                                    title1: "Items answered",
+                                    title2:
+                                        "${state.allReports.data!.oasesResults!.section1!.answeredQuestions!.toInt()}",
+                                    title3:
+                                        "${state.allReports.data!.oasesResults!.section2!.answeredQuestions!.toInt()}",
+                                    title4:
+                                        "${state.allReports.data!.oasesResults!.section3!.answeredQuestions!.toInt()}",
+                                    title5:
+                                        "${state.allReports.data!.oasesResults!.section5!.answeredQuestions!.toInt()}"),
+                                buildColumnOases(context,
+                                    width: context.width * 0.12,
+                                    title1: "Raw score",
+                                    title2:
+                                        "${state.allReports.data!.oasesResults!.section1!.points!.toInt()}",
+                                    title3:
+                                        "${state.allReports.data!.oasesResults!.section2!.points!.toInt()}",
+                                    title4:
+                                        "${state.allReports.data!.oasesResults!.section3!.points!.toInt()}",
+                                    title5:
+                                        "${state.allReports.data!.oasesResults!.section5!.points!.toInt()}"),
+                                buildColumnOases(context,
+                                    width: context.width * 0.25,
+                                    title1: "Scale",
+                                    title2: state.allReports.data!.oasesResults!
+                                        .section1!.sectionNameEn!,
+                                    title3: state.allReports.data!.oasesResults!
+                                        .section2!.sectionNameEn!,
+                                    title4: state.allReports.data!.oasesResults!
+                                        .section3!.sectionNameEn!,
+                                    title5: state.allReports.data!.oasesResults!
+                                        .section5!.sectionNameEn!),
+                              ],
                             ),
 
-
-
-                           /* SizedBox(
-                              height: context.height*0.3,
-                              child: ListView.builder(
-                                shrinkWrap: true,
-
-                                  itemCount: state.allReports.oasesResults?.length,
-                                  itemBuilder: (context ,index){
-                                //   final qList = state.allReports.oasesResults![index];
-
-                                return Column(
-                                  crossAxisAlignment: CrossAxisAlignment.center,
-                                  children:  const [
-                                    FourTables(
-                                      textColor: kTextFieldColor,
-                                      color: kAppBarColor,
-                                      title1: "" ,
-                                      title2: "Impact rating",
-                                      title3: "Items answered",
-                                      title4: "Raw score",
-                                      title5: "Scale",
-                                    ),
-                                    FourTables(
-                                      textColor: kTextFieldColor,
-                                      color: kHomeColor,
-                                      title1: "Impact score",
-                                      title2: "Impact rating",
-                                      title3: "Items answered",
-                                      title4: "Raw score",
-                                      title5: "Scale",
-                                    ),
-                                    FourTables(
-                                      textColor: kTextFieldColor,
-                                      color: kAppBarColor,
-                                      title1: "Impact score",
-                                      title2: "Impact rating",
-                                      title3: "Items answered",
-                                      title4: "Raw score",
-                                      title5: "Scale",
-                                    ),
-                                    FourTables(
-                                      textColor: kTextFieldColor,
-                                      color: kHomeColor,
-                                      title1: "Impact score",
-                                      title2: "Impact rating",
-                                      title3: "Items answered",
-                                      title4: "Raw score",
-                                      title5: "Scale",
-                                    ),
-                                  ],
-                                );
-                              }),
-                            ),*/
                             SizedBox(
                               height: context.height * 0.05,
                             ),
 
                             NoHead(
                               name: content.firstName!,
-                              her: pContent.hisOrHer??"",
-                              impactRating: pContent.hisOrHer??"",
+                              her: state.allReports.data!.hisOrHer.toString(),
+                              impactRating:
+                                  state.allReports.data!.hisOrHer.toString(),
                             ),
 
                             Recommended(
                               title1: "",
                               title2: "Recommendations",
                               name: content.firstName!,
-                              her: pContent.hisOrHer??"",
-                              mild: pContent.exhibits??"",
-                              doctorDep: pContent.specialistName!.toString(),
-                              doctorName: pContent.supervisorName!.toString(),
+                              her: state.allReports.data!.hisOrHer.toString(),
+                              mild: state.allReports.data!.exhibits.toString(),
+                              doctorDep: state.allReports.data!.specialistName!
+                                  .toString(),
+                              doctorName:
+                                  ": " + state.allReports.data!.supervisorName!,
+                            ),
+
+                            SizedBox(
+                              height: context.height * 0.1,
                             ),
                           ],
                         );
@@ -343,6 +366,88 @@ class MedicalReportsDetails extends StatelessWidget {
           ),
         ),
       ),
+    );
+  }
+
+  Widget buildColumnOases(
+    BuildContext context, {
+    String title6 = "",
+    String title7 = "",
+    String title8 = "",
+    required double width,
+    required String title1,
+    required String title2,
+    required String title3,
+    required String title4,
+    required String title5,
+  }) {
+    return Column(
+      children: [
+        Container(
+          height: context.height * 0.08,
+          width: width,
+          color: kPrimaryColor,
+          child: Center(
+            child: custom12Text(title: title1, color: kHomeColor),
+          ),
+        ),
+        Container(
+          height: context.height * 0.08,
+          width: width,
+          color: kBackGroundCard,
+          child: Center(
+            child: custom12Text(title: title2, color: kBlackText),
+          ),
+        ),
+        Container(
+          height: context.height * 0.08,
+          width: width,
+          color: kHomeColor,
+          child: Center(
+            child: custom12Text(title: title3, color: kBlackText),
+          ),
+        ),
+        Container(
+          height: context.height * 0.08,
+          width: width,
+          color: kBackGroundCard,
+          child: Center(
+            child: custom12Text(title: title4, color: kBlackText),
+          ),
+        ),
+        Container(
+          height: context.height * 0.08,
+          width: width,
+          color: kHomeColor,
+          child: Center(
+            child: custom12Text(title: title5, color: kBlackText),
+          ),
+        ),
+        Container(
+          height: context.height * 0.08,
+          width: width,
+          color: kBackGroundCard,
+          child: Center(
+            child: custom12Text(title: title6, color: kBlackText),
+          ),
+        ),
+        Container(
+          height: context.height * 0.08,
+          width: width,
+          color: kHomeColor,
+          child: Center(
+            child: custom12Text(title: title7, color: kBlackText),
+          ),
+        ),
+        Container(
+          height: context.height * 0.08,
+          width: width,
+          color: kBackGroundCard,
+          child: Center(
+            child: custom12Text(title: title8, color: kBlackText),
+          ),
+        ),
+      ],
     );
   }
 }

@@ -41,38 +41,49 @@ class MedicalReports extends StatelessWidget {
                 builder: (context, state) {
                   final cubit = BlocProvider.of<MedicalReportsCubit>(context);
                   if (state is MedicalsLoading) {
-                    return const LoadingFadingCubeGrid();
+                    return const LoadingFadingCircle();
                   }
                   if (state is MedicalsSuccess) {
                     return Expanded(
                       child: RefreshIndicator(
                         onRefresh: () async {
                           cubit.getReports();
-                          return Future<void>.delayed(const Duration(seconds: 3));
+                          return Future<void>.delayed(
+                              const Duration(seconds: 3));
                         },
                         backgroundColor: kAccentColor,
                         color: Colors.white,
                         child: state.allReports.isEmpty
                             ? Center(
-                            child:
-                            customBoldText(title: "لا توجد طلبات الاّن", color: kBlackText))
-                            :ListView.builder(
-                          padding: const EdgeInsets.symmetric(horizontal: 16),
-                          itemCount: state.allReports.length,
-                          physics: const BouncingScrollPhysics(),
-                          itemBuilder: (context, index) {
-                            return CardItems(
-                                onPressed: () {
-                                  navigateTo(
-                                      context,  MedicalReportsDetails( allReportsDetails: state.allReports[index]));
+                                child: customBoldText(
+                                    title: "لا توجد طلبات الاّن",
+                                    color: kBlackText))
+                            : ListView.builder(
+                                padding:
+                                    const EdgeInsets.symmetric(horizontal: 16),
+                                itemCount: state.allReports.length,
+                                physics: const BouncingScrollPhysics(),
+                                itemBuilder: (context, index) {
+                                  return CardItems(
+                                    onPressed: () {
+                                      navigateTo(
+                                          context,
+                                          MedicalReportsDetails(
+                                              allReportsDetails:
+                                                  state.allReports[index]));
+                                    },
+                                    subTitleReportName: state
+                                        .allReports[index].reportName!
+                                        .toString(),
+                                    subTitleSpecialistName: state
+                                        .allReports[index].specialistName!
+                                        .toString(),
+                                    subTitleDate:
+                                        DateConverter.dateConverterMonth(state
+                                            .allReports[index].generatedAt!),
+                                  );
                                 },
-                                subTitleReportName: state.allReports[index].reportName!.toString(),
-                                subTitleSpecialistName: state.allReports[index].specialistName!.toString(),
-                                subTitleDate:     DateConverter.dateConverterMonth(
-                                    state.allReports[index].generatedAt!),
-                            );
-                          },
-                        ),
+                              ),
                       ),
                     );
                   }
@@ -81,9 +92,6 @@ class MedicalReports extends StatelessWidget {
                   }
 
                   return const SizedBox();
-
-
-
                 },
               )
             ],
@@ -93,8 +101,7 @@ class MedicalReports extends StatelessWidget {
     );
   }
 
-  SizedBox buildSizedBox(double height) =>
-      SizedBox(
+  SizedBox buildSizedBox(double height) => SizedBox(
         height: height * 0.05,
       );
 }

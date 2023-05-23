@@ -16,6 +16,7 @@ import '../../widgets/constants.dart';
 import '../../widgets/customButton.dart';
 import '../../widgets/donotHave.dart';
 import '../../widgets/loading.dart';
+import '../forget_password/view.dart';
 import '../register/page/title_subtitle.dart';
 import 'cubit/login_cubit.dart';
 
@@ -40,12 +41,6 @@ class LoginScreen extends StatelessWidget {
               "مرحبا بكم في تطبيق كلامي",
               desc: "تم تسجيل الدخول بنجاح",
             );
-
-            // navigateAndFinish(
-            //     context,
-            //     HomeTabScreen(
-            //       userId: state.model.data!.userId!,
-            //     ));
 
             Navigator.of(context).pushAndRemoveUntil(
                 MaterialPageRoute(
@@ -127,7 +122,7 @@ class LoginScreen extends StatelessWidget {
                         ),
                         RecoveryWidget(
                           onTap: () {
-                            //  navigateTo(context, ForgetPassword());
+                            Get.to(() => ForgetPassword());
                           },
                         ),
                         state is! LoginLoading

@@ -7,7 +7,7 @@ abstract class NetWork {
   static Dio get _dio {
     final _dio = Dio(
       BaseOptions(
-        baseUrl: 'http://dev-sas.cpt-it.com/api/api/',
+        baseUrl: 'https://mcsc-saudi.com/api/api/',
         contentType: 'application/json',
         headers: {
           'Content-Type': 'application/json',
@@ -25,10 +25,12 @@ abstract class NetWork {
   }
 
   static Response _validate(Response res) {
-    if (res.data['status'] == 0 ||
-        res.data['status'] == -1 ||
-        res.statusCode != 200) {
-      throw res.data['message'];
+    // print("-=-=-=-=-=${  res.data['messages'][0]["body"]}");
+
+    if ((res.data['status'] == 0 ||
+        res.data['status'] == -1 )&&
+        res.statusCode == 200) {
+      throw res.data['messages'][0]["title"] ??res.data['messages'][0]["body"] ;
     }
     return res;
   }

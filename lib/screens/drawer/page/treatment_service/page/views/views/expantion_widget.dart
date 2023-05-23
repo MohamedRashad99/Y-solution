@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:queen/core/helpers/prefs.dart';
 
 import '../../../../../../../config/keys.dart';
 
@@ -21,8 +22,21 @@ class TreatmentServiceExpansion extends StatelessWidget {
   final VoidCallback onTapSSRS2;
   final VoidCallback onTapSSI42;
   final VoidCallback onTapBookSpecialist2;
+  final Widget isPayment;
+  final Widget isQuestionnaire;
+  final Widget isFirstSessions;
+  final Widget isOases;
+  final Widget isSsrs;
+  final Widget isSsi4;
+  final Widget isReservedFirst;
+  final Widget isSessionTwo;
+  final Widget isOasesTwo;
+  final Widget isSsrsTwo;
+  final Widget isSsi4Two;
+  final Widget isReservedTwo;
 
   const TreatmentServiceExpansion({
+    super.key,
     required this.onTapInductions,
     required this.onTapPayment,
     required this.PretreatmentQuestionnaire,
@@ -36,11 +50,25 @@ class TreatmentServiceExpansion extends StatelessWidget {
     required this.onTapSSRS2,
     required this.onTapSSI42,
     required this.onTapBookSpecialist2,
+    required this.isPayment,
+    required this.isQuestionnaire,
+    required this.isFirstSessions,
+    required this.isOases,
+    required this.isSsrs,
+    required this.isSsi4,
+    required this.isReservedFirst,
+    required this.isSessionTwo,
+    required this.isOasesTwo,
+    required this.isSsrsTwo,
+    required this.isSsi4Two,
+    required this.isReservedTwo,
   });
 
   @override
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
+    bool _isAvailable = Prefs.getBool("isAvailable");
+
     // double width = MediaQuery.of(context).size.width;
     return ExpansionTile(
         backgroundColor: kPrimaryColor,
@@ -75,9 +103,10 @@ class TreatmentServiceExpansion extends StatelessWidget {
                 children: [
                   Image.asset("assets/images/wallet.png"),
                   buildSizedBox(),
-                  customText4(title: KeysConfig.payment, color: kBlackText),
+                  _isAvailable == false ? customText4(title: KeysConfig.payment, color: kBlackText): customText4(title :  "متابعة", color: kBlackText),
                 ],
               ),
+              trailing: isPayment,
             ),
           ),
           Container(
@@ -94,6 +123,7 @@ class TreatmentServiceExpansion extends StatelessWidget {
                       color: kBlackText),
                 ],
               ),
+              trailing: isQuestionnaire,
             ),
           ),
           Container(
@@ -124,6 +154,7 @@ class TreatmentServiceExpansion extends StatelessWidget {
                             color: kBlackText),
                       ],
                     ),
+                    trailing: isFirstSessions,
                   ),
                 ),
                 Container(
@@ -139,6 +170,7 @@ class TreatmentServiceExpansion extends StatelessWidget {
                             title: KeysConfig.testOases, color: kBlackText),
                       ],
                     ),
+                    trailing: isOases,
                   ),
                 ),
                 Container(
@@ -154,6 +186,7 @@ class TreatmentServiceExpansion extends StatelessWidget {
                             title: KeysConfig.testSSRS, color: kBlackText),
                       ],
                     ),
+                    trailing: isSsrs,
                   ),
                 ),
                 Container(
@@ -168,6 +201,7 @@ class TreatmentServiceExpansion extends StatelessWidget {
                         customText4(title: KeysConfig.test4, color: kBlackText),
                       ],
                     ),
+                    trailing: isSsi4,
                   ),
                 ),
                 Container(
@@ -184,6 +218,7 @@ class TreatmentServiceExpansion extends StatelessWidget {
                             color: kBlackText),
                       ],
                     ),
+                    trailing: isReservedFirst,
                   ),
                 ),
               ],
@@ -217,6 +252,7 @@ class TreatmentServiceExpansion extends StatelessWidget {
                             color: kBlackText),
                       ],
                     ),
+                    trailing: isSessionTwo,
                   ),
                 ),
                 Container(
@@ -232,6 +268,7 @@ class TreatmentServiceExpansion extends StatelessWidget {
                             title: KeysConfig.testOases, color: kBlackText),
                       ],
                     ),
+                    trailing: isOasesTwo,
                   ),
                 ),
                 Container(
@@ -247,6 +284,7 @@ class TreatmentServiceExpansion extends StatelessWidget {
                             title: KeysConfig.testSSRS, color: kBlackText),
                       ],
                     ),
+                    trailing: isSsrsTwo,
                   ),
                 ),
                 Container(
@@ -261,6 +299,7 @@ class TreatmentServiceExpansion extends StatelessWidget {
                         customText4(title: KeysConfig.test4, color: kBlackText),
                       ],
                     ),
+                    trailing: isSsi4Two,
                   ),
                 ),
                 Container(
@@ -277,6 +316,7 @@ class TreatmentServiceExpansion extends StatelessWidget {
                             color: kBlackText),
                       ],
                     ),
+                    trailing: isReservedTwo,
                   ),
                 ),
               ],

@@ -6,7 +6,6 @@ import 'package:queen/core/helpers/prefs.dart';
 import '../../../../../../config/keys.dart';
 import '../../../../../widgets/constants.dart';
 
-
 enum TypeRead { Read, UnRead }
 
 class DropDownIsRead extends StatefulWidget {
@@ -41,6 +40,7 @@ class _DropDownIsReadState extends State<DropDownIsRead> {
   Widget build(BuildContext context) {
     // double height = MediaQuery.of(context).size.height;
     //  double width = MediaQuery.of(context).size.width;
+
     return Container(
       // padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 8),
       margin: const EdgeInsets.symmetric(horizontal: 35, vertical: 8),
@@ -48,13 +48,12 @@ class _DropDownIsReadState extends State<DropDownIsRead> {
 
       child: DropdownButtonHideUnderline(
         child: DropdownButtonFormField<TypeRead>(
-
           value: selected,
           // autofocus: true,
           // isDense: true,
           isExpanded: true,
-          hint:  Text(
-            Prefs.getString('type'),
+          hint: Text(
+            "النوع : " + Prefs.getString('type'),
             style: const TextStyle(
               color: kPrimaryColor,
               fontSize: 16,
@@ -69,7 +68,7 @@ class _DropDownIsReadState extends State<DropDownIsRead> {
           },
           decoration: InputDecoration(
             contentPadding:
-            const EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
+                const EdgeInsets.symmetric(vertical: 10.0, horizontal: 15.0),
             fillColor: Colors.white,
             enabledBorder: OutlineInputBorder(
               borderSide: const BorderSide(color: kPrimaryColor, width: 1),
@@ -107,7 +106,7 @@ class _DropDownIsReadState extends State<DropDownIsRead> {
             });
           },
           items:
-          TypeRead.values.map<DropdownMenuItem<TypeRead>>((TypeRead value) {
+              TypeRead.values.map<DropdownMenuItem<TypeRead>>((TypeRead value) {
             return DropdownMenuItem<TypeRead>(
               value: value,
               child: Text(
