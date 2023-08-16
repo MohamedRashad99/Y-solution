@@ -4,10 +4,10 @@ import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:meta/meta.dart';
-import 'package:queen/core.dart';
 import 'package:tal3thoom/serives/diagnostics_injects/diagnostic_ssrs_service/answers.dart';
 import 'package:tal3thoom/serives/diagnostics_injects/diagnostic_ssrs_service/question.dart';
 
+import '../../../../../../../../config/custom_shared_prefs.dart';
 import '../../diagnostic_history/models/diagnostic_history_question_model.dart';
 import '../../diagnostic_ssi4/views/department_one/view.dart';
 import '../../success_page.dart';

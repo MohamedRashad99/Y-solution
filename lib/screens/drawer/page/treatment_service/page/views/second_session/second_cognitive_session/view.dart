@@ -3,11 +3,12 @@ import 'dart:developer';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:fijkplayer/fijkplayer.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:queen/core/helpers/prefs.dart';
-import 'package:flutter/material.dart';
+import 'package:tal3thoom/config/custom_shared_prefs.dart';import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_form_builder/flutter_form_builder.dart';
 
+import '../../../../../../../home/pages/views/profile/cubit/profile_cubit.dart';
+import '../../../../../../../widgets/alerts.dart';
 import '../../../../../../../widgets/appBar.dart';
 import '../../../../../../../widgets/better_video_widget.dart';
 import '../../../../../../../widgets/constants.dart';
@@ -42,6 +43,8 @@ class _SecondTreatmentSessionState extends State<SecondTreatmentSession> {
 
   @override
   Widget build(BuildContext context) {
+    final profileStatus = BlocProvider.of<ProfileCubit>(context);
+
     return Scaffold(
       backgroundColor: kHomeColor,
       drawer: const MenuItems(),
@@ -77,12 +80,63 @@ class _SecondTreatmentSessionState extends State<SecondTreatmentSession> {
                             () => const FirstStageAdditionalTrainingScreen()),
                         goNext: true,
                         title3: "الجلسة العلاجية التالية",
-                        onTap2: () {
-                          BlocProvider.of<SecondCognitiveSectionCubit>(context)
-                              .getSecondCognitiveSection();
+                        onTap2: () {},
+                        withAdditionalButton: true,
+                        button: BlocConsumer<ProfileCubit, ProfileState>(
+                            builder: (context, state) {
+                          if (state is ProfileLoading) {
+                            return const Center(child: LoadingFadingCircle());
+                          }
+                          return CustomButton(
+                            color: kPrimaryColor,
+                            onPressed: () {
+                              BlocProvider.of<ProfileCubit>(context)
+                                  .getProfile();
+                            },
+                            title: "الجلسة العلاجية التالية",
+                          );
+                        }, listener: (context, state) {
+                          if (state is ProfileSuccess) {
+                            print((state.profileModel.data
+                                            .currentDiagnosesStatus ==
+                                        1)
+                                    .toString() +
+                                "Khalllllllllllled");
+                            print(state.profileModel.data.currentDiagnosesStatus
+                                    .toString() +
+                                "Khalllllllllllled");
+                            if (state
+                                    .profileModel.data.currentDiagnosesStatus ==
+                                3) {
+                              BlocProvider.of<SecondCognitiveSectionCubit>(
+                                      context)
+                                  .getSecondCognitiveSection();
 
-                          Get.off(() => const SecondTreatmentSession());
-                        },
+                              Get.off(() => const SecondTreatmentSession());
+                            } else if (state
+                                    .profileModel.data.currentDiagnosesStatus ==
+                                2) {
+                                                          BlocProvider.of<SecondCognitiveSectionCubit>(
+                                      context)
+                                  .getSecondCognitiveSection();
+
+                              Get.off(() => const SecondTreatmentSession());
+                                                          Alert.error(
+                                                              "تنبية : لم تتم الموافقة على النتيجة السابقة لهذه الجلسة وتم إرسال الملاحظات على البريد الإلكترونى");
+
+                            } else if (state
+                                    .profileModel.data.currentDiagnosesStatus ==
+                                1) {
+                              Alert.error(
+                                  "تنبية :الجلسة قيد الانتظار لحين موافقه المختص علي النتيجة السابقة");
+                            } else {
+                              Alert.error("ولا واحدة");
+                            }
+                          }
+                          if (state is ProfileError) {
+                            Alert.error(state.msg);
+                          }
+                        }),
                       )
                     : (state.questionModel[0].examMode.toString() ==
                                 "jump_oases_2" &&
@@ -156,18 +210,22 @@ class _SecondTreatmentSessionState extends State<SecondTreatmentSession> {
                                                                 color:
                                                                     kBackgroundButton),
                                                         child: Column(
-                                                          crossAxisAlignment: CrossAxisAlignment.start,
+                                                          crossAxisAlignment:
+                                                              CrossAxisAlignment
+                                                                  .start,
                                                           children: [
                                                             AutoSizeText(
                                                               "$index - " +
                                                                   state
                                                                       .questionModel[
-                                                                  index]
+                                                                          index]
                                                                       .description,
                                                               style: const TextStyle(
-                                                                  color: kBlackText,
+                                                                  color:
+                                                                      kBlackText,
                                                                   fontSize: 14,
-                                                                  fontFamily: 'DinBold'),
+                                                                  fontFamily:
+                                                                      'DinBold'),
                                                               maxLines: 2,
                                                             ),
                                                             FormBuilder(
@@ -182,7 +240,8 @@ class _SecondTreatmentSessionState extends State<SecondTreatmentSession> {
                                                                   labelStyle: TextStyle(
                                                                       color:
                                                                           kBlackText,
-                                                                      fontSize: 18,
+                                                                      fontSize:
+                                                                          18,
                                                                       fontFamily:
                                                                           'DinBold'),
                                                                   // labelText: "${index + 1} " +
@@ -192,24 +251,26 @@ class _SecondTreatmentSessionState extends State<SecondTreatmentSession> {
                                                                   //         .description,
                                                                 ),
                                                                 initialValue: cubit
-                                                                    .answer[state
-                                                                        .questionModel[
-                                                                    index]],
+                                                                        .answer[
+                                                                    state.questionModel[
+                                                                        index]],
                                                                 name:
                                                                     'best_language',
-                                                                onChanged: (value) {
+                                                                onChanged:
+                                                                    (value) {
                                                                   log('$value');
                                                                   if (value !=
                                                                       null) {
-                                                                    setState(() {
-                                                                      cubit
-                                                                          .answer[state
-                                                                              .questionModel[
-                                                                          index]] = value;
+                                                                    setState(
+                                                                        () {
+                                                                      cubit.answer[
+                                                                              state.questionModel[index]] =
+                                                                          value;
                                                                     });
                                                                   }
                                                                 },
-                                                                validator: (value) {
+                                                                validator:
+                                                                    (value) {
                                                                   if (value ==
                                                                       null) {
                                                                     return 'من فضلك أجب علي المدون أعلاة ';
@@ -225,11 +286,8 @@ class _SecondTreatmentSessionState extends State<SecondTreatmentSession> {
                                                                           value:
                                                                               lang,
                                                                           child: customText3(
-                                                                              title: lang
-                                                                                  .answerOption
-                                                                                  .toString(),
-                                                                              color:
-                                                                                  kBlackText),
+                                                                              title: lang.answerOption.toString(),
+                                                                              color: kBlackText),
                                                                         ))
                                                                     .toList(
                                                                         growable:
@@ -248,40 +306,45 @@ class _SecondTreatmentSessionState extends State<SecondTreatmentSession> {
                                                         .videoFile ==
                                                     null
                                                 ? const SizedBox.shrink()
-                                                : Container(
-                                                    margin: const EdgeInsets
-                                                        .symmetric(vertical: 8),
-                                                    width: context.width * 0.8,
-                                                    height:
-                                                        context.height * 0.25,
-                                                    child:
+                                                : Column(
+                                                  children: [
+                                                    videoHint(),
+                                                    Container(
+                                                        margin: const EdgeInsets
+                                                            .symmetric(vertical: 8),
+                                                        width: context.width * 0.8,
+                                                        height:
+                                                            context.height * 0.25,
+                                                        child:
 
-                                                        // BetterVideoItems(video:      BetterPlayer.network(
-                                                        //   "http://mcsc-saudi.com/api/" +
-                                                        //       state
-                                                        //           .questionModel[
-                                                        //       index]
-                                                        //           .videoFile
-                                                        //           .toString(),
-                                                        //   betterPlayerConfiguration: const BetterPlayerConfiguration(
-                                                        //     aspectRatio: 16 / 9,
-                                                        //   ),
-                                                        // ),
-                                                        //
-                                                        //
-                                                        //
-                                                        //
-                                                        // ),
+                                                            // BetterVideoItems(video:      BetterPlayer.network(
+                                                            //   "http://mcsc-saudi.com/api/" +
+                                                            //       state
+                                                            //           .questionModel[
+                                                            //       index]
+                                                            //           .videoFile
+                                                            //           .toString(),
+                                                            //   betterPlayerConfiguration: const BetterPlayerConfiguration(
+                                                            //     aspectRatio: 16 / 9,
+                                                            //   ),
+                                                            // ),
+                                                            //
+                                                            //
+                                                            //
+                                                            //
+                                                            // ),
 
-                                                        VideoScreen(
-                                                      url: "http://mcsc-saudi.com/api/" +
-                                                          state
-                                                              .questionModel[
-                                                                  index]
-                                                              .videoFile
-                                                              .toString(),
-                                                    ),
-                                                  ),
+                                                            VideoScreen(
+                                                          url: "http://mcsc-saudi.com/api/" +
+                                                              state
+                                                                  .questionModel[
+                                                                      index]
+                                                                  .videoFile
+                                                                  .toString(),
+                                                        ),
+                                                      ),
+                                                  ],
+                                                ),
                                           ],
                                         ),
                                       );

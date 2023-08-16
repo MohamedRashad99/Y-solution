@@ -36,7 +36,7 @@ class InductionDiagnosticModel extends Equatable {
 class Data extends Equatable {
   int? id;
   int? stageId;
-  dynamic? stageDiagnosesId;
+  dynamic stageDiagnosesId;
   String? instructionHeader;
   String? instructionDetails;
   String? videoUrl;

@@ -15,6 +15,8 @@ import 'cubit/evaluation_cubit.dart';
 
 // ignore: must_be_immutable
 class EvaluationSectionScreen extends StatefulWidget {
+  const EvaluationSectionScreen({super.key});
+
   @override
   State<EvaluationSectionScreen> createState() =>
       _EvaluationSectionScreenState();
@@ -92,7 +94,7 @@ class _EvaluationSectionScreenState extends State<EvaluationSectionScreen> {
                                   border: Border.all(color: kLightText)),
                               child: Column(
                                 children: [
-                                  RichTextCustom(),
+                                  const RichTextCustom(),
                                   ListView.builder(
                                       padding: const EdgeInsets.symmetric(
                                           vertical: 4),
@@ -176,7 +178,7 @@ class _EvaluationSectionScreenState extends State<EvaluationSectionScreen> {
                                   border: Border.all(color: kLightText)),
                               child: Column(
                                 children: [
-                                  RichTextCustom2(),
+                                  const RichTextCustom2(),
                                   ListView.builder(
                                       padding: const EdgeInsets.symmetric(
                                           vertical: 4),

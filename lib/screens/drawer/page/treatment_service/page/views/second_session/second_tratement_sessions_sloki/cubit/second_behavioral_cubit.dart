@@ -4,8 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:meta/meta.dart';
-import 'package:queen/core/helpers/prefs.dart';
-import 'package:dio/dio.dart' as _dio;
+import 'package:tal3thoom/config/custom_shared_prefs.dart';import 'package:dio/dio.dart' as _dio;
 
 import '../../../../../../../../../config/dio_helper/dio.dart';
 import '../../../../../../../../../serives/second_stage_inject/sessions/behavioral_section/question_serives.dart';

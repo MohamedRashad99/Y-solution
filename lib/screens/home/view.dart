@@ -5,8 +5,7 @@ import 'package:tal3thoom/screens/widgets/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import 'package:queen/core/helpers/prefs.dart';
-
+import 'package:tal3thoom/config/custom_shared_prefs.dart';
 import 'cubit/home_tabebar_cubit.dart';
 
 // ignore: must_be_immutable

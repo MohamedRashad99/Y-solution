@@ -5,8 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:meta/meta.dart';
 import 'package:dio/dio.dart' as _dio;
-import 'package:queen/core/helpers/prefs.dart';
-import 'package:tal3thoom/serives/diagnostics_injects/diagnostic_ssi4/question.dart';
+import 'package:tal3thoom/config/custom_shared_prefs.dart';import 'package:tal3thoom/serives/diagnostics_injects/diagnostic_ssi4/question.dart';
 
 import '../../../../../../../../config/dio_helper/dio.dart';
 import '../../../../../../../widgets/alerts.dart';

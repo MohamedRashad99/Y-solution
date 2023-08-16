@@ -104,12 +104,12 @@ class _SecondStageOasesTestState extends State<SecondStageOasesTest>
                 width: context.width * 0.08,
                 height: context.height * 0.05,
                 decoration: BoxDecoration(
-                  color: kTextColor,
+                  color: Colors.transparent,
                   borderRadius: BorderRadius.circular(50),
                 ),
                 child: Center(
                   child: customText3(
-                      title: currentQNumber.toString(), color: kBlackText),
+                      title: currentQNumber.toString()+" -", color: kBlackText),
                 ),
               ),
               Expanded(

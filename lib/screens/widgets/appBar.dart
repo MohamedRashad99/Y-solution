@@ -1,12 +1,9 @@
-// ignore_for_file: file_names
 
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:flutter_readable/flutter_readable.dart';
 
-import 'constants.dart';
 
-class DynamicAppbar extends StatelessWidget with PreferredSizeWidget {
+class DynamicAppbar extends StatelessWidget implements PreferredSizeWidget {
   final ValueChanged<BuildContext> press;
   final BuildContext context;
 
@@ -16,7 +13,6 @@ class DynamicAppbar extends StatelessWidget with PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {
 
-    final width = MediaQuery.of(context).size.width;
     return Padding(
       padding: const EdgeInsets.only(top: 30.0),
       child: Stack(
@@ -41,7 +37,8 @@ class DynamicAppbar extends StatelessWidget with PreferredSizeWidget {
   Size get preferredSize => AppBar().preferredSize;
 }
 
-class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
+/*
+class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   final String? title;
   final IconData? icon;
 
@@ -80,6 +77,7 @@ class CustomAppBar extends StatelessWidget with PreferredSizeWidget {
   @override
   Size get preferredSize => AppBar().preferredSize;
 }
+*/
 /*
 customAppBar({required BuildContext context, required VoidCallback press} ) {
   return AppBar(
@@ -121,7 +119,7 @@ customAppBar({required BuildContext context, required VoidCallback press} ) {
 }
 */
 
-AppBar customAppbar(
+/*AppBar customAppbar(
     {bool isIcons = false, IconData? icons, String? title, context}) {
   return AppBar(
     backgroundColor: kAppBarColor,
@@ -132,9 +130,9 @@ AppBar customAppbar(
     ],
     elevation: 0,
   );
-}
+}*/
 
-AppBar customssAppbar(
+/*AppBar customssAppbar(
     {bool isIcons = false,
     IconData? icons,
     String? title,
@@ -173,9 +171,10 @@ Widget dynamicAppbar(
       )
     ],
   );
-}
+}*/
 
-class Tal3thomAppbar extends StatelessWidget with PreferredSizeWidget {
+/*
+class Tal3thomAppbar extends StatelessWidget implements PreferredSizeWidget {
   const Tal3thomAppbar({super.key});
 
   @override
@@ -196,3 +195,4 @@ class Tal3thomAppbar extends StatelessWidget with PreferredSizeWidget {
   @override
   Size get preferredSize => AppBar().preferredSize;
 }
+*/

@@ -1,6 +1,7 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/services.dart';
-import 'package:queen/queen.dart';
+import 'package:get/get.dart';
+import 'package:queen_validators/queen_validators.dart';
 import 'package:tal3thoom/screens/widgets/constants.dart';
 import 'package:tal3thoom/screens/widgets/customButton.dart';
 import 'package:tal3thoom/screens/widgets/customTextFeild.dart';
@@ -8,7 +9,6 @@ import 'package:flutter/material.dart';
 import '../../../../../../config/keys.dart';
 import 'package:timer_count_down/timer_controller.dart';
 import 'package:timer_count_down/timer_count_down.dart';
-import 'package:get/get.dart' hide Trans hide ContextExtensionss;
 
 import '../../widgets/alerts.dart';
 import '../new_password/view.dart';

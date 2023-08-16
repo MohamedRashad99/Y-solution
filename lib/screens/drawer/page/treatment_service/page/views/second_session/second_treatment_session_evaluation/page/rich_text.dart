@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import '../../../../../../../../widgets/constants.dart';
 
 class RichTextCustom extends StatelessWidget {
+  const RichTextCustom({super.key});
+
   @override
   Widget build(BuildContext context) {
     return const Padding(
@@ -42,6 +44,8 @@ class RichTextCustom extends StatelessWidget {
 }
 
 class RichTextCustom2 extends StatelessWidget {
+  const RichTextCustom2({super.key});
+
   @override
   Widget build(BuildContext context) {
     return const Padding(

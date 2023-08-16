@@ -3,8 +3,7 @@ import 'package:fijkplayer/fijkplayer.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-import 'package:queen/core/helpers/prefs.dart';
-import 'package:tal3thoom/config/keys.dart';
+import 'package:tal3thoom/config/custom_shared_prefs.dart';import 'package:tal3thoom/config/keys.dart';
 import 'package:tal3thoom/screens/widgets/mediaButton.dart';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -220,7 +219,8 @@ class _InductionDiagnosticState extends State<InductionDiagnostic> {
                                   Get.offAll(
                                       () => const FirstTreatmentInduction());
                                 }
-                              } else if (_isAvailable == true) {
+                              }
+                              else if (_isAvailable == true) {
                                 print("فيييييييييييييييييمص");
                                 if (state.accessPermissionModel.data!
                                         .stagesDiagnosis!.caseHistory ==

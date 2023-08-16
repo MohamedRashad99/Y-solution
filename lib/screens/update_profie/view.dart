@@ -7,8 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:queen/validation.dart';
-import 'package:tal3thoom/config/keys.dart';
+import 'package:queen_validators/queen_validators.dart';import 'package:tal3thoom/config/keys.dart';
 
 import '../auth/register/page/drop_down_is_readble.dart';
 import '../auth/register/page/drop_down_six.dart';

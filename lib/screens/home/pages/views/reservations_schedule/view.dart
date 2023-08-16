@@ -2,7 +2,7 @@ import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-import 'package:queen/core/helpers/url_luncher.dart';
+import 'package:tal3thoom/config/keys.dart';
 import 'package:tal3thoom/screens/home/pages/views/reservations_schedule/page/views/reservation_card.dart';
 
 import '../../../../finished_sessions/view.dart';
@@ -51,6 +51,11 @@ class _ReservationsScheduleState extends State<ReservationsSchedule> {
                   title: " الإنتقال إلي المواعيد المنتهية",
                   color: kButtonDashBoard),
             ),
+
+            ScrollText(
+
+                title: KeysConfig.zoomNote,
+               ),
             BlocConsumer<BookingCubit, BookingState>(
               listener: (context, state) {},
               builder: (context, state) {
@@ -80,6 +85,9 @@ class _ReservationsScheduleState extends State<ReservationsSchedule> {
                               return FadeInUpBig(
                                 child: ReservationCard(
                                     onPressStart: () {
+
+                                      cubit.getBookingList();
+
                                       setState(() {
                                       if(  ((state
                                           .bookingInfo
@@ -99,8 +107,8 @@ class _ReservationsScheduleState extends State<ReservationsSchedule> {
                                           (state.bookingInfo.data[index]
                                               .allowEnterZoomSession ==
                                               true)){
-                                        Launch.url(state.bookingInfo
-                                            .data[index].zoomInvitationUrl);
+                                        LaunchURLT(state.bookingInfo
+                                            .data[index].zoomInvitationUrl );
 
                                       }
 

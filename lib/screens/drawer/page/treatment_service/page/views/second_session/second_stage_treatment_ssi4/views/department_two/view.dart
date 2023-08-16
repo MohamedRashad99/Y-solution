@@ -11,8 +11,7 @@ import 'package:tal3thoom/screens/widgets/fast_widget.dart';
 import 'package:tal3thoom/screens/widgets/mediaButton.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:queen/validation.dart';
-import 'package:video_player/video_player.dart';
+import 'package:queen_validators/queen_validators.dart';import 'package:video_player/video_player.dart';
 
 import '../../../../../../../../../../config/keys.dart';
 import '../../../../../../../../../widgets/alerts.dart';
@@ -149,7 +148,15 @@ class _SecondTreatmentSSI4TwoState extends State<SecondTreatmentSSI4Two> {
                                   const EdgeInsets.symmetric(vertical: 8.0),
                               child: Image.asset("assets/images/Earphone.png"),
                             )),
-
+                        const Divider(
+                          color: Colors.black45,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(20.0),
+                          child: Image.asset(
+                              "assets/images/instraction video.png"),
+                        ),
+                        videoHint(),
                         Container(
                           margin: const EdgeInsets.symmetric(vertical: 8),
                           width: context.width * 0.8,
@@ -209,7 +216,7 @@ class _SecondTreatmentSSI4TwoState extends State<SecondTreatmentSSI4Two> {
                                         _file = x;
                                       });
                                     },
-                                text: joinedString,
+                                    text: joinedString,
                                   ));
                             } else {
                               Alert.error(
@@ -217,8 +224,11 @@ class _SecondTreatmentSSI4TwoState extends State<SecondTreatmentSSI4Two> {
                             }
                           },
                         ),
-                        ScrollText(title: '  -  يرجى إعادة تسجيل الفيديو بالضغط على الزر أعلاه مرة أخرى عند عدم قناعتك بالفيديو الذي قمت بتسجيله     ...    '),
 
+                        ScrollText(
+                         //   fontSizeable: 14,
+                            title:
+                                '  -  في حال عدم قناعتك بجودة الفيديو الذي قمت بتسجيله يمكنك اعادة التسجيل بالضغط على زر "هل ترغب في تسجيل فيديو جديد" ...    '),
 
                         Padding(
                           padding: const EdgeInsets.all(12.0),
@@ -275,28 +285,25 @@ class _SecondTreatmentSSI4TwoState extends State<SecondTreatmentSSI4Two> {
 
   XFile? _file;
 
-
   void pickVideo() async {
-
     setState(() {
       _file = null;
       _controller?.dispose();
     });
     _picker.pickVideo(source: ImageSource.gallery).then((value) {
       if (value != null) {
-
         final file = File(value.path);
-        print("File = "+file.path.toString());
+        print("File = " + file.path.toString());
         if (file.existsSync()) {
           final fileLength = file.lengthSync();
           if (fileLength > 150 * 1024 * 1024) {
-            Alert.error("هذا الفيديو كبير جدًا. الرجاء تحديد مقطع فيديو بحجم أقل.");
+            Alert.error(
+                "هذا الفيديو كبير جدًا. الرجاء تحديد مقطع فيديو بحجم أقل.");
           } else {
             setState(() {
               _file = value;
             });
             _playVideo(value);
-
           }
         } else {
           Alert.error("لم يتم العثور على الملف.");
@@ -329,12 +336,13 @@ class _SecondTreatmentSSI4TwoState extends State<SecondTreatmentSSI4Two> {
       await _disposeVideoController();
       late VideoPlayerController controller;
       if (kIsWeb) {
-        controller = VideoPlayerController.network(file.path,);
+        controller = VideoPlayerController.network(
+          file.path,
+        );
       } else {
         controller = VideoPlayerController.file(
           File(file.path),
           videoPlayerOptions: VideoPlayerOptions(mixWithOthers: true),
-
         );
       }
       _controller = controller;
@@ -349,7 +357,6 @@ class _SecondTreatmentSSI4TwoState extends State<SecondTreatmentSSI4Two> {
       await controller.setLooping(false);
       await controller.pause();
       //await controller.play();
-
 
       setState(() {});
     }

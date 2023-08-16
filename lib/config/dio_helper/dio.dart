@@ -1,10 +1,11 @@
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
+import 'package:tal3thoom/config/custom_shared_prefs.dart';
 import 'package:pretty_dio_logger/pretty_dio_logger.dart';
-import 'package:queen/core.dart';
 
 abstract class NetWork {
   static Dio get _dio {
+
     final _dio = Dio(
       BaseOptions(
         baseUrl: 'https://mcsc-saudi.com/api/api/',

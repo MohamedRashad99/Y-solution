@@ -8,9 +8,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:queen/validation.dart';
-import '../../../../../../config/keys.dart';
+import 'package:queen_validators/queen_validators.dart';import '../../../../../../config/keys.dart';
 
+import '../../home/cubit/home_tabebar_cubit.dart';
 import '../../widgets/alerts.dart';
 import '../../widgets/constants.dart';
 import '../../widgets/customButton.dart';
@@ -42,12 +42,17 @@ class LoginScreen extends StatelessWidget {
               desc: "تم تسجيل الدخول بنجاح",
             );
 
-            Navigator.of(context).pushAndRemoveUntil(
-                MaterialPageRoute(
-                    builder: (context) => HomeTabScreen(
-                          userId: state.model.data!.userId!,
-                        )),
-                (Route<dynamic> route) => false);
+            // Navigator.of(context).pushAndRemoveUntil(
+            //     MaterialPageRoute(
+            //         builder: (context) => HomeTabScreen(
+            //               userId: state.model.data!.userId!,
+            //             )),
+            //     (Route<dynamic> route) => false);
+
+
+            Get.offAll(() =>const HomeTabScreen());
+            BlocProvider.of<HomeTabeBarCubit>(context)
+                .changeIndex(1);
           } else if (state is LoginError) {
             // Alert.error(state.msg.toString());
             Alert.error(

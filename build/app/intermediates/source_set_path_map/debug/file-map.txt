@@ -1,0 +1,52 @@
+com.example.tal3thoom.app-jetified-appcompat-resources-1.3.0-0 C:\Users\Ra4ad\.gradle\caches\transforms-3\01bc32e2c7b42829835dff5666a0b3c8\transformed\jetified-appcompat-resources-1.3.0\res
+com.example.tal3thoom.app-jetified-profileinstaller-1.3.0-1 C:\Users\Ra4ad\.gradle\caches\transforms-3\034f1bf8463995f274637543b2c242ec\transformed\jetified-profileinstaller-1.3.0\res
+com.example.tal3thoom.app-lifecycle-viewmodel-2.6.1-2 C:\Users\Ra4ad\.gradle\caches\transforms-3\13d16ed937dd041d81329241d4b78cd2\transformed\lifecycle-viewmodel-2.6.1\res
+com.example.tal3thoom.app-jetified-ucrop-2.2.8-3 C:\Users\Ra4ad\.gradle\caches\transforms-3\2bace4c9afd665adbdb3bf53df382b73\transformed\jetified-ucrop-2.2.8\res
+com.example.tal3thoom.app-jetified-lifecycle-viewmodel-savedstate-2.6.1-4 C:\Users\Ra4ad\.gradle\caches\transforms-3\2ec4553475c4f0232070de21c7e09320\transformed\jetified-lifecycle-viewmodel-savedstate-2.6.1\res
+com.example.tal3thoom.app-jetified-core-ktx-1.10.1-5 C:\Users\Ra4ad\.gradle\caches\transforms-3\3884c47dc97d8f8b1a10b703c01667c2\transformed\jetified-core-ktx-1.10.1\res
+com.example.tal3thoom.app-jetified-activity-1.7.2-6 C:\Users\Ra4ad\.gradle\caches\transforms-3\3980600be997ec825acfa1560bf0ad09\transformed\jetified-activity-1.7.2\res
+com.example.tal3thoom.app-lifecycle-livedata-core-2.6.1-7 C:\Users\Ra4ad\.gradle\caches\transforms-3\3b2b7bb4063c396ed1867c49929a7ec5\transformed\lifecycle-livedata-core-2.6.1\res
+com.example.tal3thoom.app-core-1.10.1-8 C:\Users\Ra4ad\.gradle\caches\transforms-3\473310a45c27bec78f4eaf643d7b67d3\transformed\core-1.10.1\res
+com.example.tal3thoom.app-jetified-firebase-common-20.3.3-9 C:\Users\Ra4ad\.gradle\caches\transforms-3\4e97b1022c59e6e40ac39918ec414960\transformed\jetified-firebase-common-20.3.3\res
+com.example.tal3thoom.app-transition-1.4.1-10 C:\Users\Ra4ad\.gradle\caches\transforms-3\4f79c8879606ee90aec9a2d1b1494148\transformed\transition-1.4.1\res
+com.example.tal3thoom.app-jetified-annotation-experimental-1.3.0-11 C:\Users\Ra4ad\.gradle\caches\transforms-3\647cff0f3d8343f998cbea034f4b6f46\transformed\jetified-annotation-experimental-1.3.0\res
+com.example.tal3thoom.app-jetified-startup-runtime-1.1.1-12 C:\Users\Ra4ad\.gradle\caches\transforms-3\6aa9b31eaee48f02cdcaaf7c1b9d979a\transformed\jetified-startup-runtime-1.1.1\res
+com.example.tal3thoom.app-core-runtime-2.2.0-13 C:\Users\Ra4ad\.gradle\caches\transforms-3\82ca68d265e987eadd808cfb81141d62\transformed\core-runtime-2.2.0\res
+com.example.tal3thoom.app-jetified-savedstate-1.2.1-14 C:\Users\Ra4ad\.gradle\caches\transforms-3\88e63778c6f7ca4ab04d75cc44a9a51d\transformed\jetified-savedstate-1.2.1\res
+com.example.tal3thoom.app-appcompat-1.3.0-15 C:\Users\Ra4ad\.gradle\caches\transforms-3\9da22c6d39461bcb77fdce7ce4d2855a\transformed\appcompat-1.3.0\res
+com.example.tal3thoom.app-fragment-1.3.4-16 C:\Users\Ra4ad\.gradle\caches\transforms-3\a30fa255fe3ea161f72b98ed77685955\transformed\fragment-1.3.4\res
+com.example.tal3thoom.app-jetified-exoplayer-core-2.18.7-17 C:\Users\Ra4ad\.gradle\caches\transforms-3\b81b364cc0da12cb8f9a46171486667c\transformed\jetified-exoplayer-core-2.18.7\res
+com.example.tal3thoom.app-lifecycle-runtime-2.6.1-18 C:\Users\Ra4ad\.gradle\caches\transforms-3\ce89a44f0266dd5f975b1d3fd5d158f5\transformed\lifecycle-runtime-2.6.1\res
+com.example.tal3thoom.app-webkit-1.5.0-19 C:\Users\Ra4ad\.gradle\caches\transforms-3\e46b37a718e0ca35705b49c658164e29\transformed\webkit-1.5.0\res
+com.example.tal3thoom.app-lifecycle-livedata-2.6.1-20 C:\Users\Ra4ad\.gradle\caches\transforms-3\ecdebe15d96414b8083b23f70d0fc0e6\transformed\lifecycle-livedata-2.6.1\res
+com.example.tal3thoom.app-jetified-window-java-1.0.0-beta04-21 C:\Users\Ra4ad\.gradle\caches\transforms-3\f0b974b758349e9c54fcc6f9656f330a\transformed\jetified-window-java-1.0.0-beta04\res
+com.example.tal3thoom.app-jetified-window-1.0.0-beta04-22 C:\Users\Ra4ad\.gradle\caches\transforms-3\fd5f419e863560aa62f941d72f6221aa\transformed\jetified-window-1.0.0-beta04\res
+com.example.tal3thoom.app-jetified-play-services-basement-18.1.0-23 C:\Users\Ra4ad\.gradle\caches\transforms-3\ff69d175c49cfa9394e8ca832c98affc\transformed\jetified-play-services-basement-18.1.0\res
+com.example.tal3thoom.app-debug-24 C:\Users\Ra4ad\Downloads\must upload\tal3thoom-ysoluation\tal3thoom-ysoluation\android\app\src\debug\res
+com.example.tal3thoom.app-main-25 C:\Users\Ra4ad\Downloads\must upload\tal3thoom-ysoluation\tal3thoom-ysoluation\android\app\src\main\res
+com.example.tal3thoom.app-pngs-26 C:\Users\Ra4ad\Downloads\must upload\tal3thoom-ysoluation\tal3thoom-ysoluation\build\app\generated\res\pngs\debug
+com.example.tal3thoom.app-resValues-27 C:\Users\Ra4ad\Downloads\must upload\tal3thoom-ysoluation\tal3thoom-ysoluation\build\app\generated\res\resValues\debug
+com.example.tal3thoom.app-rs-28 C:\Users\Ra4ad\Downloads\must upload\tal3thoom-ysoluation\tal3thoom-ysoluation\build\app\generated\res\rs\debug
+com.example.tal3thoom.app-mergeDebugResources-29 C:\Users\Ra4ad\Downloads\must upload\tal3thoom-ysoluation\tal3thoom-ysoluation\build\app\intermediates\incremental\debug\mergeDebugResources\merged.dir
+com.example.tal3thoom.app-mergeDebugResources-30 C:\Users\Ra4ad\Downloads\must upload\tal3thoom-ysoluation\tal3thoom-ysoluation\build\app\intermediates\incremental\debug\mergeDebugResources\stripped.dir
+com.example.tal3thoom.app-merged_res-31 C:\Users\Ra4ad\Downloads\must upload\tal3thoom-ysoluation\tal3thoom-ysoluation\build\app\intermediates\merged_res\debug
+com.example.tal3thoom.app-packaged_res-32 C:\Users\Ra4ad\Downloads\must upload\tal3thoom-ysoluation\tal3thoom-ysoluation\build\camera_android\intermediates\packaged_res\debug
+com.example.tal3thoom.app-packaged_res-33 C:\Users\Ra4ad\Downloads\must upload\tal3thoom-ysoluation\tal3thoom-ysoluation\build\fijkplayer\intermediates\packaged_res\debug
+com.example.tal3thoom.app-packaged_res-34 C:\Users\Ra4ad\Downloads\must upload\tal3thoom-ysoluation\tal3thoom-ysoluation\build\file_picker\intermediates\packaged_res\debug
+com.example.tal3thoom.app-packaged_res-35 C:\Users\Ra4ad\Downloads\must upload\tal3thoom-ysoluation\tal3thoom-ysoluation\build\firebase_analytics\intermediates\packaged_res\debug
+com.example.tal3thoom.app-packaged_res-36 C:\Users\Ra4ad\Downloads\must upload\tal3thoom-ysoluation\tal3thoom-ysoluation\build\firebase_core\intermediates\packaged_res\debug
+com.example.tal3thoom.app-packaged_res-37 C:\Users\Ra4ad\Downloads\must upload\tal3thoom-ysoluation\tal3thoom-ysoluation\build\firebase_remote_config\intermediates\packaged_res\debug
+com.example.tal3thoom.app-packaged_res-38 C:\Users\Ra4ad\Downloads\must upload\tal3thoom-ysoluation\tal3thoom-ysoluation\build\flutter_plugin_android_lifecycle\intermediates\packaged_res\debug
+com.example.tal3thoom.app-packaged_res-39 C:\Users\Ra4ad\Downloads\must upload\tal3thoom-ysoluation\tal3thoom-ysoluation\build\flutter_tts\intermediates\packaged_res\debug
+com.example.tal3thoom.app-packaged_res-40 C:\Users\Ra4ad\Downloads\must upload\tal3thoom-ysoluation\tal3thoom-ysoluation\build\fluttertoast\intermediates\packaged_res\debug
+com.example.tal3thoom.app-packaged_res-41 C:\Users\Ra4ad\Downloads\must upload\tal3thoom-ysoluation\tal3thoom-ysoluation\build\image_cropper\intermediates\packaged_res\debug
+com.example.tal3thoom.app-packaged_res-42 C:\Users\Ra4ad\Downloads\must upload\tal3thoom-ysoluation\tal3thoom-ysoluation\build\image_picker_android\intermediates\packaged_res\debug
+com.example.tal3thoom.app-packaged_res-43 C:\Users\Ra4ad\Downloads\must upload\tal3thoom-ysoluation\tal3thoom-ysoluation\build\package_info_plus\intermediates\packaged_res\debug
+com.example.tal3thoom.app-packaged_res-44 C:\Users\Ra4ad\Downloads\must upload\tal3thoom-ysoluation\tal3thoom-ysoluation\build\path_provider_android\intermediates\packaged_res\debug
+com.example.tal3thoom.app-packaged_res-45 C:\Users\Ra4ad\Downloads\must upload\tal3thoom-ysoluation\tal3thoom-ysoluation\build\permission_handler_android\intermediates\packaged_res\debug
+com.example.tal3thoom.app-packaged_res-46 C:\Users\Ra4ad\Downloads\must upload\tal3thoom-ysoluation\tal3thoom-ysoluation\build\shared_preferences_android\intermediates\packaged_res\debug
+com.example.tal3thoom.app-packaged_res-47 C:\Users\Ra4ad\Downloads\must upload\tal3thoom-ysoluation\tal3thoom-ysoluation\build\sqflite\intermediates\packaged_res\debug
+com.example.tal3thoom.app-packaged_res-48 C:\Users\Ra4ad\Downloads\must upload\tal3thoom-ysoluation\tal3thoom-ysoluation\build\url_launcher_android\intermediates\packaged_res\debug
+com.example.tal3thoom.app-packaged_res-49 C:\Users\Ra4ad\Downloads\must upload\tal3thoom-ysoluation\tal3thoom-ysoluation\build\video_player_android\intermediates\packaged_res\debug
+com.example.tal3thoom.app-packaged_res-50 C:\Users\Ra4ad\Downloads\must upload\tal3thoom-ysoluation\tal3thoom-ysoluation\build\wakelock_plus\intermediates\packaged_res\debug
+com.example.tal3thoom.app-packaged_res-51 C:\Users\Ra4ad\Downloads\must upload\tal3thoom-ysoluation\tal3thoom-ysoluation\build\webview_flutter_android\intermediates\packaged_res\debug

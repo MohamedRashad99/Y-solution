@@ -7,8 +7,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-import 'package:queen/core/helpers/prefs.dart';
+import 'package:tal3thoom/config/custom_shared_prefs.dart';import 'package:tal3thoom/config/keys.dart';
 import 'package:text_scroll/text_scroll.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../home/cubit/home_tabebar_cubit.dart';
 import '../home/view.dart';
@@ -89,33 +90,33 @@ final headingStyle = TextStyle(
   color: Colors.black,
 );
 
-Widget ScrollText({required String title}){
-  return     Padding(
-    padding: const EdgeInsets.symmetric(horizontal: 8.0,vertical: 8.0),
+Widget ScrollText({
+  required String title,
+}) {
+  return Padding(
+    padding: const EdgeInsets.symmetric(horizontal: 8.0, vertical: 8.0),
     child: TextScroll(
       textDirection: TextDirection.rtl,
       title,
       mode: TextScrollMode.endless,
-      velocity:  const Velocity(pixelsPerSecond: Offset(150, 0)),
-      delayBefore:  const Duration(seconds: 2),
+      velocity: const Velocity(pixelsPerSecond: Offset(150, 0)),
+      delayBefore: const Duration(seconds: 2),
       numberOfReps: 10,
-      pauseBetween:  const Duration(seconds: 2),
-      style:  const TextStyle(  fontFamily: 'DinMedium',
-          fontSize: 14,
-          color: kButtonRedDark),
+      pauseBetween: const Duration(seconds: 2),
+      style: const TextStyle(
+          fontFamily: 'DinMedium', fontSize: 14, color: kButtonRedDark),
       textAlign: TextAlign.right,
       selectable: true,
     ),
   );
 }
 
-
 Widget customNormalText({required BuildContext context, String? title}) {
   return Text(
     title!,
     style: Theme.of(context)
         .textTheme
-        .headline6
+        .titleLarge
         ?.copyWith(color: Colors.black, fontSize: 16, fontFamily: 'Contrail'),
   );
 }
@@ -194,6 +195,14 @@ Widget custom12Text({required String title, required Color color}) {
       style: TextStyle(color: color, fontSize: 10, fontFamily: 'DinBold'));
 }
 
+Widget zoomNote({required String title, required Color color}) {
+  return Padding(
+    padding: const EdgeInsets.all(8.0),
+    child: Text(title,
+        style: TextStyle(color: color, fontSize: 10, fontFamily: 'DinBold')),
+  );
+}
+
 Widget customBoldText({required String title, required Color color}) {
   return Text(title,
       style: TextStyle(color: color, fontSize: 18, fontFamily: 'DinBold'));
@@ -202,7 +211,9 @@ Widget customBoldText({required String title, required Color color}) {
 Widget customText2({required String title, required Color color}) {
   return Text(title,
       style: TextStyle(color: color, fontSize: 18, fontFamily: 'DinBold'));
-}Widget customText16({required String title, required Color color}) {
+}
+
+Widget customText16({required String title, required Color color}) {
   return Text(title,
       style: TextStyle(color: color, fontSize: 22, fontFamily: 'DinBold'));
 }
@@ -211,11 +222,43 @@ Widget customText3({required String title, required Color color}) {
   return Text(title,
       style: TextStyle(color: color, fontSize: 14, fontFamily: 'DinLight'));
 }
-Widget customTextWatchVideo({required String title, required Color color ,required VoidCallback onTap}) {
+void LaunchURLT(String url) async {
+  if (await canLaunch(url)) {
+    await launch(url);
+  } else {
+    throw 'Could not launch $url';
+  }
+}
+Widget customTextWatchVideo(
+    {required String title,
+    required Color color,
+    required VoidCallback onTap}) {
   return GestureDetector(
     onTap: onTap,
     child: Text(title,
-        style: TextStyle(color: color, decoration: TextDecoration.underline, fontSize: 16, fontFamily: 'DinMedium')),
+        style: TextStyle(
+            color: color,
+            decoration: TextDecoration.underline,
+            fontSize: 16,
+            fontFamily: 'DinMedium')),
+  );
+}
+Widget BuildCardImage({required String image}) {
+  return Padding(
+    padding: const EdgeInsets.symmetric(
+        horizontal: 12.0, vertical: 4),
+    child: Image.asset(
+      image,
+    ),
+  );
+}
+
+Widget videoHint() {
+  return const Padding(
+    padding: EdgeInsets.all(8.0),
+    child: Text(KeysConfig.videoHint,
+        style: TextStyle(
+            color: kButtonRedDark, fontSize: 12, fontFamily: 'DinMedium')),
   );
 }
 
@@ -239,7 +282,8 @@ Widget customText5({required String title, required Color color}) {
 }
 
 Widget customText6({required String title, required Color color}) {
-  return Text(title,textAlign: TextAlign.center,
+  return Text(title,
+      textAlign: TextAlign.center,
       style: TextStyle(color: color, fontSize: 18, fontFamily: 'DinBold'));
 }
 
@@ -253,7 +297,9 @@ Widget customText8({required String title, required Color color}) {
   return Text(title,
       textAlign: TextAlign.center,
       style: TextStyle(color: color, fontSize: 17, fontFamily: 'DinReguler'));
-}Widget customText18({required String title, required Color color}) {
+}
+
+Widget customText18({required String title, required Color color}) {
   return Text(title,
       textAlign: TextAlign.center,
       style: TextStyle(color: color, fontSize: 22, fontFamily: 'DinReguler'));
@@ -263,6 +309,23 @@ Widget customText9({required String title, required Color color}) {
   return Text(title,
       textAlign: TextAlign.center,
       style: TextStyle(color: color, fontSize: 15, fontFamily: 'DinReguler'));
+}
+
+Widget departmentName({required String departmentName}) {
+  return Align(
+      alignment: Alignment.topRight,
+      child: customText2(title: departmentName, color: kBlackText));
+}
+
+Widget behavioralDescription({required String description, required double width}) {
+  return Container(
+    margin: const EdgeInsets.symmetric(vertical: 8.0),
+    width: width,
+    decoration: const BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(8.0)),
+        color: kPrimaryColor),
+    child: customText9(title: description, color: kHomeColor),
+  );
 }
 
 void showAlertDialog(BuildContext context, VoidCallback onTap) {

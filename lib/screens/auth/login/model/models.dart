@@ -2,7 +2,6 @@
 
 import 'package:equatable/equatable.dart';
 
-// ignore: must_be_immutable
 /*class LoginModel extends Equatable {
   Data? data;
   List<dynamic>? messages;
@@ -110,7 +109,7 @@ class Data extends Equatable {
       ];
 }*/
 
-// ignore: must_be_immutable
+
 class LoginModel extends Equatable {
   Data? data;
  // List<dynamic>? messages;
@@ -148,7 +147,7 @@ class LoginModel extends Equatable {
   List<Object?> get props => [data, messages, status, dataLength];
 }
 
-// ignore: must_be_immutable
+
 class Data extends Equatable {
   String? userId;
   String? userName;
@@ -233,11 +232,11 @@ class Data extends Equatable {
       ];
 }
 
-// ignore: must_be_immutable
+
 class RolesDetails extends Equatable {
   String? roleCode;
   String? enRoleName;
-  dynamic? arRoleName;
+  dynamic arRoleName;
 
   RolesDetails({this.roleCode, this.enRoleName, this.arRoleName});
 

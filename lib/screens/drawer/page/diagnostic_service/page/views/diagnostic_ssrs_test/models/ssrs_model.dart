@@ -19,30 +19,30 @@ class SsrsQuestionModel {
 
 class Question {
   int? id;
-  dynamic? qype;
-  dynamic? bankId;
+  dynamic qype;
+  dynamic bankId;
   String? language;
-  dynamic? time;
-  dynamic? evalType;
-  dynamic? courseCode;
-  dynamic? examMode;
-  dynamic? difficultyLevel;
+  dynamic time;
+  dynamic evalType;
+  dynamic courseCode;
+  dynamic examMode;
+  dynamic difficultyLevel;
   String? questionType;
   String? description;
-  dynamic? hint;
-  dynamic? videoFile;
-  dynamic? audioFile;
-  dynamic? mark;
-  dynamic? tags;
-  dynamic? published;
-  dynamic? createdBy;
-  dynamic? createdAt;
-  dynamic? deleted;
+  dynamic hint;
+  dynamic videoFile;
+  dynamic audioFile;
+  dynamic mark;
+  dynamic tags;
+  dynamic published;
+  dynamic createdBy;
+  dynamic createdAt;
+  dynamic deleted;
   int? examId;
-  dynamic? categoryId;
+  dynamic categoryId;
   int? sectionId;
-  dynamic? exam;
-  dynamic? category;
+  dynamic exam;
+  dynamic category;
   Section? section;
   List<Answers>? answers;
 
@@ -149,10 +149,10 @@ class Answers {
   int? id;
   int? questionId;
   String? answerOption;
-  dynamic? isTrueAnswer;
-  dynamic? isOther;
+  dynamic isTrueAnswer;
+  dynamic isOther;
   double? mark;
-  dynamic? altAnswers;
+  dynamic altAnswers;
 
   Answers(
       {this.id,
@@ -191,18 +191,18 @@ class Section {
   String? sectionName;
   String? sectionNameEn;
   int? examId;
-  dynamic? lightStart;
-  dynamic? lightEnd;
-  dynamic? lightToMediumStart;
-  dynamic? lightToMediumEnd;
-  dynamic? mediumStart;
-  dynamic? mediumEnd;
-  dynamic? mediumToExtremeStart;
-  dynamic? mediumToExtremeEnd;
-  dynamic? extremeStart;
-  dynamic? extremeEnd;
-  dynamic? exam;
-  dynamic? questions;
+  dynamic lightStart;
+  dynamic lightEnd;
+  dynamic lightToMediumStart;
+  dynamic lightToMediumEnd;
+  dynamic mediumStart;
+  dynamic mediumEnd;
+  dynamic mediumToExtremeStart;
+  dynamic mediumToExtremeEnd;
+  dynamic extremeStart;
+  dynamic extremeEnd;
+  dynamic exam;
+  dynamic questions;
 
   Section(
       {this.id,

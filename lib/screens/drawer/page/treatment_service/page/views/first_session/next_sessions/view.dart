@@ -1,6 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:queen/core/helpers/prefs.dart';
-import 'package:flutter/material.dart';
+import 'package:tal3thoom/config/custom_shared_prefs.dart';import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../../../../widgets/appBar.dart';
@@ -9,7 +8,6 @@ import '../../../../../../../widgets/customButton.dart';
 import '../../../../../../view.dart';
 import '../first_cognitive_session/cubit/cognitive_section_cubit.dart';
 import '../first_cognitive_session/view.dart';
-import '../first_stage_additional_traning/view.dart';
 
 // ignore: must_be_immutable
 
@@ -44,7 +42,8 @@ class _NextSessionState extends State<NextSession> {
             ),
             customText4(
                 title:
-                    "لقد اتممت الجلسة العلاجية وسيتم تحويلك إلي الجلسة التالية عن طريق المختص بعد تقييمة لنتائج الجلسة والفيديو التي قمت بارسالة",
+                "لقد اتممت الجلسة العلاجية بنجاج",
+
                 color: kBlackText),
             Container(
               margin: const EdgeInsets.symmetric(vertical: 10),
@@ -55,13 +54,17 @@ class _NextSessionState extends State<NextSession> {
                 child: Image.asset("assets/images/success.png"),
               ),
             ),
-            CustomButton(
+         /*   CustomButton(
               title: "تتدريب وتعليم اضافي",
               onPressed: () =>
                   Get.off(() => const FirstStageAdditionalTrainingScreen()),
+            ),*/
+            ScrollText(
+
+              title: "في حال عدم تجاوزك لجلستك العلاجية الحالية سيتم  نقلك لنفس الجلسة لاعادتها .....",
             ),
             CustomButton(
-              title: "الإنتقال إلي المرحلة التالية",
+              title: "متابعة",
               onPressed: () {
                 BlocProvider.of<CognitiveSectionCubit>(context)
                     .getCognitiveSection();

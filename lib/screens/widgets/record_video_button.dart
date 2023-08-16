@@ -37,10 +37,10 @@ class SmallButtonSizerRecordVideo extends StatelessWidget {
         ),
         child: Center(
           child: isLoading != true
-              ? Row(
+              ? const Row(
                   // crossAxisAlignment: CrossAxisAlignment.,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: const [
+                  children: [
                     Icon(Icons.camera_alt_outlined, color: kHomeColor),
                     // SizedBox(width: width*0.02,),
                     Text(

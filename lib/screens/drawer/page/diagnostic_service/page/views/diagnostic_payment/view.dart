@@ -1,6 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:queen/core/helpers/prefs.dart';
-import 'package:tal3thoom/screens/drawer/page/diagnostic_service/page/views/diagnostic_payment/cubit/diagnostic_payment_cubit.dart';
+import 'package:tal3thoom/config/custom_shared_prefs.dart';import 'package:tal3thoom/screens/drawer/page/diagnostic_service/page/views/diagnostic_payment/cubit/diagnostic_payment_cubit.dart';
 import 'package:tal3thoom/screens/drawer/page/diagnostic_service/page/views/diagnostic_payment/views/alert_message.dart';
 import 'package:tal3thoom/screens/drawer/page/diagnostic_service/page/views/diagnostic_payment/views/alert_to_pay.dart';
 import 'package:tal3thoom/screens/drawer/page/diagnostic_service/page/views/diagnostic_payment/views/payment_card.dart';

@@ -3,8 +3,7 @@ import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:meta/meta.dart';
-import 'package:queen/core/helpers/prefs.dart';
-
+import 'package:tal3thoom/config/custom_shared_prefs.dart';
 import '../../../../../../../../config/dio_helper/dio.dart';
 import '../../../../../treatment_service/page/views/first_session/first_payment_treatment/models/payment_treatement_model.dart';
 

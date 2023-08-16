@@ -6,9 +6,7 @@
 //
 // import 'package:get/get.dart';
 //
-// import 'package:queen/core/helpers/prefs.dart';
-// import 'package:queen/validation.dart';
-// ';
+// import 'package:tal3thoom/config/custom_shared_prefs.dart';// import 'package:queen_validators/queen_validators.dart';// ';
 // import '../../../widgets/loading.dart';
 // import 'cubit/input_data.dart';
 //

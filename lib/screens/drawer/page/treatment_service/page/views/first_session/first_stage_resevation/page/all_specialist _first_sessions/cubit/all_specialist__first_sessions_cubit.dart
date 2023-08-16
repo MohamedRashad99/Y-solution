@@ -2,8 +2,7 @@ import 'dart:developer';
 
 import 'package:bloc/bloc.dart';
 import 'package:meta/meta.dart';
-import 'package:queen/core/helpers/prefs.dart';
-
+import 'package:tal3thoom/config/custom_shared_prefs.dart';
 import '../../../../../../../../../../../config/dio_helper/dio.dart';
 import '../../../../../../../../../../widgets/alerts.dart';
 import '../../../../../../../../../../widgets/date_convertors.dart';
@@ -17,11 +16,11 @@ class AllSpecialistFirstSessionsCubit
       : super(AllSpecialistFirstSessionsInitial());
 
   Future<void> getSpecialists(
-      {required String startTime, required String date}) async {
+      {required String startTime, required String date,required String gender}) async {
     emit(FirstSessionsSpecialistsLoading());
     try {
       final res = await NetWork.get(
-          'Booking/GetSpecialistByDateAndTime/M/$startTime/${DateConverter.dateConverterOnlys(date.toString())}');
+          'Booking/GetSpecialistByDateAndTime/$gender/$startTime/${DateConverter.dateConverterOnlys(date.toString())}');
 
       if (res.data['status'] == 0 ||
           res.data['status'] == -1 ||

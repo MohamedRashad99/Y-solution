@@ -1,17 +1,20 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:queen/core/helpers/prefs.dart';
-import 'package:tal3thoom/screens/drawer/page/advisors_service/views/Reservation_appointment/page/card_item.dart';
+import 'package:tal3thoom/config/custom_shared_prefs.dart';import 'package:tal3thoom/screens/drawer/page/advisors_service/views/Reservation_appointment/page/card_item.dart';
 import 'package:tal3thoom/screens/drawer/page/advisors_service/views/Reservation_appointment/page/card_reservation.dart';
 import 'package:tal3thoom/screens/drawer/page/advisors_service/views/Reservation_appointment/page/drop_down_spcialist.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:tal3thoom/screens/widgets/smallButtonSizer.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+import '../../../../../../config/remote_config.dart';
+import '../../../../../home/cubit/home_tabebar_cubit.dart';
+import '../../../../../home/view.dart';
 import '../../../../../widgets/appBar.dart';
 import '../../../../../widgets/constants.dart';
 import '../../../../../widgets/date_convertors.dart';
 import '../../../../../widgets/fast_widget.dart';
 import '../../../../../widgets/loading.dart';
+import '../../../../../widgets/mediaButton.dart';
 import '../../../../view.dart';
 import '../../cubit/advisor_profile/advisor_profile_cubit.dart';
 import '../spcializer_profile/view.dart';
@@ -35,11 +38,23 @@ class _ReservationAppointmentScreenState
   int? adviserIdInt;
   int? selectedDate;
   var userId = Prefs.getString("userId");
+  RemoteConfigSetup remoteConfigSetup = RemoteConfigSetup();
+
+  void getUpdateList() {
+    if (![showSelectedDate, selectedDate, adviserId].contains(null)) {
+      BlocProvider.of<AdvisorProfileCubit>(context).getAllAdvisors(
+          userProfileId: adviserIdInt!,
+          time: selectedDate!,
+          data: newDateToSend);
+      print(newDateToSend);
+      setState(() {});
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-     bool _isAvailable = Prefs.getBool("isAvailable");
-
+    remoteConfigSetup.setupRemoteConfig();
+    bool _isAvailable = Prefs.getBool("isAvailable");
     // BlocProvider.of<AdvisorProfileCubit>(context).selectedAdvisor;
     return Scaffold(
       backgroundColor: kHomeColor,
@@ -62,8 +77,10 @@ class _ReservationAppointmentScreenState
                       widthh: context.width * 0.5,
                       title: "حجز المواعيد",
                       context: context),
-                  adviserIdInt == null? const SizedBox.shrink():    const HeadTitles(
-                      headTitle: " 1- من فضلك قم بأختيار الأخصائي :"),
+                  adviserIdInt == null
+                      ? const SizedBox.shrink()
+                      : const HeadTitles(
+                          headTitle: " 1- من فضلك قم بأختيار الأخصائي :"),
                   // adviserIdInt == null? Center(
                   //
                   //   child: customBoldText(
@@ -71,16 +88,17 @@ class _ReservationAppointmentScreenState
                   //       color: kBlackText),
                   //
                   // ):
-              Row(
+                  Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     mainAxisSize: MainAxisSize.min,
                     children: [
-                       DropDownSpecialist(onChanged: (value) {
+                      DropDownSpecialist(onChanged: (value) {
                         cubit.onAdvChange(value);
                         adviserId = value.userId;
                         adviserIdInt = value.id;
-
                         setState(() {});
+                       // getUpdateList();
+
                       }),
                       adviserId == null
                           ? SizedBox(
@@ -110,12 +128,13 @@ class _ReservationAppointmentScreenState
                                   userProfileId: adviserIdInt!,
                                   time: selectedDate!,
                                   data: newDateToSend);
+                          getUpdateList();
                           setState(() {
                             print(selectedDate);
                           });
                         }),
                   if (selectedDate != null)
-                    const HeadTitles(headTitle: "3- أحتر التاريخ المتاح :"),
+                    const HeadTitles(headTitle: "3- أختر التاريخ المتاح :"),
                   if (selectedDate != null)
                     DropDownAvailableDates(
                         userProfileId: adviserIdInt,
@@ -165,6 +184,7 @@ class _ReservationAppointmentScreenState
                                               " لا يوجد مستشارين متاحين الاّن",
                                           color: kBlackText))
                                   : ListView.builder(
+                                      physics: const BouncingScrollPhysics(),
                                       padding: const EdgeInsets.symmetric(
                                           horizontal: 16),
                                       itemCount: state.allAdvisorToReservedModel
@@ -184,44 +204,109 @@ class _ReservationAppointmentScreenState
                                               border: Border.all(
                                                   color: kPrimaryColor)),
                                           child: ReservationsCard(
-                                              specialistName: state
-                                                  .allAdvisorToReservedModel
-                                                  .data![index]
-                                                  .createdBy!,
-                                              sessionDate: DateConverter
-                                                  .dateConverterOnlys(state
-                                                      .allAdvisorToReservedModel
-                                                      .data![index]
-                                                      .availableDateTime!),
-                                              start: state
-                                                  .allAdvisorToReservedModel
-                                                  .data![index]
-                                                  .startTime!,
-                                              end: state
-                                                  .allAdvisorToReservedModel
-                                                  .data![index]
-                                                  .endTime!,
-                                              onTap: () {
-                                               if(_isAvailable == true){
-                                                 navigateTo(
-                                                     context,
-                                                     const WebView(
-                                                       javascriptMode: JavascriptMode.unrestricted,
-                                                       initialUrl: "https://mcsc-saudi.com/intro-videos",
-                                                     ));
-                                               }else if(_isAvailable == false){
-                                                 navigateTo(
-                                                     context,
-                                                     WebView(
-                                                       javascriptMode:
-                                                       JavascriptMode
-                                                           .unrestricted,
-                                                       initialUrl:
-                                                       "http://mcsc-saudi.com/Sas/PaymentConsultant/$userId/${state.allAdvisorToReservedModel.data![index].id!}",
-                                                     ));
-                                               }
+                                            specialistName: state
+                                                .allAdvisorToReservedModel
+                                                .data![index]
+                                                .createdBy!,
+                                            sessionDate: DateConverter
+                                                .dateConverterOnlys(state
+                                                    .allAdvisorToReservedModel
+                                                    .data![index]
+                                                    .availableDateTime!),
+                                            start: state
+                                                .allAdvisorToReservedModel
+                                                .data![index]
+                                                .startTime!,
+                                            end: state.allAdvisorToReservedModel
+                                                .data![index].endTime!,
+                                            onTap: () {
+                                              // if (_isAvailable == true) {
+                                              //   // navigateTo(
+                                              //   //     context,
+                                              //   //     const WebView(
+                                              //   //       javascriptMode:
+                                              //   //           JavascriptMode
+                                              //   //               .unrestricted,
+                                              //   //       initialUrl:
+                                              //   //           "https://mcsc-saudi.com/intro-videos",
+                                              //   //     ));
+                                              //
+                                              //
+                                              //
+                                              // }
+                                              // else if (_isAvailable ==
+                                              //     false) {
+                                              //   navigateTo(
+                                              //       context,
+                                              //       WebView(
+                                              //         javascriptMode:
+                                              //             JavascriptMode
+                                              //                 .unrestricted,
+                                              //         initialUrl:
+                                              //             "http://mcsc-saudi.com/Sas/PaymentConsultant/$userId/${state.allAdvisorToReservedModel.data![index].id!}",
+                                              //       ));
+                                              // }
+                                            },
+                                            button: BlocConsumer<
+                                                AdvisorProfileCubit,
+                                                AdvisorProfileState>(
+                                              listener: (context, state) {},
+                                              builder: (context, state) {
+                                                if (state
+                                                    is AllAdvisorToReservedLoading) {
+                                                  return const LoadingFadingCircle();
+                                                }
+                                                if (state
+                                                    is AllAdvisorToReservedSuccess) {
+                                                  return MediaButton(
+                                                    onPressed: () async {
+                                                      if (_isAvailable ==
+                                                          true) {
+                                                        print("الصفحة" +
+                                                            _isAvailable
+                                                                .toString());
+                                                        cubit.submitReservation(
+                                                          scheduleId: state
+                                                              .allAdvisorToReservedModel
+                                                              .data![index]
+                                                              .id!,
+                                                        );
+                                                        BlocProvider.of<
+                                                                    HomeTabeBarCubit>(
+                                                                context)
+                                                            .changeIndex(2);
 
-                                              }),
+                                                        await Get.offAll(() =>
+                                                            const HomeTabScreen());
+                                                      } else if (_isAvailable ==
+                                                          false) {
+                                                        print("ويب" +
+                                                            _isAvailable
+                                                                .toString());
+                                                        navigateTo(
+                                                            context,
+                                                            WebView(
+                                                              javascriptMode:
+                                                                  JavascriptMode
+                                                                      .unrestricted,
+                                                              initialUrl:
+                                                                  "http://mcsc-saudi.com/Sas/PaymentConsultant/$userId/${state.allAdvisorToReservedModel.data![index].id!}",
+                                                            ));
+                                                      }
+                                                    },
+                                                    color: kButtonGreenDark,
+                                                    title: "حجز جلسة",
+                                                  );
+                                                }
+                                                if (state
+                                                    is AllAdvisorToReservedError) {
+                                                  return Text(state.msg);
+                                                }
+
+                                                return const SizedBox.shrink();
+                                              },
+                                            ),
+                                          ),
                                         );
                                       },
                                     ),
@@ -235,6 +320,9 @@ class _ReservationAppointmentScreenState
                         return const SizedBox();
                       },
                     ),
+                  SizedBox(
+                    height: context.height * 0.2,
+                  ),
                 ],
               ),
             ),

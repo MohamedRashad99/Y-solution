@@ -4,8 +4,7 @@ import 'package:tal3thoom/screens/drawer/page/medical_reports/view.dart';
 import 'package:tal3thoom/screens/widgets/constants.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:queen/core/helpers/prefs.dart';
-
+import 'package:tal3thoom/config/custom_shared_prefs.dart';
 import '../../../../drawer/page/advisors_service/views/advisor_induction/view.dart';
 import '../../../../drawer/page/treatment_service/page/views/first_session/first_stage_induction/view.dart';
 
@@ -26,12 +25,12 @@ class MyHomeScreen extends StatelessWidget {
         children: [
           FadeInUpBig(
               child:
-                  Image.asset("assets/images/main_page.png", fit: BoxFit.fill)),
+                  Image.asset("assets/images/main page update.png", fit: BoxFit.fill)),
           Positioned(
-              top: context.height * 0.3,
+              top: context.height * 0.24,
               right: context.width * 0.2,
               child: SizedBox(
-                  //color: Colors.pinkAccent,
+                 // color: Colors.pinkAccent,
                   height: context.height * 0.11,
                   width: context.width * 0.2,
                   child: InkWell(
@@ -43,10 +42,10 @@ class MyHomeScreen extends StatelessWidget {
                       child: customText7(
                           title: "title", color: Colors.transparent)))),
           Positioned(
-              top: context.height * 0.3,
+              top: context.height * 0.24,
               left: context.width * 0.2,
               child: SizedBox(
-                  //color: Colors.pinkAccent,
+//                  color: Colors.pinkAccent,
                   height: context.height * 0.11,
                   width: context.width * 0.2,
                   child: InkWell(
@@ -57,10 +56,10 @@ class MyHomeScreen extends StatelessWidget {
                       child: customText7(
                           title: "title", color: Colors.transparent)))),
           Positioned(
-              top: context.height * 0.46,
+              top: context.height * 0.4,
               right: context.width * 0.25,
               child: SizedBox(
-                  // color: Colors.pinkAccent,
+ //                  color: Colors.pinkAccent,
                   height: context.height * 0.08,
                   width: context.width * 0.43,
                   child: InkWell(
@@ -71,10 +70,10 @@ class MyHomeScreen extends StatelessWidget {
                       child: customText7(
                           title: "title", color: Colors.transparent)))),
           Positioned(
-              top: context.height * 0.6,
+              top: context.height * 0.56,
               right: context.width * 0.25,
               child: SizedBox(
-                  //color: Colors.pinkAccent,
+//                  color: Colors.pinkAccent,
                   height: context.height * 0.08,
                   width: context.width * 0.43,
                   child: InkWell(

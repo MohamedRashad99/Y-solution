@@ -37,7 +37,7 @@ class AllReports extends Equatable {
   int? supervisorId;
   String? supervisorName;
   String? enrolmentDate;
-  dynamic? dischargeDate;
+  dynamic dischargeDate;
   String? stutteringWasBecoming;
   String? bornWith;
   String? stutteringNoticedAge;
@@ -473,7 +473,7 @@ class Section1 extends Equatable {
   int? sectionId;
   String? sectionName;
   String? sectionNameEn;
-  dynamic? points;
+  dynamic points;
   int? answeredQuestions;
   double? impactDegree;
   String? impactRating;
@@ -525,7 +525,7 @@ class Section3 extends Equatable {
   int? sectionId;
   String? sectionName;
   String? sectionNameEn;
-  dynamic? points;
+  dynamic points;
   int? answeredQuestions;
   num? impactDegree;
   String? impactRating;
@@ -577,7 +577,7 @@ class Section5 extends Equatable {
   dynamic sectionId;
   String? sectionName;
   String? sectionNameEn;
-  dynamic? points;
+  dynamic points;
   int? answeredQuestions;
   double? impactDegree;
   String? impactRating;
@@ -660,7 +660,7 @@ class SpeakingSample extends Equatable {
   int? sectionId;
   String? sectionName;
   String? sectionNameEn;
-  dynamic? sttCount;
+  dynamic sttCount;
   double? ssValue;
   int? taskScore;
 

@@ -145,8 +145,8 @@ class _CameraPageState extends State<CameraPage> {
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 12,vertical: 8),
                       child: AutoSizeText(
-                        minFontSize: 12,
-                        maxFontSize: 12,
+                        minFontSize: 16,
+                        maxFontSize: 16,
                        // maxLines: 10,
 
                         "( عند تسجيلك للفيديو يرجى أن تكون صورتك في وسط الشاشة )\n"+  widget.text! ,style: const TextStyle(color: kHomeColor,  fontFamily: 'DinMedium'),

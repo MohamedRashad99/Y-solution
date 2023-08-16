@@ -25,7 +25,7 @@ class CardItems extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.symmetric(vertical: 16),
       padding: const EdgeInsets.symmetric(horizontal: 14),
-      height: context.height * 0.3,
+      height: context.height * 0.22,
       width: context.width * 0.8,
       decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(8),

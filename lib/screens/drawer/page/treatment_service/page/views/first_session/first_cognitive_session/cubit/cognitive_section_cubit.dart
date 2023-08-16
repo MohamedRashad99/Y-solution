@@ -5,8 +5,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:get/get.dart';
-import 'package:queen/core/helpers/prefs.dart';
-
+import 'package:tal3thoom/config/custom_shared_prefs.dart';
 import '../../../../../../../../../serives/first_stage_injects/sessions/cognitive_section/answers_service.dart';
 import '../../../../../../../../../serives/first_stage_injects/sessions/cognitive_section/question_serives.dart';
 import '../../../../../../../../widgets/alerts.dart';

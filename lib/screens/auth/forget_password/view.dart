@@ -1,14 +1,14 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:queen/queen.dart';
 import 'package:tal3thoom/screens/auth/register/page/back_icon.dart';
 import 'package:tal3thoom/screens/auth/vcode/view.dart';
 import 'package:tal3thoom/screens/widgets/customButton.dart';
 import 'package:tal3thoom/screens/widgets/customTextFeild.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart' hide Trans hide ContextExtensionss;
-import '../../../../../../config/keys.dart';
+import 'package:get/get.dart';
+import 'package:queen_validators/queen_validators.dart';
 
+import '../../../../../../config/keys.dart';
 import '../../widgets/alerts.dart';
 import '../../widgets/constants.dart';
 import '../../widgets/loading.dart';

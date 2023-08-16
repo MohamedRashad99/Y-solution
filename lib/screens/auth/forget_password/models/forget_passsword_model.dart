@@ -34,7 +34,7 @@ class ForgetPasswordModel {
 
 class UserInfo {
   String? email;
-  dynamic? password;
+  dynamic password;
   String? code;
 
   UserInfo({this.email, this.password, this.code});
@@ -56,7 +56,7 @@ class UserInfo {
 
 class Messages {
   String? code;
-  dynamic? body;
+  dynamic body;
   String? title;
   int? type;
 

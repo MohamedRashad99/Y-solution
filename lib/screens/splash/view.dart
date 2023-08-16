@@ -4,8 +4,7 @@ import 'dart:io';
 
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:queen/core/helpers/prefs.dart';
-import 'package:tal3thoom/screens/home/view.dart';
+import 'package:tal3thoom/config/custom_shared_prefs.dart';import 'package:tal3thoom/screens/home/view.dart';
 import 'package:tal3thoom/screens/widgets/constants.dart';
 import 'package:tal3thoom/screens/widgets/network_dialog.dart';
 import 'package:flutter/material.dart';

@@ -5,8 +5,7 @@ import 'package:get/get.dart';
 import 'package:easy_localization/easy_localization.dart';
 import '../../../../../../config/keys.dart';
 
-import 'package:queen/core/helpers/prefs.dart';
-import 'package:tal3thoom/screens/widgets/appBar.dart';
+import 'package:tal3thoom/config/custom_shared_prefs.dart';import 'package:tal3thoom/screens/widgets/appBar.dart';
 
 import '../../../widgets/constants.dart';
 

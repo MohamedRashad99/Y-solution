@@ -4,8 +4,7 @@ import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:meta/meta.dart';
-import 'package:queen/core/helpers/prefs.dart';
-
+import 'package:tal3thoom/config/custom_shared_prefs.dart';
 import '../../../../../../../../../serives/first_stage_injects/ssrs/answers.dart';
 import '../../../../../../../../../serives/first_stage_injects/ssrs/question.dart';
 import '../../../../../../diagnostic_service/page/views/diagnostic_history/models/diagnostic_history_question_model.dart';

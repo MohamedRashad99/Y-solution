@@ -68,7 +68,7 @@ class _DropDownAvailableDatesState extends State<DropDownAvailableDates> {
             fontFamily: "DinReguler",
           ),
           underline: null,
-          onChanged: (dynamic? newValue) {
+          onChanged: (dynamic newValue) {
             if (newValue == null) return;
             selected = newValue;
 

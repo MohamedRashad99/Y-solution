@@ -11,8 +11,7 @@ import 'package:tal3thoom/screens/widgets/fast_widget.dart';
 import 'package:tal3thoom/screens/widgets/mediaButton.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:queen/validation.dart';
-import 'package:video_player/video_player.dart';
+import 'package:queen_validators/queen_validators.dart';import 'package:video_player/video_player.dart';
 
 import '../../../../../../../../../../config/keys.dart';
 import '../../../../../../../../../widgets/alerts.dart';
@@ -148,7 +147,15 @@ class _TreatmentSSI4TwoState extends State<TreatmentSSI4Two> {
                                   const EdgeInsets.symmetric(vertical: 8.0),
                               child: Image.asset("assets/images/Earphone.png"),
                             )),
-
+                        const Divider(
+                          color: Colors.black45,
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(20.0),
+                          child: Image.asset(
+                              "assets/images/instraction video.png"),
+                        ),
+                        videoHint(),
                         Container(
                             margin: const EdgeInsets.symmetric(vertical: 8),
                             width: context.width * 0.8,
@@ -217,7 +224,10 @@ class _TreatmentSSI4TwoState extends State<TreatmentSSI4Two> {
                         ),
 
                         //const AlertVideoMessage(),
-                        ScrollText(title: '  -  يرجى إعادة تسجيل الفيديو بالضغط على الزر أعلاه مرة أخرى عند عدم قناعتك بالفيديو الذي قمت بتسجيله     ...    '),
+                        ScrollText(
+                          //  fontSizeable: 14,
+                            title:
+                                '  -  في حال عدم قناعتك بجودة الفيديو الذي قمت بتسجيله يمكنك اعادة التسجيل بالضغط على زر "هل ترغب في تسجيل فيديو جديد" ...    '),
 
                         state is! FirstStageSsi4OneLoading
                             ? MediaButton(

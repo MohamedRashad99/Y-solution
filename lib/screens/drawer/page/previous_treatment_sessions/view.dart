@@ -224,48 +224,31 @@ class _ResultsPreviousTreatmentSessionsState
                                                         .videoFile ==
                                                     null
                                                 ? const SizedBox.shrink()
-                                                : Container(
-                                                    margin: const EdgeInsets
-                                                        .symmetric(vertical: 8),
-                                                    width: context.width * 0.8,
-                                                    height:
-                                                        context.height * 0.25,
-                                                    child:
+                                                : Column(
+                                                  children: [
+                                                    videoHint(),
+                                                    Container(
+                                                        margin: const EdgeInsets
+                                                            .symmetric(vertical: 8),
+                                                        width: context.width * 0.8,
+                                                        height:
+                                                            context.height * 0.25,
+                                                        child:
 
-                                                        // BetterVideoItems(video:
-                                                        //
-                                                        // BetterPlayer.network(
-                                                        //   "http://mcsc-saudi.com/api/" +
-                                                        //       state
-                                                        //           .previousAnswersModel
-                                                        //           .data!
-                                                        //           .cognitiveResult![
-                                                        //       index]
-                                                        //           .question!
-                                                        //           .videoFile!
-                                                        //           .toString(),
-                                                        //
-                                                        //
-                                                        //
-                                                        //   betterPlayerConfiguration: const BetterPlayerConfiguration(
-                                                        //     aspectRatio: 16 / 9,
-                                                        //   ),
-                                                        // ),
-                                                        //
-                                                        //                 ),
-
-                                                        VideoScreen(
-                                                      url: "http://mcsc-saudi.com/api/" +
-                                                          state
-                                                              .previousAnswersModel
-                                                              .data!
-                                                              .cognitiveResult![
-                                                                  index]
-                                                              .question!
-                                                              .videoFile!
-                                                              .toString(),
-                                                    ),
-                                                  ),
+                                                            VideoScreen(
+                                                          url: "http://mcsc-saudi.com/api/" +
+                                                              state
+                                                                  .previousAnswersModel
+                                                                  .data!
+                                                                  .cognitiveResult![
+                                                                      index]
+                                                                  .question!
+                                                                  .videoFile!
+                                                                  .toString(),
+                                                        ),
+                                                      ),
+                                                  ],
+                                                ),
                                           ],
                                         ),
                                       );

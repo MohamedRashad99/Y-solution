@@ -1,7 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:queen/core.dart';
-import 'package:queen/core/helpers/prefs.dart';
-
+import 'package:tal3thoom/config/custom_shared_prefs.dart';
 import '../../../../../../drawer/page/diagnostic_service/page/views/resevation_diagnostic/models/avalible_periods_model.dart';
 import '../../../../../../widgets/constants.dart';
 

@@ -18,9 +18,9 @@ import 'cubit/all_specialist__first_sessions_cubit.dart';
 class AllSpecialistsFirstSessions extends StatefulWidget {
   final String startTime;
   final DateTime date;
-
+  final String gender;
   const AllSpecialistsFirstSessions(
-      {super.key, required this.startTime, required this.date});
+      {super.key, required this.startTime, required this.date,required this.gender});
 
   @override
   State<AllSpecialistsFirstSessions> createState() =>
@@ -32,6 +32,7 @@ class _AllSpecialistsFirstSessionsState
   @override
   Widget build(BuildContext context) {
     BlocProvider.of<AllSpecialistFirstSessionsCubit>(context).getSpecialists(
+       gender: widget.gender.toString(),
       startTime: widget.startTime.toString(),
       date: widget.date.toString(),
     );

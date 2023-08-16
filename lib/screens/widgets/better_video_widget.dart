@@ -103,6 +103,7 @@ class _VideoScreenState extends State<VideoScreen> {
     return FijkView(
       fit: FijkFit.fill,
       player: player,
+
       cover: const AssetImage(
         "assets/images/icon 003.png",
       ),

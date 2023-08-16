@@ -2,8 +2,7 @@ import 'dart:developer';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:bloc/bloc.dart';
-import 'package:queen/core/helpers/prefs.dart';
-
+import 'package:tal3thoom/config/custom_shared_prefs.dart';
 import '../../../../../../config/dio_helper/dio.dart';
 import '../../../../../widgets/alerts.dart';
 import '../models/profile_model.dart';

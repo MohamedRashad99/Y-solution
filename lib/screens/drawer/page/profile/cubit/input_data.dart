@@ -1,6 +1,5 @@
 import 'package:dio/dio.dart';
-import 'package:queen/core/helpers/prefs.dart';
-
+import 'package:tal3thoom/config/custom_shared_prefs.dart';
 class UpdateProfileInputData {
   String? firstName,
       lastName,

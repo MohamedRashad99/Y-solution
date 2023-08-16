@@ -16,12 +16,17 @@ class SuccessViewWidget extends StatelessWidget {
   final VoidCallback? onTap;
   final VoidCallback? onTap2;
   bool? goNext;
+  bool? withAdditionalButton = false;
+  final Widget? button ;
+
 
   SuccessViewWidget(
       {Key? key,
       required this.title1,
       required this.title2,
       this.onTap,
+      this.button,
+        this.withAdditionalButton,
       this.goNext = false,
       this.title3,
       this.onTap2})
@@ -58,7 +63,7 @@ class SuccessViewWidget extends StatelessWidget {
               }
             },
             title: title2),
-        goNext == true
+        goNext == true && withAdditionalButton == false
             ? CustomButton(
                 color: kPrimaryColor,
                 onPressed: () {
@@ -71,8 +76,16 @@ class SuccessViewWidget extends StatelessWidget {
                   //   navigateTo(context, const HomeTabScreen());
                   // }
                 },
-                title: title3)
+                title: title3,
+
+
+        )
             : const SizedBox.shrink(),
+
+        button ?? const SizedBox.shrink(),
+
+
+
       ]),
     );
   }

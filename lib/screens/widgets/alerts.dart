@@ -2,9 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'package:edge_alerts/edge_alerts.dart';
-import 'package:flutter_readable/flutter_readable.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:get/route_manager.dart';
 
 import 'constants.dart';
 
@@ -26,6 +24,7 @@ abstract class Alert {
     edgeAlert(
       Get.context!,
       title: msg.toString(),
+      duration: 4,
       icon: FontAwesomeIcons.times,
       backgroundColor: const Color(0xFFDC3130),
       description: desc,
@@ -38,7 +37,7 @@ abstract class Alert {
       Get.context!,
       title: 'قريبا في التحديثات',
       icon: Icons.new_releases_outlined,
-      backgroundColor: Get.context!.primaryColor,
+      backgroundColor: Get.context!.iconColor,
     );
   }
 }

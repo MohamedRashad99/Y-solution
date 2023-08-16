@@ -30,12 +30,12 @@ enum TypeSessionName {
   EX_TRE_S22,
   EX_TRE_S23,
   EX_TRE_S24,
-  EX_TRE_S25,
-  EX_TRE_S26,
-  EX_TRE_S27,
-  EX_TRE_S28,
-  EX_TRE_S29,
-  EX_TRE_S30
+  // EX_TRE_S25,
+  // EX_TRE_S26,
+  // EX_TRE_S27,
+  // EX_TRE_S28,
+  // EX_TRE_S29,
+  // EX_TRE_S30
 }
 
 class DropDownListResultSessions extends StatefulWidget {
@@ -128,28 +128,29 @@ class _DropDownListResultSessionsState
       } else if (widget.initial == "EX_TRE_S23") {
         selected = TypeSessionName.EX_TRE_S23;
         valueSelected = widget.initial;
-      } else if (widget.initial == "EX_TRE_S24") {
+      } else  {
         selected = TypeSessionName.EX_TRE_S24;
         valueSelected = widget.initial;
-      } else if (widget.initial == "EX_TRE_S25") {
-        selected = TypeSessionName.EX_TRE_S25;
-        valueSelected = widget.initial;
-      } else if (widget.initial == "EX_TRE_S26") {
-        selected = TypeSessionName.EX_TRE_S26;
-        valueSelected = widget.initial;
-      } else if (widget.initial == "EX_TRE_S27") {
-        selected = TypeSessionName.EX_TRE_S27;
-        valueSelected = widget.initial;
-      } else if (widget.initial == "EX_TRE_S28") {
-        selected = TypeSessionName.EX_TRE_S28;
-        valueSelected = widget.initial;
-      } else if (widget.initial == "EX_TRE_S29") {
-        selected = TypeSessionName.EX_TRE_S29;
-        valueSelected = widget.initial;
-      } else {
-        selected = TypeSessionName.EX_TRE_S30;
-        valueSelected = widget.initial;
       }
+      // else if (widget.initial == "EX_TRE_S25") {
+      //   selected = TypeSessionName.EX_TRE_S25;
+      //   valueSelected = widget.initial;
+      // } else if (widget.initial == "EX_TRE_S26") {
+      //   selected = TypeSessionName.EX_TRE_S26;
+      //   valueSelected = widget.initial;
+      // } else if (widget.initial == "EX_TRE_S27") {
+      //   selected = TypeSessionName.EX_TRE_S27;
+      //   valueSelected = widget.initial;
+      // } else if (widget.initial == "EX_TRE_S28") {
+      //   selected = TypeSessionName.EX_TRE_S28;
+      //   valueSelected = widget.initial;
+      // } else if (widget.initial == "EX_TRE_S29") {
+      //   selected = TypeSessionName.EX_TRE_S29;
+      //   valueSelected = widget.initial;
+      // } else {
+      //   selected = TypeSessionName.EX_TRE_S30;
+      //   valueSelected = widget.initial;
+      // }
     }
     super.initState();
   }
@@ -245,21 +246,22 @@ class _DropDownListResultSessionsState
                 valueSelected = "EX_TRE_S22";
               } else if (selected == TypeSessionName.EX_TRE_S23) {
                 valueSelected = "EX_TRE_S23";
-              } else if (selected == TypeSessionName.EX_TRE_S24) {
-                valueSelected = "EX_TRE_S24";
-              } else if (selected == TypeSessionName.EX_TRE_S25) {
-                valueSelected = "EX_TRE_S25";
-              } else if (selected == TypeSessionName.EX_TRE_S26) {
-                valueSelected = "EX_TRE_S26";
-              } else if (selected == TypeSessionName.EX_TRE_S27) {
-                valueSelected = "EX_TRE_S27";
-              } else if (selected == TypeSessionName.EX_TRE_S28) {
-                valueSelected = "EX_TRE_S28";
-              } else if (selected == TypeSessionName.EX_TRE_S29) {
-                valueSelected = "EX_TRE_S29";
               } else {
-                valueSelected = "EX_TRE_S30";
+                valueSelected = "EX_TRE_S24";
               }
+              // else if (selected == TypeSessionName.EX_TRE_S25) {
+              //   valueSelected = "EX_TRE_S25";
+              // } else if (selected == TypeSessionName.EX_TRE_S26) {
+              //   valueSelected = "EX_TRE_S26";
+              // } else if (selected == TypeSessionName.EX_TRE_S27) {
+              //   valueSelected = "EX_TRE_S27";
+              // } else if (selected == TypeSessionName.EX_TRE_S28) {
+              //   valueSelected = "EX_TRE_S28";
+              // } else if (selected == TypeSessionName.EX_TRE_S29) {
+              //   valueSelected = "EX_TRE_S29";
+              // } else {
+              //   valueSelected = "EX_TRE_S30";
+              // }
               widget.onChanged(valueSelected!);
             });
           },

@@ -1,12 +1,12 @@
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:queen/queen.dart';
 import 'package:tal3thoom/screens/auth/login/view.dart';
 import 'package:tal3thoom/screens/widgets/constants.dart';
 import 'package:tal3thoom/screens/widgets/customButton.dart';
 import 'package:tal3thoom/screens/widgets/customTextFeild.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart' hide Trans hide ContextExtensionss;
+import 'package:get/get.dart';
+import 'package:queen_validators/queen_validators.dart';
 import '../../../../../../config/keys.dart';
 
 import '../../widgets/alerts.dart';
@@ -35,7 +35,6 @@ class _NewPasswordScreenState extends State<NewPasswordScreen> {
 
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
     //double width = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: kHomeColor,

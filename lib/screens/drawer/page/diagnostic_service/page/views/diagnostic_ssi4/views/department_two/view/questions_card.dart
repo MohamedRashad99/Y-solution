@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:queen/queen.dart';
-
+import 'package:get/get.dart';
 import '../../../../../../../../../widgets/constants.dart';
 
 class CardQuestions extends StatelessWidget {

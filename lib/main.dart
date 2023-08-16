@@ -3,15 +3,15 @@ import 'dart:io';
 import 'package:country_picker/country_picker.dart';
 import 'package:device_preview/device_preview.dart';
 import 'package:flutter/foundation.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get_navigation/src/root/get_material_app.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:get/get.dart' as g;
+import 'config/custom_shared_prefs.dart';
 import 'config/provider_list.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:queen/queen.dart';
 
 import 'config/bloc_observer.dart';
 import 'config/http_certifications.dart';
@@ -29,8 +29,8 @@ Future<void> main() async {
     WidgetsFlutterBinding.ensureInitialized();
     HttpOverrides.global = MyHttpOverrides();
     //await EasyLocalization.ensureInitialized();
-
-    await App.boot();
+     Prefs.initPrefs();
+    //  await App.boot();
     await Firebase.initializeApp();
     await GetStorage.init();
 
@@ -52,22 +52,13 @@ Future<void> main() async {
     //
     // ); // may be nul
 
-    runApp(
-      QueenBuilder(
-        enableDevtools: false,
-        builder: (context) {
-          return DevicePreview(
-              enabled: false, builder: (context) => const MyApp());
-        },
-      ),
-    );
+    runApp(DevicePreview(enabled: false, builder: (context) => const MyApp()));
     SystemChrome.setPreferredOrientations([
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
     ]);
     SystemChrome.setSystemUIOverlayStyle(
       const SystemUiOverlayStyle(
-        // systemNavigationBarColor: kButtonRedDark, // navigation bar color
         statusBarColor: kPrimaryColor, // status bar color
       ),
     );

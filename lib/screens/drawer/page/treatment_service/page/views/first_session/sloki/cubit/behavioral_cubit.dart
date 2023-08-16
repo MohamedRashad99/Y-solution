@@ -6,8 +6,7 @@ import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 import 'package:meta/meta.dart';
-import 'package:queen/core/helpers/prefs.dart';
-import 'package:tal3thoom/screens/drawer/page/diagnostic_service/page/views/diagnostic_history/models/diagnostic_history_question_model.dart';
+import 'package:tal3thoom/config/custom_shared_prefs.dart';import 'package:tal3thoom/screens/drawer/page/diagnostic_service/page/views/diagnostic_history/models/diagnostic_history_question_model.dart';
 import 'package:tal3thoom/serives/first_stage_injects/sessions/behavioral_section/question_serives.dart';
 
 import '../../../../../../../../../config/dio_helper/dio.dart';

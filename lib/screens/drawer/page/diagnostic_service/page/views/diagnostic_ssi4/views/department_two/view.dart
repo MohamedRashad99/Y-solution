@@ -12,8 +12,7 @@ import 'package:tal3thoom/screens/widgets/fast_widget.dart';
 import 'package:tal3thoom/screens/widgets/mediaButton.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:queen/validation.dart';
-import 'package:video_player/video_player.dart';
+import 'package:queen_validators/queen_validators.dart';import 'package:video_player/video_player.dart';
 
 import '../../../../../../../../../config/keys.dart';
 import '../../../../../../../../widgets/alerts.dart';
@@ -30,6 +29,8 @@ import '../department_one/views/upload_video.dart';
 
 // ignore: must_be_immutable
 class DiagnosticSSI4Two extends StatefulWidget {
+  const DiagnosticSSI4Two({super.key});
+
   @override
   State<DiagnosticSSI4Two> createState() => _DiagnosticSSI4TwoState();
 }
@@ -81,7 +82,6 @@ class _DiagnosticSSI4TwoState extends State<DiagnosticSSI4Two> {
 
                   print(listOfString);
                   print(
-
                       "***************************************************************");
                   String joinedString = '';
 
@@ -115,9 +115,6 @@ class _DiagnosticSSI4TwoState extends State<DiagnosticSSI4Two> {
                               physics: const NeverScrollableScrollPhysics(),
                               itemCount: listOfString.length,
                               itemBuilder: (context, index) {
-
-
-
                                 return CardQuestions(
                                     index: index + 1,
                                     desc: listOfString[index]);
@@ -148,26 +145,36 @@ class _DiagnosticSSI4TwoState extends State<DiagnosticSSI4Two> {
                                   const EdgeInsets.symmetric(vertical: 8.0),
                               child: Image.asset("assets/images/Earphone.png"),
                             )),
-                        Container(
-                          margin: const EdgeInsets.symmetric(vertical: 8),
-                          width: context.width * 0.8,
-                          height: context.height * 0.25,
-                          child: _file == null
-                              ? Container(
-                                  decoration: BoxDecoration(
-                                      color: kBlackText,
-                                      border: Border.all(
-                                          color: kPrimaryColor, width: 3)
-                                      ),
-                                )
-                              : VideoUploadRecordScreen(url:_file!.path.toString() ,)
-
-                          // VideoItems(
-                          //         videoPlayerController:
-                          //             VideoPlayerController.file(
-                          //                 File(_file!.path)),
-                          //       ),
+                        const Divider(
+                          color: Colors.black45,
                         ),
+                        Padding(
+                          padding: const EdgeInsets.all(20.0),
+                          child: Image.asset(
+                              "assets/images/instraction video.png"),
+                        ),
+                        videoHint(),
+                        Container(
+                            margin: const EdgeInsets.symmetric(vertical: 8),
+                            width: context.width * 0.8,
+                            height: context.height * 0.25,
+                            child: _file == null
+                                ? Container(
+                                    decoration: BoxDecoration(
+                                        color: kBlackText,
+                                        border: Border.all(
+                                            color: kPrimaryColor, width: 3)),
+                                  )
+                                : VideoUploadRecordScreen(
+                                    url: _file!.path.toString(),
+                                  )
+
+                            // VideoItems(
+                            //         videoPlayerController:
+                            //             VideoPlayerController.file(
+                            //                 File(_file!.path)),
+                            //       ),
+                            ),
                         CardUploadVideo(
                           height: context.height * 0.18,
                           title: "fullMessage",
@@ -192,16 +199,14 @@ class _DiagnosticSSI4TwoState extends State<DiagnosticSSI4Two> {
                                 _controller?.dispose();
                               });
                               Get.to(() => CameraPage(
-                                    onAdd: (x) {
-                                      setState(() {
-                                        _file = x;
-                                        print("File = Recorded => "+_file!.path.toString());
-
-                                      });
-                                    },
-                                  text:   joinedString
-
-                                  ));
+                                  onAdd: (x) {
+                                    setState(() {
+                                      _file = x;
+                                      print("File = Recorded => " +
+                                          _file!.path.toString());
+                                    });
+                                  },
+                                  text: joinedString));
                             } else {
                               Alert.error(
                                   "يجب الحصول علي تصريح الوصول الي الكاميرا");
@@ -213,7 +218,11 @@ class _DiagnosticSSI4TwoState extends State<DiagnosticSSI4Two> {
                           child: Image.asset("assets/images/record.png"),
                         ),
                         //const AlertVideoMessage(),
-                        ScrollText(title: '  -  يرجى إعادة تسجيل الفيديو بالضغط على الزر أعلاه مرة أخرى عند عدم قناعتك بالفيديو الذي قمت بتسجيله     ...    '),
+
+                        ScrollText(
+                         //   fontSizeable: 14,
+                            title:
+                                '  -  في حال عدم قناعتك بجودة الفيديو الذي قمت بتسجيله يمكنك اعادة التسجيل بالضغط على زر "هل ترغب في تسجيل فيديو جديد" ...    '),
 
                         state is! DiagnosticSsi4FirstLoading
                             ? MediaButton(
@@ -284,26 +293,24 @@ class _DiagnosticSSI4TwoState extends State<DiagnosticSSI4Two> {
 */
 
   void pickVideo() async {
-
     setState(() {
       _file = null;
       _controller?.dispose();
     });
     _picker.pickVideo(source: ImageSource.gallery).then((value) {
       if (value != null) {
-
         final file = File(value.path);
-        print("File = "+file.path.toString());
+        print("File = " + file.path.toString());
         if (file.existsSync()) {
           final fileLength = file.lengthSync();
           if (fileLength > 150 * 1024 * 1024) {
-            Alert.error("هذا الفيديو كبير جدًا. الرجاء تحديد مقطع فيديو بحجم أقل.");
+            Alert.error(
+                "هذا الفيديو كبير جدًا. الرجاء تحديد مقطع فيديو بحجم أقل.");
           } else {
             setState(() {
               _file = value;
             });
             _playVideo(value);
-
           }
         } else {
           Alert.error("لم يتم العثور على الملف.");
@@ -336,12 +343,13 @@ class _DiagnosticSSI4TwoState extends State<DiagnosticSSI4Two> {
       await _disposeVideoController();
       late VideoPlayerController controller;
       if (kIsWeb) {
-        controller = VideoPlayerController.network(file.path,);
+        controller = VideoPlayerController.network(
+          file.path,
+        );
       } else {
         controller = VideoPlayerController.file(
           File(file.path),
           videoPlayerOptions: VideoPlayerOptions(mixWithOthers: true),
-
         );
       }
       _controller = controller;
@@ -352,7 +360,6 @@ class _DiagnosticSSI4TwoState extends State<DiagnosticSSI4Two> {
       await controller.setLooping(false);
       await controller.pause();
       //await controller.play();
-
 
       setState(() {});
     }

@@ -3,8 +3,7 @@ import 'dart:developer';
 import 'package:bloc/bloc.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
-import 'package:queen/core/helpers/prefs.dart';
-
+import 'package:tal3thoom/config/custom_shared_prefs.dart';
 import '../../../config/dio_helper/dio.dart';
 import '../../home/pages/views/profile/models/profile_model.dart';
 import '../../widgets/alerts.dart';

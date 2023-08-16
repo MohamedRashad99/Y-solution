@@ -46,6 +46,7 @@ class _TreatmentServiceInductionState extends State<TreatmentServiceInduction> {
                   padding: const EdgeInsets.all(12.0),
                   child: Image.asset("assets/images/treatmentDis.png"),
                 ),
+                videoHint(),
                 Container(
                   margin: const EdgeInsets
                       .symmetric(vertical: 8),

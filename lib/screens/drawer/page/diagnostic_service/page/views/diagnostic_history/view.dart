@@ -3,7 +3,7 @@ import 'package:auto_size_text/auto_size_text.dart';
 import 'package:get/get.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:queen/validation.dart';
+import 'package:queen_validators/queen_validators.dart';
 import 'package:tal3thoom/screens/drawer/page/diagnostic_service/page/views/diagnostic_history/cubit/diagnostic_history_question_cubit.dart';
 import 'package:tal3thoom/screens/drawer/page/diagnostic_service/page/views/question.dart';
 import 'package:tal3thoom/screens/widgets/mediaButton.dart';
@@ -72,7 +72,7 @@ class _DiagnosticHistoryState extends State<DiagnosticHistory> {
                     ),
                     FormBuilder(
 
-                      autoFocusOnValidationFailure: true,
+
                       autovalidateMode: AutovalidateMode.always,
                       child: FormBuilderRadioGroup<Answers>(
 

@@ -59,8 +59,10 @@ class MedicalReports extends StatelessWidget {
                                     title: "لا توجد طلبات الاّن",
                                     color: kBlackText))
                             : ListView.builder(
+
                                 padding:
                                     const EdgeInsets.symmetric(horizontal: 16),
+
                                 itemCount: state.allReports.length,
                                 physics: const BouncingScrollPhysics(),
                                 itemBuilder: (context, index) {
@@ -93,7 +95,9 @@ class MedicalReports extends StatelessWidget {
 
                   return const SizedBox();
                 },
-              )
+              ),
+              SizedBox(height: context.height*0.2,),
+
             ],
           ),
         ),

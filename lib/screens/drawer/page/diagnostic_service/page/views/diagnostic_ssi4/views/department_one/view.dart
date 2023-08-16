@@ -1,11 +1,11 @@
 import 'dart:io';
 import 'package:fijkplayer/fijkplayer.dart';
-import 'package:get/get.dart' hide Trans, ContextExtensionss;
+import 'package:get/get.dart' ;
 import 'package:flutter/foundation.dart';
+import 'package:queen_validators/queen_validators.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:queen/queen.dart';
 import 'package:tal3thoom/screens/drawer/page/diagnostic_service/page/views/diagnostic_ssi4/views/department_one/views/upload_video.dart';
 import 'package:tal3thoom/screens/drawer/page/diagnostic_service/page/views/question.dart';
 import 'package:tal3thoom/screens/widgets/fast_widget.dart';
@@ -47,7 +47,6 @@ class _DiagnosticSSI4State extends State<DiagnosticSSI4> {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       backgroundColor: kHomeColor,
       drawer: const MenuItems(),
@@ -83,8 +82,7 @@ class _DiagnosticSSI4State extends State<DiagnosticSSI4> {
                               context: context),
                           Padding(
                             padding: const EdgeInsets.all(12.0),
-                            child:
-                                Image.asset("assets/images/SSI4 01.png"),
+                            child: Image.asset("assets/images/SSI4 01.png"),
                           ),
 
                           Padding(
@@ -115,25 +113,35 @@ class _DiagnosticSSI4State extends State<DiagnosticSSI4> {
                                 child:
                                     Image.asset("assets/images/Earphone.png"),
                               )),
-                          SizedBox(
-                            width: context.width * 0.8,
-                            height: context.height * 0.25,
-                            child: _file == null
-                                ? Container(
-                                    decoration: BoxDecoration(
-                                        color: kBlackText,
-                                        border: Border.all(
-                                            color: kPrimaryColor, width: 3)),
-                                  )
-                                : VideoUploadRecordScreen(url:_file!.path.toString() ,)
-
-
-                            // VideoItems(
-                            //         videoPlayerController:
-                            //             VideoPlayerController.file(
-                            //                 File(_file!.path)),
-                            //       ),
+                          const Divider(
+                            color: Colors.black45,
                           ),
+                          Padding(
+                            padding: const EdgeInsets.all(20.0),
+                            child: Image.asset(
+                                "assets/images/instraction video.png"),
+                          ),
+                          videoHint(),
+                          SizedBox(
+                              width: context.width * 0.8,
+                              height: context.height * 0.25,
+                              child: _file == null
+                                  ? Container(
+                                      decoration: BoxDecoration(
+                                          color: kBlackText,
+                                          border: Border.all(
+                                              color: kPrimaryColor, width: 3)),
+                                    )
+                                  : VideoUploadRecordScreen(
+                                      url: _file!.path.toString(),
+                                    )
+
+                              // VideoItems(
+                              //         videoPlayerController:
+                              //             VideoPlayerController.file(
+                              //                 File(_file!.path)),
+                              //       ),
+                              ),
                           CardUploadVideo(
                             height: context.height * 0.18,
                             title: "fullMessage",
@@ -142,7 +150,7 @@ class _DiagnosticSSI4State extends State<DiagnosticSSI4> {
                               if (await Permission.storage
                                   .request()
                                   .isGranted) {
-                                 pickVideo();
+                                pickVideo();
                               } else {
                                 Alert.error(
                                     "يجب الحصول علي تصريح الوصول الي الخزينة");
@@ -163,7 +171,8 @@ class _DiagnosticSSI4State extends State<DiagnosticSSI4> {
                                       onAdd: (x) {
                                         setState(() {
                                           _file = x;
-                                          print("File = Recorded => "+_file!.path.toString());
+                                          print("File = Recorded => " +
+                                              _file!.path.toString());
                                         });
                                       },
                                       text: parseHtmlString(state
@@ -175,8 +184,16 @@ class _DiagnosticSSI4State extends State<DiagnosticSSI4> {
                               }
                             },
                           ),
-                          ScrollText(title: '  -  يرجى إعادة تسجيل الفيديو بالضغط على الزر أعلاه مرة أخرى عند عدم قناعتك بالفيديو الذي قمت بتسجيله     ...    '),
-                          //const AlertVideoMessage(),
+
+                          // const InstructionVideo(
+                          //   KeysConfig.instructionVideo,
+                          // ),
+                          ScrollText(
+                             // fontSizeable: 14,
+                              title:
+                                  '  -  في حال عدم قناعتك بجودة الفيديو الذي قمت بتسجيله يمكنك اعادة التسجيل بالضغط على زر "هل ترغب في تسجيل فيديو جديد" ...    '),
+
+                          //  const AlertVideoMessage(),
                           state is! DiagnosticSsi4FirstLoading
                               ? MediaButton(
                                   onPressed: () {
@@ -193,7 +210,7 @@ class _DiagnosticSSI4State extends State<DiagnosticSSI4> {
                                                     .examId,
                                                 video: _file);
 
-                                            return DiagnosticSSI4Two();
+                                            return const DiagnosticSSI4Two();
                                           });
                                   },
                                   title: "متابعة",
@@ -219,30 +236,25 @@ class _DiagnosticSSI4State extends State<DiagnosticSSI4> {
 
   XFile? _file;
 
-
-
-
   void pickVideo() async {
-
-       setState(() {
-         _file = null;
-         _controller?.dispose();
-       });
+    setState(() {
+      _file = null;
+      _controller?.dispose();
+    });
     _picker.pickVideo(source: ImageSource.gallery).then((value) {
       if (value != null) {
-
         final file = File(value.path);
-       print("File = "+file.path.toString());
+        print("File = " + file.path.toString());
         if (file.existsSync()) {
           final fileLength = file.lengthSync();
           if (fileLength > 150 * 1024 * 1024) {
-            Alert.error("هذا الفيديو كبير جدًا. الرجاء تحديد مقطع فيديو بحجم أقل.");
+            Alert.error(
+                "هذا الفيديو كبير جدًا. الرجاء تحديد مقطع فيديو بحجم أقل.");
           } else {
             setState(() {
               _file = value;
             });
             _playVideo(value);
-
           }
         } else {
           Alert.error("لم يتم العثور على الملف.");
@@ -275,12 +287,13 @@ class _DiagnosticSSI4State extends State<DiagnosticSSI4> {
       await _disposeVideoController();
       late VideoPlayerController controller;
       if (kIsWeb) {
-        controller = VideoPlayerController.network(file.path,);
+        controller = VideoPlayerController.network(
+          file.path,
+        );
       } else {
         controller = VideoPlayerController.file(
           File(file.path),
           videoPlayerOptions: VideoPlayerOptions(mixWithOthers: true),
-
         );
       }
       _controller = controller;
@@ -292,12 +305,9 @@ class _DiagnosticSSI4State extends State<DiagnosticSSI4> {
       await controller.pause();
       //await controller.play();
 
-
       setState(() {});
     }
   }
-
-
 }
 
 SizedBox buildSizedBox(double height) => SizedBox(

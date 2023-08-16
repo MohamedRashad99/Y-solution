@@ -13,8 +13,7 @@ import 'package:tal3thoom/screens/widgets/customTextFeild.dart';
 import 'package:tal3thoom/screens/widgets/fast_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:queen/validation.dart';
-import '../../widgets/alerts.dart';
+import 'package:queen_validators/queen_validators.dart';import '../../widgets/alerts.dart';
 import '../../widgets/custom_textFornField_range.dart';
 import '../../widgets/custom_text_field_phone.dart';
 import '../../widgets/custom_text_filed_country_code.dart';
@@ -671,11 +670,15 @@ class _SignUpScreenState extends State<SignUpScreen> {
                         controller: _phoneController,
                         validator: qValidator([
                           IsRequired(KeysConfig.thisFieldRequired),
-                          MinLength(10, "يجب ان يكون الحد الأدني 10 أرقام "),
-                          MaxLength(30),
+                        //  MinLength(9, "الحد الأدني المطلوب 9 أرقام "),
+                          //MaxLength(10),
+
+
                         ]),
+
                         type: TextInputType.phone,
                         textInputFormatter: [
+                          LengthLimitingTextInputFormatter(10),
                           FilteringTextInputFormatter.allow(RegExp('[0-9]')),
                         ],
                       ),

@@ -5,8 +5,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:queen/queen.dart';
-import 'package:get/get.dart' hide Trans, ContextExtensionss;
+import 'package:get/get.dart';
+import 'package:queen_validators/queen_validators.dart';
 
 import 'package:tal3thoom/screens/drawer/page/diagnostic_service/page/views/question.dart';
 import 'package:tal3thoom/screens/widgets/fast_widget.dart';
@@ -85,8 +85,7 @@ class _SecondTreatmentSSI4State extends State<SecondTreatmentSSI4> {
                               context: context),
                           Padding(
                             padding: const EdgeInsets.all(12.0),
-                            child:
-                                Image.asset("assets/images/SSI4 01.png"),
+                            child: Image.asset("assets/images/SSI4 01.png"),
                           ),
 
                           Padding(
@@ -115,28 +114,38 @@ class _SecondTreatmentSSI4State extends State<SecondTreatmentSSI4> {
                                 child:
                                     Image.asset("assets/images/Earphone.png"),
                               )),
-                          SizedBox(
-                            width: context.width * 0.8,
-                            height: context.height * 0.25,
-                            child: _file == null
-                                ? Container(
-                                    //padding: EdgeInsets.symmetric(vertical: 4,),
-                                    decoration: BoxDecoration(
-                                        color: kBlackText,
-                                        border: Border.all(
-                                            color: kPrimaryColor, width: 3)
-                                        // borderRadius: BorderRadius.circular(4)
-                                        ),
-                                  )
-                                :VideoUploadRecordScreen(url:_file!.path.toString() ,)
-
-
-                                // VideoItems(
-                                //     videoPlayerController:
-                                //         VideoPlayerController.file(
-                                //             File(_file!.path)),
-                                //   ),
+                          const Divider(
+                            color: Colors.black45,
                           ),
+                          Padding(
+                            padding: const EdgeInsets.all(20.0),
+                            child: Image.asset(
+                                "assets/images/instraction video.png"),
+                          ),
+                          videoHint(),
+                          SizedBox(
+                              width: context.width * 0.8,
+                              height: context.height * 0.25,
+                              child: _file == null
+                                  ? Container(
+                                      //padding: EdgeInsets.symmetric(vertical: 4,),
+                                      decoration: BoxDecoration(
+                                          color: kBlackText,
+                                          border: Border.all(
+                                              color: kPrimaryColor, width: 3)
+                                          // borderRadius: BorderRadius.circular(4)
+                                          ),
+                                    )
+                                  : VideoUploadRecordScreen(
+                                      url: _file!.path.toString(),
+                                    )
+
+                              // VideoItems(
+                              //     videoPlayerController:
+                              //         VideoPlayerController.file(
+                              //             File(_file!.path)),
+                              //   ),
+                              ),
                           CardUploadVideo(
                             height: context.height * 0.18,
                             title: "fullMessage",
@@ -158,7 +167,6 @@ class _SecondTreatmentSSI4State extends State<SecondTreatmentSSI4> {
                           SmallButtonSizerRecordVideo(
                             onPressed: () async {
                               if (await Permission.camera.request().isGranted) {
-
                                 setState(() {
                                   _file = null;
                                   _controller?.dispose();
@@ -169,8 +177,8 @@ class _SecondTreatmentSSI4State extends State<SecondTreatmentSSI4> {
                                           _file = x;
                                         });
                                       },
-                                  text:   parseHtmlString(
-                                      state.ssi4QuestionModel[0].description),
+                                      text: parseHtmlString(state
+                                          .ssi4QuestionModel[0].description),
                                     ));
                               } else {
                                 Alert.error(
@@ -178,8 +186,14 @@ class _SecondTreatmentSSI4State extends State<SecondTreatmentSSI4> {
                               }
                             },
                           ),
+                          // const InstructionVideo(
+                          //   KeysConfig.instructionVideo,
+                          // ),
                           //const AlertVideoMessage(),
-                          ScrollText(title: '  -  يرجى إعادة تسجيل الفيديو بالضغط على الزر أعلاه مرة أخرى عند عدم قناعتك بالفيديو الذي قمت بتسجيله     ...    '),
+                          ScrollText(
+                             // fontSizeable: 14,
+                              title:
+                                  '  -  في حال عدم قناعتك بجودة الفيديو الذي قمت بتسجيله يمكنك اعادة التسجيل بالضغط على زر "هل ترغب في تسجيل فيديو جديد" ...    '),
 
                           state is! SecondStageSsi4OneLoading
                               ? MediaButton(
@@ -248,28 +262,25 @@ class _SecondTreatmentSSI4State extends State<SecondTreatmentSSI4> {
   }
 */
 
-
   void pickVideo() async {
-
     setState(() {
       _file = null;
       _controller?.dispose();
     });
     _picker.pickVideo(source: ImageSource.gallery).then((value) {
       if (value != null) {
-
         final file = File(value.path);
-        print("File = "+file.path.toString());
+        print("File = " + file.path.toString());
         if (file.existsSync()) {
           final fileLength = file.lengthSync();
           if (fileLength > 150 * 1024 * 1024) {
-            Alert.error("هذا الفيديو كبير جدًا. الرجاء تحديد مقطع فيديو بحجم أقل.");
+            Alert.error(
+                "هذا الفيديو كبير جدًا. الرجاء تحديد مقطع فيديو بحجم أقل.");
           } else {
             setState(() {
               _file = value;
             });
             _playVideo(value);
-
           }
         } else {
           Alert.error("لم يتم العثور على الملف.");
@@ -302,12 +313,13 @@ class _SecondTreatmentSSI4State extends State<SecondTreatmentSSI4> {
       await _disposeVideoController();
       late VideoPlayerController controller;
       if (kIsWeb) {
-        controller = VideoPlayerController.network(file.path,);
+        controller = VideoPlayerController.network(
+          file.path,
+        );
       } else {
         controller = VideoPlayerController.file(
           File(file.path),
           videoPlayerOptions: VideoPlayerOptions(mixWithOthers: true),
-
         );
       }
       _controller = controller;
@@ -322,7 +334,6 @@ class _SecondTreatmentSSI4State extends State<SecondTreatmentSSI4> {
       await controller.setLooping(false);
       await controller.pause();
       //await controller.play();
-
 
       setState(() {});
     }

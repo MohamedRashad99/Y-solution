@@ -19,9 +19,10 @@ class DiagnosticAllSpecialists extends StatefulWidget {
 
   final String startTime;
   final DateTime date;
+  final String gender;
 
   const DiagnosticAllSpecialists(
-      {super.key, required this.startTime, required this.date});
+      {super.key, required this.startTime, required this.date,required  this.gender});
 
   @override
   State<DiagnosticAllSpecialists> createState() =>
@@ -34,6 +35,7 @@ class _DiagnosticAllSpecialistsState extends State<DiagnosticAllSpecialists> {
     BlocProvider.of<DiagnosticSpecialistsCubit>(context).getSpecialists(
       startTime: widget.startTime.toString(),
       date: widget.date.toString(),
+      gender: widget.gender.toString(),
     );
     return Scaffold(
       backgroundColor: kHomeColor,
@@ -215,26 +217,7 @@ class _DiagnosticAllSpecialistsState extends State<DiagnosticAllSpecialists> {
                 },
               ),
 
-              // BlocConsumer<DiagnosticSpecialistsCubit,
-              //     DiagnosticSpecialistsState>(
-              //   listener: (context, state) {
-              //     // TODO: implement listener
-              //   },
-              //   builder: (context, state) {
-              //
-              //     // if (state is DiagnosticSpecialistsLoading) {
-              //     //   return const Center(
-              //     //     child: LoadingFadingCircle(),
-              //     //   );
-              //     // }
-              //     // if (state is DiagnosticSpecialistsSuccess) {
-              //     //
-              //     // }
-              //     // if (state is DiagnosticSpecialistsError) {
-              //     //   return Text(state.msg);
-              //     // }
-              //     // return const SizedBox();
-              //   },
+
             ],
           ),
         ),

@@ -20,7 +20,7 @@ class DropDownDurations extends StatefulWidget {
 }
 
 class _DropDownDurationsState extends State<DropDownDurations> {
-  dynamic? selected;
+  dynamic selected;
   final List<dynamic> libs = [];
   @override
   void initState() {
@@ -67,7 +67,7 @@ class _DropDownDurationsState extends State<DropDownDurations> {
             fontFamily: "DinReguler",
           ),
           underline: null,
-          onChanged: (dynamic? newValue) {
+          onChanged: (dynamic newValue) {
             if (newValue == null) return;
             selected = newValue;
 

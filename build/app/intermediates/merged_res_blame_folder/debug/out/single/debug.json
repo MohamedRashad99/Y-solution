@@ -1,0 +1,46 @@
+[
+    {
+        "merged": "com.example.tal3thoom.app-merged_res-31:/mipmap-xxhdpi_ic_launcher.png.flat",
+        "source": "com.example.tal3thoom.app-main-25:/mipmap-xxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.example.tal3thoom.app-merged_res-31:/mipmap-mdpi_logo.png.flat",
+        "source": "com.example.tal3thoom.app-main-25:/mipmap-mdpi/logo.png"
+    },
+    {
+        "merged": "com.example.tal3thoom.app-merged_res-31:/mipmap-xxxhdpi_logo.png.flat",
+        "source": "com.example.tal3thoom.app-main-25:/mipmap-xxxhdpi/logo.png"
+    },
+    {
+        "merged": "com.example.tal3thoom.app-merged_res-31:/mipmap-hdpi_logo.png.flat",
+        "source": "com.example.tal3thoom.app-main-25:/mipmap-hdpi/logo.png"
+    },
+    {
+        "merged": "com.example.tal3thoom.app-merged_res-31:/mipmap-xhdpi_logo.png.flat",
+        "source": "com.example.tal3thoom.app-main-25:/mipmap-xhdpi/logo.png"
+    },
+    {
+        "merged": "com.example.tal3thoom.app-merged_res-31:/mipmap-xxhdpi_logo.png.flat",
+        "source": "com.example.tal3thoom.app-main-25:/mipmap-xxhdpi/logo.png"
+    },
+    {
+        "merged": "com.example.tal3thoom.app-merged_res-31:/mipmap-mdpi_ic_launcher.png.flat",
+        "source": "com.example.tal3thoom.app-main-25:/mipmap-mdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.example.tal3thoom.app-merged_res-31:/mipmap-xxxhdpi_ic_launcher.png.flat",
+        "source": "com.example.tal3thoom.app-main-25:/mipmap-xxxhdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.example.tal3thoom.app-merged_res-31:/drawable-v21_launch_background.xml.flat",
+        "source": "com.example.tal3thoom.app-main-25:/drawable-v21/launch_background.xml"
+    },
+    {
+        "merged": "com.example.tal3thoom.app-merged_res-31:/mipmap-hdpi_ic_launcher.png.flat",
+        "source": "com.example.tal3thoom.app-main-25:/mipmap-hdpi/ic_launcher.png"
+    },
+    {
+        "merged": "com.example.tal3thoom.app-merged_res-31:/mipmap-xhdpi_ic_launcher.png.flat",
+        "source": "com.example.tal3thoom.app-main-25:/mipmap-xhdpi/ic_launcher.png"
+    }
+]

@@ -1,10 +1,7 @@
-import 'dart:io';
 
 import 'package:animate_do/animate_do.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-
-import 'package:queen/core/helpers/url_luncher.dart';
 import 'package:tal3thoom/config/keys.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -29,7 +26,6 @@ class ContactUsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-
     return Scaffold(
       backgroundColor: kHomeColor,
       drawer: const MenuItems(),
@@ -55,8 +51,7 @@ class ContactUsScreen extends StatelessWidget {
                     height: context.height * 0.15,
                     child: InkWell(
                         onTap: () {
-                          Launch.url(web);
-
+                          launchUrl(web);
                         },
                         child: Image.asset("assets/images/logoHeader.png"))),
               ),
@@ -69,7 +64,7 @@ class ContactUsScreen extends StatelessWidget {
                 child: InkWell(
                   onTap: () {
                     sendEmail(email: email);
-
+                    // launchUrl(emailLaunchUri);
                   },
                   child: Padding(
                     padding: const EdgeInsets.all(14.0),
@@ -84,15 +79,16 @@ class ContactUsScreen extends StatelessWidget {
                     },
                     child: Padding(
                       padding: const EdgeInsets.symmetric(horizontal: 12),
-                      child: Image.asset("assets/images/phone_new.png",),
+                      child: Image.asset(
+                        "assets/images/phone_new.png",
+                      ),
                     )),
               ),
               FadeInLeft(
                 child: InkWell(
-                  onTap: () async{
-                    Launch.onWhatsApp(whatsApp);
-                   // launchWhatsApp(phone: whatsApp);
-
+                  onTap: () async {
+                    //Launch.onWhatsApp(whatsApp);
+                    launchWhatsApp(phone: whatsApp);
                   },
                   child: Padding(
                     padding: const EdgeInsets.all(14.0),
@@ -103,7 +99,7 @@ class ContactUsScreen extends StatelessWidget {
               FadeInRightBig(
                 child: InkWell(
                   onTap: () {
-                    Launch.url(location);
+                    LaunchURLT(location);
                   },
                   child: Padding(
                     padding: const EdgeInsets.all(14.0),
@@ -114,7 +110,7 @@ class ContactUsScreen extends StatelessWidget {
               FadeInUpBig(
                 child: GestureDetector(
                   onTap: () {
-                    Launch.url(location);
+                    LaunchURLT(location );
                   },
                   child: SizedBox(
                       height: context.height * 0.3,
@@ -122,16 +118,15 @@ class ContactUsScreen extends StatelessWidget {
                       child: Image.asset("assets/images/map.jpeg")),
                 ),
               ),
-        Container(
-          margin: const EdgeInsets.symmetric(vertical: 8.0),
-          color: kPrimaryColor,
-          height: context.height * 0.1,
-          
-        child: Center(
-          child: customText2(title: "يسعدنا تواصلكم", color: kHomeColor ),
-        ),
-        
-        )
+              Container(
+                margin: const EdgeInsets.symmetric(vertical: 8.0),
+                color: kPrimaryColor,
+                height: context.height * 0.1,
+                child: Center(
+                  child:
+                      customText2(title: "يسعدنا تواصلكم", color: kHomeColor),
+                ),
+              )
             ],
           ),
         ),
@@ -139,19 +134,10 @@ class ContactUsScreen extends StatelessWidget {
     );
   }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
+  final Uri emailLaunchUri = Uri(
+    scheme: 'mailto',
+    path: 'info@mcsc-saudi.com',
+  );
 
   void _launchURL() async {
     final Uri params = Uri(
@@ -177,9 +163,8 @@ class ContactUsScreen extends StatelessWidget {
 
   _launchPhoneURL(String phoneNumber) async {
     String url = 'tel:' + phoneNumber;
-    Launch.url(url);
+    LaunchURLT(url);
   }
-
 
   void launchWhatsApp({required String phone}) async {
     // Remove non-digit characters from the phone number
@@ -193,14 +178,13 @@ class ContactUsScreen extends StatelessWidget {
     }
   }
 
-
-  // String _urlWhatApp() {
-  //   if (Platform.isAndroid || Platform.isIOS) {
-  //     // add the [https]
-  //     return "https://wa.me/$whatsApp/?text=${Uri.parse(whatsApp)}"; // new line
-  //   } else {
-  //     // add the [https]
-  //     return "https://api.whatsapp.com/send?phone=$whatsApp=${Uri.parse(whatsApp)}"; // new line
-  //   }
-  // }
+// String _urlWhatApp() {
+//   if (Platform.isAndroid || Platform.isIOS) {
+//     // add the [https]
+//     return "https://wa.me/$whatsApp/?text=${Uri.parse(whatsApp)}"; // new line
+//   } else {
+//     // add the [https]
+//     return "https://api.whatsapp.com/send?phone=$whatsApp=${Uri.parse(whatsApp)}"; // new line
+//   }
+// }
 }

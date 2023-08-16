@@ -1,8 +1,6 @@
-import 'dart:io';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:queen/core/helpers/prefs.dart';
-import 'package:tal3thoom/screens/drawer/page/advisors_service/views/expention_card/view.dart';
+import 'package:tal3thoom/config/custom_shared_prefs.dart';import 'package:tal3thoom/screens/drawer/page/advisors_service/views/expention_card/view.dart';
 import 'package:tal3thoom/screens/drawer/page/contact_us/view.dart';
 import 'package:tal3thoom/screens/drawer/page/diagnostic_service/page/views/diagnostic_induction/view.dart';
 import 'package:tal3thoom/screens/drawer/page/diagnostic_service/page/views/diagnostic_ssrs_test/view.dart';
@@ -421,19 +419,36 @@ class _MenuItemsState extends State<MenuItems> {
                             ? doneWidget(context)
                             : const Text(""),
                         onTaptherapeuticSessions2: () {
-                          if (state.accessPermissionModel.data?.stagesTreatmentSecond!
-                                      .sessions ==
-                                  false &&
-                              state.accessPermissionModel.data
-                                      ?.stagesTreatmentFirst!.closeBooking ==
-                                  true &&
-                              state.accessPermissionModel.data?.stagesTreatment!
-                                      .paymentTreatmentAll ==
-                                  true) {
-                            Get.back();
-                            Get.offAll(() => const SecondTreatmentSession());
+                          if (remoteConfigSetup.isAvailable == false) {
+                            if (state.accessPermissionModel.data
+                                        ?.stagesTreatmentSecond!.sessions ==
+                                    false &&
+                                state.accessPermissionModel.data
+                                        ?.stagesTreatmentFirst!.closeBooking ==
+                                    true &&
+                                state
+                                        .accessPermissionModel
+                                        .data
+                                        ?.stagesTreatment!
+                                        .paymentTreatmentAll ==
+                                    true) {
+                              Get.back();
+                              Get.offAll(() => const SecondTreatmentSession());
+                            } else {
+                              return;
+                            }
                           } else {
-                            return;
+                            if (state.accessPermissionModel.data
+                                        ?.stagesTreatmentSecond!.sessions ==
+                                    false &&
+                                state.accessPermissionModel.data
+                                        ?.stagesTreatmentFirst!.closeBooking ==
+                                    true ) {
+                              Get.back();
+                              Get.offAll(() => const SecondTreatmentSession());
+                            } else {
+                              return;
+                            }
                           }
                         },
                         isOasesTwo: state.accessPermissionModel.data
@@ -575,7 +590,6 @@ class _MenuItemsState extends State<MenuItems> {
                         onTap: () {
                           Get.back();
                           Get.offAll(() => ContactUsScreen());
-
                         },
                         leading: Image.asset("assets/images/message.png"),
                         title: customText2(
@@ -584,15 +598,27 @@ class _MenuItemsState extends State<MenuItems> {
                       ListTile(
                         onTap: () {
                           Get.back();
-                        //  Get.offAll(() => LoginScreen());
+                          //  Get.offAll(() => LoginScreen());
 
-                          Prefs.clear().then((value) {
+                          // Prefs.clear().then((value) {
+                          //
+                          //   BlocProvider.of<HomeTabeBarCubit>(context)
+                          //       .changeIndex(1);
+                          //    Get.offAll(() => LoginScreen());
+                          // });
 
-                            BlocProvider.of<HomeTabeBarCubit>(context)
-                                .changeIndex(1);
-                             Get.offAll(() => LoginScreen());
-                          });
-                         // exit(0);
+                          Prefs.clearKey(cubit.userId);
+                          Prefs.clearKey(cubit.token);
+
+
+                          Prefs.clear();
+                          Get.offAll(() => LoginScreen());
+                        //  setState(() {});
+                          //exit(0);
+
+                          // Prefs.clear();
+                          // Prefs.clear();
+                          // exit(0);
                         },
                         leading: Image.asset("assets/images/Exit.png"),
                         title: customText2(

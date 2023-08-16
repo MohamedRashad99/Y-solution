@@ -92,7 +92,7 @@ class _SecondTreatmentSessionEvaluationState
                                   border: Border.all(color: kLightText)),
                               child: Column(
                                 children: [
-                                  RichTextCustom(),
+                                  const RichTextCustom(),
                                   ListView.builder(
                                       padding: const EdgeInsets.symmetric(
                                           vertical: 4),
@@ -176,7 +176,7 @@ class _SecondTreatmentSessionEvaluationState
                                   border: Border.all(color: kLightText)),
                               child: Column(
                                 children: [
-                                  RichTextCustom2(),
+                                  const RichTextCustom2(),
                                   ListView.builder(
                                       padding: const EdgeInsets.symmetric(
                                           vertical: 4),

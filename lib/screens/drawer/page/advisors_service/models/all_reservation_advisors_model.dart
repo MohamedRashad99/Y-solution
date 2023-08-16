@@ -1,8 +1,10 @@
 import 'package:equatable/equatable.dart';
 
+
 // ignore: must_be_immutable
 class AllReservationsAdvisorModel extends Equatable {
   List<ReservationsAdvisor>? data;
+  List<Messages>? messages;
   int? status;
   int? dataLength;
 
@@ -15,6 +17,8 @@ class AllReservationsAdvisorModel extends Equatable {
         data!.add(ReservationsAdvisor.fromJson(v));
       });
     }
+    messages = json["messages"] == null ? null : (json["messages"] as List).map((e) => Messages.fromJson(e)).toList();
+
     status = json['status'];
     dataLength = json['dataLength'];
   }
@@ -30,7 +34,7 @@ class AllReservationsAdvisorModel extends Equatable {
   }
 
   @override
-  List<Object?> get props => [data, status, dataLength];
+  List<Object?> get props => [data, status, dataLength,messages];
 }
 
 class ReservationsAdvisor extends Equatable {
@@ -143,4 +147,32 @@ class ReservationsAdvisor extends Equatable {
         zoomInvitationUrl,
         schedule
       ];
+}
+class Messages  extends Equatable{
+  dynamic code;
+  String? body;
+  dynamic title;
+  int? type;
+
+  Messages({this.code, this.body, this.title, this.type});
+
+  Messages.fromJson(Map<String, dynamic> json) {
+    code = json["code"];
+    body = json["body"];
+    title = json["title"];
+    type = json["type"];
+  }
+
+  Map<String, dynamic> toJson() {
+    final Map<String, dynamic> _data = <String, dynamic>{};
+    _data["code"] = code;
+    _data["body"] = body;
+    _data["title"] = title;
+    _data["type"] = type;
+    return _data;
+  }
+
+  @override
+
+  List<Object?> get props => [code , body, title,type];
 }
