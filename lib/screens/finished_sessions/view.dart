@@ -60,6 +60,7 @@ class _FinishedSessionsState extends State<FinishedSessions> {
                                 title: "لا توجد حجوزات منتهية الاّن",
                                 color: kBlackText))
                             : ListView.builder(
+                          reverse: true,
                           padding: const EdgeInsets.symmetric(horizontal: 16),
                           itemCount: state.bookingInfo.dataLength,
                           physics: const BouncingScrollPhysics(),

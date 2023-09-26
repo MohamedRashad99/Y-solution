@@ -11,7 +11,8 @@ import 'package:tal3thoom/screens/widgets/fast_widget.dart';
 import 'package:tal3thoom/screens/widgets/mediaButton.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:queen_validators/queen_validators.dart';import 'package:video_player/video_player.dart';
+import 'package:queen_validators/queen_validators.dart';
+import 'package:video_player/video_player.dart';
 
 import '../../../../../../../../../../config/keys.dart';
 import '../../../../../../../../../widgets/alerts.dart';
@@ -196,7 +197,7 @@ class _SecondTreatmentSSI4TwoState extends State<SecondTreatmentSSI4Two> {
                           title: "fullMessage",
                           controller: _firstController,
                           onPressed1: () async {
-                            if (await Permission.storage.request().isGranted) {
+                            if (  await Permission.videos.request().isGranted || await Permission.storage.request().isGranted) {
                               pickVideo();
                             } else {
                               Alert.error(

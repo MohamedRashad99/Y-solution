@@ -81,12 +81,15 @@ class _SSRSDiagnosticsScreenState extends State<SSRSDiagnosticsScreen> {
                               padding: const EdgeInsets.symmetric(vertical: 12),
                               child: Image.asset("assets/images/255.png"),
                             ),
-
-                            CustomButton(
-                              onPressed: () {},
-                              title: state.ssrsQuestionModel[index].description,
-                              color: kPrimaryColor,
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 16.0),
+                              child: customText2(
+                                  title:
+                                      state.ssrsQuestionModel[index].description,
+                                  color: kPrimaryColor),
                             ),
+
+
                             const AlertMessage(),
                             Wrap(
                                 textDirection: TextDirection.ltr,

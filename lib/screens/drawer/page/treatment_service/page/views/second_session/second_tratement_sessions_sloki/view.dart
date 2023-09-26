@@ -190,9 +190,10 @@ class _SecondTreatmentSessionsSlokiScreenState
                         title: "fullMessage",
                         controller: _firstController,
                         onPressed1: () async {
-                          if (await Permission.storage.request().isGranted) {
+                          if (  await Permission.videos.request().isGranted || await Permission.storage.request().isGranted) {
                             pickVideo();
                           } else {
+                            print("ttttttt");
                             Alert.error(
                                 "يجب الحصول علي تصريح الوصول الي الخزينة");
                           }

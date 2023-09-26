@@ -81,7 +81,7 @@ class _SecondStageSSRSTreatmentScreenState
                             padding: const EdgeInsets.symmetric(vertical: 12),
                             child: Image.asset("assets/images/255.png"),
                           ),
-                          SizedBox(
+                       /*   SizedBox(
                             width: context.width * 0.8,
                             height: context.height * 0.25,
                            // child:
@@ -103,13 +103,17 @@ class _SecondStageSSRSTreatmentScreenState
                             //   url:
                             //       'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
                             // ),
+                          ),*/
+                          Padding(
+                            padding: const EdgeInsets.symmetric(vertical: 16.0),
+                            child: customText2(
+                                title:
+                                state.ssrsQuestionModel[index].description,
+                                color: kPrimaryColor),
                           ),
-                          CustomButton(
-                            onPressed: () {},
-                            title: state.ssrsQuestionModel[index].description,
-                            color: kPrimaryColor,
-                          ),
+
                           const AlertMessage(),
+
                           Wrap(
                               textDirection: TextDirection.ltr,
                               spacing: 15,

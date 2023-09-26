@@ -56,6 +56,10 @@ class _NextTwoSessionState extends State<NextTwoSession> {
               onPressed: () =>
                   Get.offAll(() => const SecondStageAdditionalTrainingScreen()),
             ),*/
+            ScrollText(
+
+              title: "في حال عدم تجاوزك لجلستك العلاجية الحالية سيتم  نقلك لنفس الجلسة لاعادتها .....",
+            ),
             CustomButton(
               title: "متابعة",
               onPressed: () {

@@ -218,6 +218,18 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "device_info_plus",
+      "rootUri": "file:///C:/Users/Ra4ad/AppData/Local/Pub/Cache/hosted/pub.dev/device_info_plus-9.0.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
+      "name": "device_info_plus_platform_interface",
+      "rootUri": "file:///C:/Users/Ra4ad/AppData/Local/Pub/Cache/hosted/pub.dev/device_info_plus_platform_interface-7.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "device_preview",
       "rootUri": "file:///C:/Users/Ra4ad/AppData/Local/Pub/Cache/git/flutter_device_preview-73c91514e5ab092bb7f911acc8a447e07e751120/device_preview",
       "packageUri": "lib/",
@@ -686,6 +698,12 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "os_detect",
+      "rootUri": "file:///C:/Users/Ra4ad/AppData/Local/Pub/Cache/hosted/pub.dev/os_detect-2.0.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "package_info_plus",
       "rootUri": "file:///C:/Users/Ra4ad/AppData/Local/Pub/Cache/hosted/pub.dev/package_info_plus-4.1.0",
       "packageUri": "lib/",
@@ -992,6 +1010,12 @@
       "languageVersion": "2.17"
     },
     {
+      "name": "upgrader",
+      "rootUri": "file:///C:/Users/Ra4ad/AppData/Local/Pub/Cache/hosted/pub.dev/upgrader-8.1.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
       "name": "url_launcher",
       "rootUri": "file:///C:/Users/Ra4ad/AppData/Local/Pub/Cache/hosted/pub.dev/url_launcher-6.1.12",
       "packageUri": "lib/",
@@ -1050,6 +1074,12 @@
       "rootUri": "file:///C:/Users/Ra4ad/AppData/Local/Pub/Cache/hosted/pub.dev/vector_math-2.1.4",
       "packageUri": "lib/",
       "languageVersion": "2.14"
+    },
+    {
+      "name": "version",
+      "rootUri": "file:///C:/Users/Ra4ad/AppData/Local/Pub/Cache/hosted/pub.dev/version-3.0.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
     },
     {
       "name": "video_player",
@@ -1124,6 +1154,12 @@
       "languageVersion": "3.0"
     },
     {
+      "name": "win32_registry",
+      "rootUri": "file:///C:/Users/Ra4ad/AppData/Local/Pub/Cache/hosted/pub.dev/win32_registry-1.1.1",
+      "packageUri": "lib/",
+      "languageVersion": "3.0"
+    },
+    {
       "name": "xdg_directories",
       "rootUri": "file:///C:/Users/Ra4ad/AppData/Local/Pub/Cache/hosted/pub.dev/xdg_directories-1.0.2",
       "packageUri": "lib/",
@@ -1142,7 +1178,7 @@
       "languageVersion": "2.17"
     }
   ],
-  "generated": "2023-08-16T12:03:07.202336Z",
+  "generated": "2023-09-26T19:26:33.743583Z",
   "generator": "pub",
   "generatorVersion": "3.0.6"
 }

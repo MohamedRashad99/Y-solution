@@ -100,10 +100,11 @@ class _SecondTreatmentSSI4State extends State<SecondTreatmentSSI4> {
                               onTap: () async {
                                 if (await Permission.storage
                                     .request()
-                                    .isGranted) {
+                                    .isGranted ) {
                                   speech.speak(parseHtmlString(
                                       state.ssi4QuestionModel[0].description));
                                 } else {
+
                                   Alert.error(
                                       "يجب الحصول علي تصريح الوصول الي الخزينة");
                                 }
@@ -151,9 +152,7 @@ class _SecondTreatmentSSI4State extends State<SecondTreatmentSSI4> {
                             title: "fullMessage",
                             controller: _firstController,
                             onPressed1: () async {
-                              if (await Permission.storage
-                                  .request()
-                                  .isGranted) {
+                              if (  await Permission.videos.request().isGranted || await Permission.storage.request().isGranted) {
                                 pickVideo();
                               } else {
                                 Alert.error(

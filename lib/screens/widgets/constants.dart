@@ -2,12 +2,12 @@
 
 import 'dart:io';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:get/get.dart' hide Trans;
+import 'package:get/get.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
-import 'package:tal3thoom/config/custom_shared_prefs.dart';import 'package:tal3thoom/config/keys.dart';
+import 'package:tal3thoom/config/custom_shared_prefs.dart';
+import 'package:tal3thoom/config/keys.dart';
 import 'package:text_scroll/text_scroll.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -222,6 +222,14 @@ Widget customText3({required String title, required Color color}) {
   return Text(title,
       style: TextStyle(color: color, fontSize: 14, fontFamily: 'DinLight'));
 }
+
+
+Widget fixedHeight({required BuildContext context}){
+  return SizedBox(
+    height: context.height * 0.02,
+  );
+}
+
 void LaunchURLT(String url) async {
   if (await canLaunch(url)) {
     await launch(url);
@@ -229,6 +237,8 @@ void LaunchURLT(String url) async {
     throw 'Could not launch $url';
   }
 }
+
+
 Widget customTextWatchVideo(
     {required String title,
     required Color color,

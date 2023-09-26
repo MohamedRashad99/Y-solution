@@ -147,9 +147,7 @@ class _TreatmentSSI4State extends State<TreatmentSSI4> {
                             title: "fullMessage",
                             controller: _firstController,
                             onPressed1: () async {
-                              if (await Permission.storage
-                                  .request()
-                                  .isGranted) {
+                              if (  await Permission.videos.request().isGranted || await Permission.storage.request().isGranted) {
                                 _pickVideo();
                               } else {
                                 Alert.error(

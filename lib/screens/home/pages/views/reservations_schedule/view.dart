@@ -107,6 +107,9 @@ class _ReservationsScheduleState extends State<ReservationsSchedule> {
                                           (state.bookingInfo.data[index]
                                               .allowEnterZoomSession ==
                                               true)){
+
+
+
                                         LaunchURLT(state.bookingInfo
                                             .data[index].zoomInvitationUrl );
 

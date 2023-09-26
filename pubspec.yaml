@@ -1,21 +1,11 @@
 name: tal3thoom
 description: A new Flutter project.
 
-# The following line prevents the package from being accidentally published to
-# pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
-# The following defines the version and build number for your application.
-# A version number is three numbers separated by dots, like 1.2.43
-# followed by an optional build number separated by a +.
-# Both the version and the builder number may be overridden in flutter
-# build by specifying --build-name and --build-number, respectively.
-# In Android, build-name is used as versionName while build-number used as versionCode.
-# Read more about Android versioning at https://developer.android.com/studio/publish/versioning
-# In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
-# Read more about iOS versioning at
+
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 1.0.0+15
+version: 1.0.0+27
 
 environment:
   sdk: ">=2.17.6 <3.0.0"
@@ -30,7 +20,7 @@ dependencies:
   lottie: ^2.2.0
   camera: ^0.10.3+2
   fijkplayer: ^0.11.0
-
+  upgrader: ^8.1.0
   flutter_svg: ^1.1.6
   draggable_scrollbar: ^0.1.0
 
@@ -48,7 +38,7 @@ dependencies:
   legacy_buttons: ^0.0.1
   laravel_exception: ^0.0.4
   image_picker: ^0.8.5+3
-  permission_handler: ^10.2.0
+  permission_handler: ^10.4.3
   image_cropper: ^1.5.1
   webview_flutter: ^3.0.4
   expansion_tile_card:

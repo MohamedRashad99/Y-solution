@@ -1,6 +1,6 @@
 import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
-
+import 'package:get/get.dart';
 import '../../../../../../../widgets/constants.dart';
 
 class AlertMessage extends StatelessWidget {
@@ -21,8 +21,8 @@ class AlertMessage extends StatelessWidget {
           //   style: TextStyle(
           //       fontSize: 20.0, color: kSafeAreasColor, fontFamily: 'DinBold'),
           // ),
-          const SizedBox(
-            width: 30.0,
+           SizedBox(
+            width: context.height * 0.01,
           ),
           DefaultTextStyle(
             style: const TextStyle(
@@ -41,15 +41,17 @@ class AlertMessage extends StatelessWidget {
                   textStyle: buildTextStyle(),
                 ),
                 TyperAnimatedText(
-                  "برجاء التقيم مبدأي للمرحلة",
+                  "برجاء التقيم مبدئيا ادناه",
                   textStyle: buildAccentTextStyle(),
                 ),
-                TyperAnimatedText("من المهم جدا إعطاء تقييمك المبدأي",
+                TyperAnimatedText("من المهم جدا إعطاء تقييمك مبدئيا ",
                     textStyle: buildAccentTextStyle()),
                 TyperAnimatedText("عن حالة طلاقة الكلام لديك ",
                     textStyle: buildAccentTextStyle()),
-                TyperAnimatedText("قبل المتابعة اسفل الشاشة",
-                    textStyle: buildTextStyle()),
+                TyperAnimatedText("يرجى الاختيار قبل المتابعة اسفل الشاشة",
+                    textStyle: buildTextStyle(),
+
+                ),
               ],
             ),
           ),
@@ -60,7 +62,7 @@ class AlertMessage extends StatelessWidget {
 
   TextStyle buildTextStyle() {
     return const TextStyle(
-        color: kBlackText, fontSize: 18, fontFamily: 'DinBold');
+        color: kBlackText, fontSize: 16, fontFamily: 'DinBold');
   }
 
   TextStyle buildAccentTextStyle() {
